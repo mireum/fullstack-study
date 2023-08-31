@@ -128,5 +128,87 @@
       <!-- 색상 선택도구(Color Picker) -->
       <label for="favcolor">색상 선택:</label>
       <input type="color" id="favcolor" value="#ff0000">
+
+      <hr>
+
+      <!-- 날짜 -->
+      <label for="birthday">생일:</label>
+      <input type="date" id="birthday">
+      <br>
+      <!-- 날짜 + 시간 -->
+      <label for="birthdaytime">생일(날짜/시간):</label>
+      <input type="datetime-local" id="birthdaytime">
+      <br>
+      <!-- 시간 -->
+      <label for="appt">시간:</label>
+      <input type="time" id="appt">
+
+      <hr>
+
+      <!-- 이메일: submit 시 자동으로 이메일 형식 유효성 검사를 해줌 -->
+      <form action="/signup">
+        <label for="email">이메일</label>
+        <input type="email" name="email">
+        <button type="submit">제출</button>
+      </form>
+      
+      <hr>
+
+      <!-- 파일 선택(첨부) -->
+      <label for="myfile">파일 첨부:</label>
+      <input type="file" id="myfile">
+      <br>
+      <label for="myfile">다중 파일 첨부:</label>
+      <input type="file" id="myfile" multiple>
+      <br>
+
+      <!-- 범위 선택 -->
+      <label for="points">점수(0~10):</label>
+      <input type="range" id="points" min="0" max="10">
+
+      <hr>
+
+      <!-- 비밀번호 -->
+      <label for="pwd">비밀번호:</label>
+      <input type="password" id="pwd">
+
+      <hr>
+
+      <!-- 셀렉트 박스(콤보 박스) -->
+      <!-- 속성
+        value: 서버에 선택한 항목의 값을 보낼 때 필요
+        selected: 항목을 미리 선택
+      -->
+      <label for="cars">차량 선택:</label>
+      <select id="cars">
+        <option value="">선택</option>
+        <option value="volvo">볼보</option>
+        <option value="benz">벤츠</option>
+        <option value="audi" selected>아우디</option>
+      </select> /#cars
+
+      <hr>
+
+      <!-- 여러 줄 입력 -->
+      <p>
+        <label for="multi">여러 줄 입력:</label>
+      </p>
+      <textarea id="multi" cols="30" rows="10"></textarea>
+      <br>
+      <textarea id="multi" cols="30" rows="10" spellcheck="false"></textarea>
+      <br>
+      <textarea id="multi" cols="30" rows="10" style="resize: none;"></textarea>
+
+      <!-- form: 작성한 내용이 어떤 서버 경로로, 어떤 방식(GET, POST)으로 전달될지 설정 -->
+      <form action="경로(서버 주소)" method="get">
+        <!-- name 속성: 서버로 전달할 때 유니크하게 구분하기 위한 이름 -->
+        <input type="text" name="name" placeholder="이름" class="hidden">
+        <input type="text" name="age" placeholder="나이" class="hidden">
+
+        <!-- <form> 태그 안에 있어야 submit 이벤트가 작동 -->
+        <button type="submit">전송</button>
+      </form>
+
+
 </body>
 </html>
