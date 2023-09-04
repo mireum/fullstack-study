@@ -2,13 +2,13 @@
 h1 img {
   border: 2px solid red;
 }
-header .logo img {}
+/* header .logo img {} */
 
 /* 2. 18~28 라인의 <ul>태그를 선택하는 선택자를 작성(하위[후손] 선택자 필수) */
 nav ul {
   border: 2px solid red;
 }
-header .main-menu {}
+/* header .main-menu {} */
 
 /* 3. 33~40 라인의 5번째 <a>태그의 <img>를 선택하는 선택자를 작성(가상 클래스 선택자 필수) */
 #global_aside a:nth-child(5) > img {
@@ -19,20 +19,20 @@ header .main-menu {}
 .column-1 > .header {
   border: 2px solid red;
 }
-#detail_list > ul.column-1 > li.header {}
+/* #detail_list > ul.column-1 > li.header {} */
 
 /* 5. 62~77 라인의 <ul>태그에서 3번째 <li>을 선택하는 선택자를 작성(가상 클래스 선택자 필수) */
 div :nth-child(4) :nth-child(3){
   border: 2px solid red;
 }
-#detail_list > ul:nth-child(4) > li:nth-child(3) {} /* 
-->자식 순서상 2번째가 아닌 4번째임 */
+/* #detail_list > ul:nth-child(4) > li:nth-child(3) {} /*  */
+/* ->자식 순서상 2번째가 아닌 4번째임 */ */
 
 /* 6. 78 라인의 <h3>태그에 마우스를 올렸을 때의 선택자를 작성 */
 div :nth-child(5):hover {
   border: 2px solid red
 }
-#detail_list > h3:last-child:hover P{}
+/* #detail_list > h3:last-child:hover P{} */
 
 /* 7. 82~85 라인의 type이 text인 <input>태그에 focus 됐을 때의 선택자를 작성(속성 선택자 필수) */
 /* 단, 마지막 읽기 전용 input은 선택에서 제외 */
