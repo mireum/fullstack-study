@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .text-input {
+      width: 120px;
+      padding: 10px;
+      font-size: 20px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    .form-background {
+      height: 700px;
+      background-color: #000;
+     
+    }
+
+    .form-container {
+      width: 500px;
+      height: 550px;
+      background-color: #fff;
+      margin: 0 auto;
+      padding-top: 30px;
+      padding-left: 20px;
+    }
+
+    .email {
+      width: 400px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+      outline: none;
+      font-size: 16px;
+      
+    }
+
+    .name {
+      display: flex;
+      /* column-gap: 10px; */
+    }
+
+    .first-name,
+    .last-name {
+      width: 150px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .message {
+      width: 400px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+      outline: none;
+      font-size: 16px;
+    }
+  
+    .send {
+      width: 100px;
+      height: 30px;
+      border-radius: 5px;
+      font-weight: bold;
+      background-color: green;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  
+  <h2>연습</h2>
+  <form>
+    <input type="text">
+    <input type="text" class="text-input">
+    <button type="submit">전송</button>
+    <!-- form 안에서 버튼의 타입을 안 써주면 기본 submit으로 동작함 -->
+
+    <br>
+
+    <!-- input 태그 쓸 때 label 태그도 같이 사용(권장) -->
+    <p>
+      <label for="">Your Name</label>
+    </p>
+    <input type="text" id="" class="text-input">
+  </form>
+
+
+  <h2>실전</h2>
+  <!-- 박스부터 그려보기!! (불필요한 div는 생략) -->
+  <div class="form-background">
+    <div class="form-container">
+      <form>
+        <h3>Contact Us</h3>
+        <div>Your Email</div>
+        <input type="text" class="email" placeholder="email@example.com">
+
+        <div class="name">
+          <div>
+            <div>First name</div>
+            <input type="text" class="first-name">
+          </div>
+          <div>
+            <div>Last name</div>
+            <input type="text" class="last-name">
+          </div>
+        </div>
+
+        <div>Message</div>
+        <input type="text" class="message">
+        
+        <br>
+        
+        <label>
+          <input type="checkbox">Agree</label>
+
+        <button type="submit" class="send">SEND</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
