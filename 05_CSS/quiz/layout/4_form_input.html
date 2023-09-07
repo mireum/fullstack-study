@@ -6,6 +6,7 @@
   <title>Document</title>
 
   <style>
+    
     .text-input {
       width: 120px;
       padding: 10px;
@@ -18,20 +19,22 @@
     .form-background {
       height: 700px;
       background-color: #000;
-     
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .form-container {
       width: 500px;
       height: 550px;
       background-color: #fff;
-      margin: 0 auto;
-      padding-top: 30px;
-      padding-left: 20px;
+      display: flex;
+      padding: 30px;
+      display: flex;
     }
 
     .email {
-      width: 400px;
+      width: 100%;
       padding: 10px;
       border-radius: 6px;
       border: 2px solid #ccc;
@@ -42,12 +45,12 @@
 
     .name {
       display: flex;
-      /* column-gap: 10px; */
+      column-gap: 40px;
     }
 
     .first-name,
     .last-name {
-      width: 150px;
+      width: 100%;
       padding: 10px;
       border-radius: 6px;
       border: 2px solid #ccc;
@@ -56,12 +59,14 @@
     }
 
     .message {
-      width: 400px;
+      width: 100%;
       padding: 10px;
       border-radius: 6px;
       border: 2px solid #ccc;
       outline: none;
       font-size: 16px;
+      overflow: scroll;
+      height: 50px;
     }
   
     .send {
@@ -71,6 +76,31 @@
       font-weight: bold;
       background-color: green;
       color: #fff;
+    }
+
+    div + .email {
+      margin-top: 10px;
+    }
+
+    .email-box {
+      margin-top: 20px;
+    }
+    .name {
+      margin-top: 20px;
+    }
+
+    .message-div {
+      margin-top: 20px;
+    }
+    div + .message {
+      margin-top: 10px;
+    }
+
+    .agree-send {
+      width: 100%;
+      display: flex;
+      margin-top: 10px;
+      justify-content: space-between;
     }
   </style>
 </head>
@@ -89,7 +119,7 @@
     <p>
       <label for="">Your Name</label>
     </p>
-    <input type="text" id="" class="text-input">
+    <input type="text" class="text-input">
   </form>
 
 
@@ -99,8 +129,10 @@
     <div class="form-container">
       <form>
         <h3>Contact Us</h3>
-        <div>Your Email</div>
-        <input type="text" class="email" placeholder="email@example.com">
+        <div class="email-box">
+          <div>Your Email</div>
+          <input type="text" class="email" placeholder="email@example.com">
+        </div>
 
         <div class="name">
           <div>
@@ -112,16 +144,17 @@
             <input type="text" class="last-name">
           </div>
         </div>
-
-        <div>Message</div>
+        
+        <div class="message-div">Message</div>
+        <!-- <textarea class="message" cols="30" rows="10" style="resize: none;"></textarea> -->
         <input type="text" class="message">
         
-        <br>
-        
-        <label>
-          <input type="checkbox">Agree</label>
+        <div class="agree-send">
+          <label class="label">
+            <input type="checkbox">Agree</label>
 
-        <button type="submit" class="send">SEND</button>
+          <button type="submit" class="send">SEND</button>
+        </div>
       </form>
     </div>
   </div>
