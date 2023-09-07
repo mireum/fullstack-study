@@ -15,7 +15,73 @@
       text-decoration: none;
     }
 
+    ul {
+      display: flex;
+      /* justify-content: flex-start; */
+    }
+
+    li > a {
+      display: block;
+      width: 60px;
+      height: 25px;
+      background-color: #eee;
+      color: #000;
+      font-size: 20px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    li + li {
+      margin-left: 10px;
+    }
+
+    .container {
+      padding-top: 10px;
+      display: flex;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .blog-content {
+      width: 80%;
+    }
+
+    .content-header {
+      display: flex;
+    }
     
+    .content-header .profile-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    div .profile {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile :first-child {
+      font-weight: bold;
+    }
+
+    div > h4 {
+      font-weight: bold;
+    }
+
+    .blog-img {
+      width: 20%;
+      padding-left: 10px;
+    }
+    
+    .profile div+div {
+      margin-top: 5px;
+    }
+
+    img + div {
+      margin-left: 7px;
+    }
   </style>
 </head>
 <body>
@@ -33,13 +99,11 @@
   <nav>
     <ul class="navbar">
       <li><a href="#">영화</a></li>
-      <li><a href="#"></a></li>
-      <li><a href="#"></a></li>
-      <li><a href="#"></a></li>
+      <li><a href="#">맛집</a></li>
+      <li><a href="#">IT</a></li>
+      <li><a href="#">컴퓨터</a></li>
     </ul>
   </nav>
-
-
 
   <!-- blog list item -->
   <div class="container">
@@ -47,13 +111,21 @@
       <div class="content-header">
         <!-- 프로필 이미지 -->
         <!-- 작성자, 시간 -->
+        <img class="profile-img"  src="https://avatars.githubusercontent.com/u/143495267?v=4" alt="프사">
+        <div class="profile">
+          <div>최지우</div>
+          <div>1시간 전</div>
+        </div>
       </div>
       <div>
         <!-- 글 제목, 글 내용 -->
+        <h4>가성비 맛집을 발견했어요!</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt rem quae, accusantium odio cumque omnis alias maiores ducimus quidem tempora autem vitae, exercitationem ad voluptates dolor perferendis saepe porro fugiat.</p>
       </div>
     </div>
     <div class="blog-img">
       <!-- 샘플 이미지 -->
+      <img src="https://via.placeholder.com/250x250" alt="샘플 이미지">
     </div>
   </div>
 
