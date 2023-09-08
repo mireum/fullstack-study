@@ -4,3 +4,4 @@ a, <img>는 인라인 요소
 label과 input은 함께 사용
     <input type="checkbox" id="agree"> //id랑 for랑 맞춰야됌
     <label for="agree">Agree</label>
+마우스 올렸을 때 포인터 cursor: pointer;
