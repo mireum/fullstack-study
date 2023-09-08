@@ -13,3 +13,4 @@ reset css하는 코드
     [disabled] {},  [type="password"] {}
 강제 상속 => height: inherit;
 자세할수록 우선순위 점수가 올라감
+부모의 가로/세로를 지정해놔야 안에 뭐를 넣을 수 있다
