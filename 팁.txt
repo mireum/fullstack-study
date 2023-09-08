@@ -21,4 +21,14 @@ visibility: hidden; 으로 영역은 차지하지만 보이지 않도록 할 수
 opacity: .5; 투명도
 line-height를 height만큼 주면 글자를 수직 정렬할 수 있다
 text 중앙정렬 => text-align
-말 줄임표 만드는 CSS 패턴 => css-14 참고
+말 줄임표 만드는 CSS 패턴, 박스 안 멀티라인 => css-14 참고
+background-image: url("")은 요소의 배경으로 이미지를 깔기 때문에 이미지가 요소보다 더 크면 잘려보임
+    background-size로 조절 가능
+background-size: cover;  => 비율을 유지, 더 넓은 너비에 가득 덮음
+background-attachment: fixed;  => 뷰포트에 고정
+position: absolute와 fixed는 그 요소의 부모 요소의 position을 기준으로 배치된다
+position을 바꾸면 block 요소가 된다
+flex-wrap: wrap; => 자동 줄바꿈
+justify-content: center; 주축 정렬  =>
+align-items: center; 교차축 정렬    =>  둘이 같이 쓰면 정중앙 정렬
+flex: n 1 0%; block 분할 css-22참고
