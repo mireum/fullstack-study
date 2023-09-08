@@ -32,3 +32,4 @@ flex-wrap: wrap; => 자동 줄바꿈
 justify-content: center; 주축 정렬  =>
 align-items: center; 교차축 정렬    =>  둘이 같이 쓰면 정중앙 정렬
 flex: n 1 0%; block 분할 css-22참고
+transition: 1s; 는 요소에 직접 줘야함
