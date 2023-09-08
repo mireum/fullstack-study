@@ -5,7 +5,7 @@ label과 input은 함께 사용
     <input type="checkbox" id="agree"> //id랑 for랑 맞춰야됌
     <label for="agree">Agree</label>
 마우스 올렸을 때 포인터 cursor: pointer;
-overflow: hidden; 은 넘치고 있는 영역에
+overflow: hidden; 은 넘치고 있는 영역(부모 요소)에
 reset css하는 코드
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
 클래스를 여러 개 가질 수 있다
@@ -14,3 +14,6 @@ reset css하는 코드
 강제 상속 => height: inherit;
 자세할수록 우선순위 점수가 올라감
 부모의 가로/세로를 지정해놔야 안에 뭐를 넣을 수 있다
+블록 요소를 가운데 정렬하려면 margin: 0 auto;
+box-sizing: border-box;
+    요소에 padding과 border 값이 추가될 때 지정한 크기보다 커지는 것을 방지
