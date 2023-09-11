@@ -95,11 +95,45 @@
     .history > h4 {
       text-align: center;
     }
+
+    .nav-container {
+      display: flex;
+      height: 40px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+    }
+    .menu {
+      list-style: none;
+      display: flex;
+      font-size: 18px;
+      font-weight: 400;
+      padding-right: 10px;
+
+      /* column-gap: 10px; */
+    }
+    .menu-item + .menu-item {
+      margin-left: 20px;  /* 또는 column-gap: 10px; */
+    }
   </style>
 
 </head>
 <body>
   
+  <!-- 추가 과제: flex 내비게이션 -->
+  <nav class="nav-container">
+    <h1>Shoes Shop</h1>
+    <!-- 로고와 메뉴 사이를 띄우는 2가지 방법
+      1) justify-content: space-between;
+      2) flex-grow: 1;  <= 로고와 메뉴 사이에 박스 하나 넣고 grow: 1
+    -->
+    <!-- <div style="flex-grow: 1;"></div> -->
+    <ul class="menu">
+      <li class="menu-item">Products</li>
+      <li class="menu-item">Services</li>
+    </ul>
+  </nav>
+
   <div class="main-background">
     <h4 class="main-title">Buy our excellent shous!</h4>
     <p class="main-content">
