@@ -20,13 +20,15 @@ h5, p {
 .container {
     background-color: #fbfbfb;
     border: 1px solid #e4e4e4;
-    padding: 30px;
+    padding: 20px;
     margin: 15px 0;
 }
 
 .form-input {
     width: 100%;
-    padding: 8px;
+    padding: 5px;
+    font-size: 12px;
+    outline: none;
 }
 
 .birth {
@@ -65,3 +67,16 @@ textarea {
 .btn-register {
     width: 100%;
 }
+
+.radio1, .radio2 {
+    font-size: 12px;
+}
+
+.checkboxes {
+    font-size: 12px;
+}
+
+.checkboxes *  {
+    margin-left: 15px;
+}
+
