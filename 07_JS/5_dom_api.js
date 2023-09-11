@@ -25,3 +25,7 @@ boxEl.addEventListener('click', function () {
 });
 
 // 활용 예: active라는 클래스에 미리 스타일 지정하고 클릭한 특정 요소에 스타일을 적용할 때
+
+// (참고) 한 번 정도 슥 읽어볼 것!
+// 이벤트 종류: https://www.w3schools.com/jsref/dom_obj_event.asp
+// HTML DOM 속성/메소드: https://www.w3schools.com/jsref/dom_obj_document.asp
