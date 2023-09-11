@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    /* 공통 스타일 */
+    * {
+      box-sizing: border-box;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      height: 100%;
+      max-width: 700px;
+    }
+
+    .inner {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cart-background {
+      width: 100%;
+      height: 500px;
+      background-color: lightsteelblue;
+      padding: 30px;
+    }
+
+    .cart-list {
+      background-color: #fff;
+      border-radius: 10px;
+    }
+
+    img {
+      width: 60px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    table td, th {
+      text-align: center;
+    }
+
+    tr :nth-child(2) {
+      width: 300px;
+    }
+    tr td,
+    tr th {
+      border-bottom: 3px solid lightsteelblue;
+    }
+    table :last-child :first-child{
+      text-align: end;
+    } 
+    table :nth-child(2) :nth-child(2),
+    table :nth-child(3) :nth-child(2) {
+      text-align: start;
+    }
+
+    td,
+    th {
+      padding: 10px;
+    }
+  
+    .btn-box {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 20px;
+    }
+
+    .btn-box :first-child {
+      text-decoration: underline;
+      color: blue;
+    }
+
+    .btn-box button {
+      width: 110px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: green;
+      color: #fff;
+      border: none;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .btn-box button:hover {
+      cursor: pointer;
+      background-color: rgb(87, 218, 87);
+    }
+    .btn-box button:active {
+      background-color: rgb(20, 107, 20);
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="cart-background">
+    <!-- 가운데 정렬을 위한 div -->
+    <div class="inner">
+      <h2>너의 장바구니</h2>
+      <table class="cart-list">
+        <!-- 4행 5열 -->
+        <tr>
+          <th></th>
+          <th>ITEM</th>
+          <th>AMOUNT</th>
+          <th>PRICE</th>
+          <th>TOTAL</th>
+        </tr>
+        <tr>
+          <td><img src="https://www.nikon-image.co.kr/upload/new_prdt/NK0001575/NK0001575_Image_middle1.png" alt="카메라"></td>
+          <td>카메라</td>
+          <td>1</td>
+          <td>100,000</td>
+          <td>100,000</td>
+        </tr>
+        <tr>
+          <td><img src="https://www.nikon-image.co.kr/upload/new_prdt/NK0001575/NK0001575_Image_middle1.png" alt="카메라"></td>
+          <td>신발</td>
+          <td>2</td>
+          <td>59,000</td>
+          <td>118,000</td>
+        </tr>
+        <tr>
+          <td colspan="5">총가격: 218,000</td>
+        </tr>
+      </table>
+
+      <div class="btn-box">
+        <div>계속 쇼핑하기</div>
+        <button type="button">구매하기</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
