@@ -20,7 +20,6 @@ function showSlides(n) {
   slides[n].style.display = 'block';
 }
 
-
 // showSlides(0);
 
 // 이전 이미지를 보여주는 prevSlide() 함수
