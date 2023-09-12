@@ -24,7 +24,7 @@ console.log(fruits[1]);
 // { } 
 // 위 데이터의 종류는?
 
-// 객체
+// Object(객체 데이터)
 
 // Q6 
 let obj = { abc: 123 };
@@ -47,7 +47,7 @@ let obj = { abc: 123 };
 // sum(2, 4);
 // 위 함수 호출에서 2, 4를 무엇이라 하는가?
 
-// 인자
+// 인수, 인자(argument)
 
 // Q10
 function sum(a, b) {
@@ -57,7 +57,7 @@ function sum(a, b) {
 // 함수 호출에서 전달받은 인수를
 // 함수 내부로 전달하기 위한 변수를 무엇이라 하는가?
 
-// 매개변수
+// 매개변수(parameter)
 
 // Q11
 // 이름이 없는 함수를 무엇이라 하는가?
@@ -68,9 +68,9 @@ function sum(a, b) {
 // hello 이름의 함수 표현을 작성(함수 표현식)하고 호출하시오! 
 // (선언과 호출 두개 다 작성할 것!)
 
-function hello() {
-  console.log('hello');
-} 
+const hello = function () {
+  
+};
 hello();
 
 // Q13
@@ -106,7 +106,7 @@ if (true) {
 // 위 HTML 요소의 내용(Content)을 콘솔 출력하시오!
 
 const boxEl = document.querySelector('.box');
-console.log(boxEl);
+console.log(boxEl.textContent);
 
 // Q18
 // 위 코드(Q17)에서 선택한 요소에 클릭(Click) 이벤트를 추가해,
@@ -122,8 +122,8 @@ boxEl.addEventListener('click', function () {
 // 위 2개의 요소에 JS로 class="hello"를 추가하시오!
 
 const spanEl = document.querySelectorAll('span');
-spanEl.forEach( function (spanEl, index) {
-  spanEl.classList.add('hello');
+spanEl.forEach( function (spanEl) {
+  spanEl.classList.add('hello'); 
 })
   
 
