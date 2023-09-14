@@ -26,31 +26,51 @@
       max-width: 100%;
       font-size: 1.6rem;
     }
+    header .menuBg, header .headerBox {
+      width: 100%;
+      height: 100%;
+    }
     header {
-      display: block;
+      /* display: block; */
       width: 100%;
       height: 100px;
       position: relative;
       z-index: 2;
     }
+    header::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 1px;
+      background: #eeeeee;
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      z-index: -1;
+      transform: translateX(-50%);
+      transition: all 0.4s ease-in-out;
+    }
     header .menuBg {
-      background: #ffffff;
+      background-color: #ffffff;
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       z-index: -1;
-      -webkit-transition: all 0.4s 0.02s ease-in-out;
       transition: all 0.4s 0.02s ease-in-out;
+    }
+    header .menuBg::before, header .menuBg::after {
+      height: 5px;
+      bottom: -5px;
     }
     .pointBar::before {
       width: 10.9375%;
-      background: var(--color-navy);
+      background-color: navy;
       left: 0;
     }
     .pointBar::after {
       width: 89.0625%;
-      background: var(--color-orange);
+      background-color: orange;
       right: 0;
     }
     .pointBar::before, .pointBar::after {
@@ -64,6 +84,11 @@
       height: 100%;
       max-width: 1800px;
       margin: 0 auto;
+    }
+    header .headerBox {
+    display: flex;
+    flex-direction: row;
+      align-items: center;
     }
     h1 {
       font-size: 30px;
@@ -92,7 +117,10 @@
       transition: all 0.4s ease-in-out;
     }
     header .depth1 > li > a {
+      width: 135px;
+      height: 100px;
       font-weight: 800;
+      /* font-size: 16px; */
       display: -webkit-box;
       display: flex;
       align-items: center;
@@ -128,6 +156,34 @@
     }
     header .depth2 > li {
       overflow: hidden;
+    }
+    header .menuButton {
+      width: 35px;
+      height: 35px;
+      flex-direction: column;
+      gap: 7px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    header .menuButton div {
+      width: 100%;
+      height: 4px;
+      display: flex;
+      gap: 0 3px;
+      
+    }
+    header .menuButton span {
+      display: block;
+      height: 4px;
+      background: #000000;
+      transition: all 0.4s ease-in-out;
+    }
+    header .menuButton .long {
+      width: 28px;
+    } 
+    header .menuButton .short {
+      width: 4px;
     }
   </style>
 
@@ -179,6 +235,16 @@
               </li>
             </ul>
           </nav>
+          <button class="menuButton">
+            <div>
+              <span class="long left"></span>
+              <span class="short"></span>
+            </div>
+            <div>
+              <span class="short"></span>
+              <span class="long left"></span>
+            </div>
+          </button>
         </div>
       </div>
     </header>
