@@ -10,7 +10,6 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      /* color: #000; */
     }
     ul {
       list-style: none;
@@ -31,7 +30,7 @@
       display: flex;
       justify-content: space-between;
       position: relative;
-      /* background-color: bisque; */
+      background-color: bisque;
     }
     .menuBg {
       width: 100%;
@@ -67,36 +66,35 @@
       line-height: 100px;
       font-size: 25px;
     }
+    nav {
+      /* position: relative; */
+      width: 1200px;
+      height: 200px;
+      padding-top: 40px;
+    }
     #gnb {
-      position: relative;
+      height: 100px;
+      display: flex;
     }
     #gnb > li {
+      position: relative;
+      margin: 0 auto;
+    }
+    #gnb > li > a {
+      display: block;
+      color: #000;
+      padding: 10px 30px;
+    }
+    /* #gnb > li > a:hover {
+      padding: 10px 60px;
+    } */
+    #gnb > li > ul {
+      width: 100%;
+      height: 380px;
+      background-color: orange;
+      position: absolute;
+    }
 
-    }
-    .menuButton {
-      display: flex;
-      flex-direction: row;
-      width: 35px;
-      height: 35px;
-      border: none;
-      /* background-color: transparent; */
-    }
-    .btn .menuButton > div {
-      /* display: block; */
-  
-      color: #000;
-      /* background-color: transparent; */
-    }
-    .menuButton span.short {
-      color:#000;
-      width: 4px;
-      height: 4px;
-    }
-    .menuButton span.long {
-      color: #000;
-      width: 28px;
-      height: 4px;
-    }
   </style>
 
 </head>
@@ -147,7 +145,7 @@
         </ul>
       </nav>
       <div class="btn">
-        <button class="menuButton">
+        <div class="menuButton">
           <div>
             <span class="long left"></span>
             <span class="short"></span>
@@ -156,7 +154,7 @@
             <span class="short"></span>
             <span class="long right"></span>
           </div>
-        </button>
+        </div>
       </div>
     </header>
   </div>
