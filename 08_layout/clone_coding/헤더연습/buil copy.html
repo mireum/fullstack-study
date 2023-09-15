@@ -10,6 +10,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      color: #000;
     }
     ul {
       list-style: none;
@@ -31,6 +32,15 @@
       justify-content: space-between;
       position: relative;
       background-color: bisque;
+      margin: 0 auto;
+    }
+    .w1800 {
+      width: 100%;
+      max-width: 1800px;
+      display: flex;
+      position: relative;
+      padding: 0 20px;
+      margin: 0 auto;
     }
     .menuBg {
       width: 100%;
@@ -67,39 +77,99 @@
       font-size: 25px;
     }
     nav {
+      /* display: flex; */
       /* position: relative; */
-      width: 1200px;
-      height: 200px;
-      padding-top: 40px;
+      width: 675px;
+      height: 100px;
+      /* margin-left: auto;
+      margin-right: auto; */
+      /* right: 0;
+      left: 0;
+      margin: auto; */
+      /* position: absolute; */
+      /* text-align: center; */
+      /* align-items: center; */
+      justify-content: center;
+      flex-grow: 1;
     }
+    /* nav::before {} */
     #gnb {
+      width: 675px;
       height: 100px;
       display: flex;
     }
     #gnb > li {
-      position: relative;
+      width: 205px;
+      height: 100px;
+      /* position: relative; */
       margin: 0 auto;
     }
     #gnb > li > a {
-      display: block;
-      color: #000;
-      padding: 10px 83px;
+      width: 205px;
+      height: 100px;
+      /* padding: 10px 83px; */
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     /* #gnb > li > a:hover {
       padding: 10px 60px;
     } */
     #gnb > li > ul {
+      /* width: 205px; */
       width: 100%;
-      height: 380px;
-      margin-top: 24px;
-      padding-top: 50px;
+      height: 190px;
+      padding: 45px 0;
       text-align: center;
       background-color: orange;
-      position: absolute;
+      
+      border: 2px solid #000;
     }
     #gnb > li > ul > li {
-      margin: 10px;
+      width: 100%;
+      height: 28px;
+      overflow: hidden;
     }
+    .btn {
+      display: flex;
+      align-items: center;
+    }
+    .menuButton {
+      width: 35px; 
+      height: 35px;
+      /* display: flex; */
+      position: relative;
+    }
+    .long {
+      width: 28px;
+      height: 4px;
+      position: absolute;
+      background-color: #000;
+    }
+    .short {
+      width: 4px;
+      height: 4px;
+      position: absolute;
+      background-color: #000;
+    }
+    .short.left {
+      left: 0;
+      bottom: 10px;
+    }
+    .short.right {
+      right: 0;
+      top: 10px;
+    }
+    .long.right {
+      bottom: 10px;
+      right: 0;
+    }
+    .long.left {
+      top: 10px;
+      left: 0;
+    }
+
   </style>
 
 </head>
@@ -108,63 +178,61 @@
     <header>
       <div class="menuBg pointBar">
       </div>
-      <div class="logo">
-        <a href="javascript:void(0)">
-          <h1>BuiL</h1>
-        </a>
-      </div>
-      <nav>
-        <ul id="gnb">
-          <li><a href="#">회사소개</a>
-            <ul class="depth2 menu01">
-              <li><a href="#">CEO 인사말</a></li>
-              <li><a href="#">회사연혁</a></li>
-              <li><a href="#">비전과 미션</a></li>
-            </ul>
-          </li>
-          <li><a href="#">사업영역</a>
-            <ul class="depth2 menu02">
-              <li><a href="#">활어 필렛</a></li>
-              <li><a href="#">냉동 수산 식품</a></li>
-              <li><a href="#">냉동즉석 수산 식품</a></li>
-            </ul>
-          </li>
-          <li><a href="#">제품소개</a>
-            <ul class="depth2 menu03">
-              <li><a href="#">회상품</a></li>
-              <li><a href="#">신선 냉동 씨키트</a></li>
-            </ul>
-          </li>
-          <li><a href="#">인재채용</a>
-            <ul class="depth2 menu04">
-              <li><a href="#">함께할 인재상</a></li>
-              <li><a href="#">복리후생</a></li>
-            </ul>
-          </li>
-          <li><a href="#">고객지원</a>
-            <ul class="depth2 menu05">
-              <li><a href="#">공지사항</a></li>
-              <li><a href="#">자료실</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <div class="btn">
-        <div class="menuButton">
-          <div>
-            <span class="long left"></span>
-            <span class="short"></span>
-          </div>
-          <div>
-            <span class="short"></span>
-            <span class="long right"></span>
+      <div class="w1800">
+        
+        <div class="logo">
+          <a href="javascript:void(0)">
+            <h1>BuiL</h1>
+          </a>
+        </div>
+        <nav>
+          <ul id="gnb">
+            <li><a href="#">회사소개</a>
+              <ul class="depth2 menu01">
+                <li><a href="#">CEO 인사말</a></li>
+                <li><a href="#">회사연혁</a></li>
+                <li><a href="#">비전과 미션</a></li>
+              </ul>
+            </li>
+            <li><a href="#">사업영역</a>
+              <ul class="depth2 menu02">
+                <li><a href="#">활어 필렛</a></li>
+                <li><a href="#">냉동 수산 식품</a></li>
+                <li><a href="#">냉동즉석 수산 식품</a></li>
+              </ul>
+            </li>
+            <li><a href="#">제품소개</a>
+              <ul class="depth2 menu03">
+                <li><a href="#">회상품</a></li>
+                <li><a href="#">신선 냉동 씨키트</a></li>
+              </ul>
+            </li>
+            <li><a href="#">인재채용</a>
+              <ul class="depth2 menu04">
+                <li><a href="#">함께할 인재상</a></li>
+                <li><a href="#">복리후생</a></li>
+              </ul>
+            </li>
+            <li><a href="#">고객지원</a>
+              <ul class="depth2 menu05">
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">자료실</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <div class="btn">
+          <div class="menuButton">
+            <div class="long left"></div>
+            <div class="short right"></div>
+            <div class="short left"></div>
+            <div class="long right"></div>
           </div>
         </div>
       </div>
     </header>
   </div>
    
-
 
 </body>
 </html>
