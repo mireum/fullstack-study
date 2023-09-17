@@ -57,7 +57,7 @@
     .menuBg::after {
       content: "";
       display: block;
-      width: 90%;
+      width: 89%;
       right: 0;
       height: 5px;
       bottom: -5px;
@@ -68,7 +68,7 @@
     .menuBg::before {
       content: "";
       display: block;
-      width: 10%;
+      width: 11%;
       height: 5px;
       position: absolute;
       bottom: -5px;
@@ -81,9 +81,11 @@
       /* background: red; */
       /* border-top: 1px solid #eeeeee; */
       transition: all 0.4s ease-in-out;
+      z-index: -1;
     }
     .pointBar.on:hover {
       height: 380px; /* 없어도 동작 */
+      z-index: -1;
     }
     .logo {
       width: 100px;
@@ -100,16 +102,22 @@
       flex-grow: 1;
     }
     #gnb {
-      width: 1020px;
+      /* width: 1020px; */
       height: 100px;
       display: flex;
       position: relative;
     }
     #gnb > li {
-      width: 205px;
+      width: 135px;
       /* height: 100px; */
       position: relative;
       margin: 0 auto;
+    }
+    #gnb.on > li {
+      width: 205px;
+    }
+    #gnb.on > li > a {
+      width: 205px;
     }
     /* #gnb > li::after {
       content: "";
@@ -122,7 +130,7 @@
       bottom: -1px;
     } */
     #gnb > li > a {
-      width: 205px;
+      width: 135px;
       height: 100px;
       /* padding: 10px 83px; */
       font-weight: bold;
@@ -142,11 +150,22 @@
       text-align: center;
       overflow: hidden;
       /* background-color: royalblue; */
+      transform: translateY(0%);
+      transition: all 0.4s ease-in-out;
     }
     #gnb.on > li > ul {
       height: 280px;
       padding: 45px 0;
       border: 1px solid #eeeeee;
+      overflow: visible;
+    }
+    /* #gnb.on > li > ul:hover {
+      height: 280px;
+      padding: 45px 0;
+      border: 1px solid #eeeeee;
+      overflow: visible;
+    } */
+    #gnb > li:hover > ul {
       overflow: visible;
     }
     #gnb.on > li:first-child > ul {
@@ -168,6 +187,7 @@
     #gnb.on > li:hover::after {
       opacity: 1;
     }
+    
     #gnb > li > ul > li {
       width: 100%;
       height: 28px;
@@ -289,6 +309,8 @@
     const ankerEl = document.querySelectorAll('#gnb > li > a');
     const pointBarEl = document.querySelector('.pointBar');
     const gnbEl = document.querySelector('#gnb');
+    const afterEl = document.querySelector('#gnb.on > li::after');
+    const menuEl = document.querySelectorAll('#gnb > li > ul');
 
     ankerEl.forEach( function (senseEl) {
       senseEl.addEventListener('mouseenter', function () {
@@ -300,6 +322,25 @@
         gnbEl.classList.remove('on');
       })
     })
+    
+    afterEl.addEventListener('mouseenter', function () {
+      gnbEl.classList.add('on');
+    })
+    afterEl.addEventListener('mouseleave', function () {
+      gnbEl.classList.remove('on');
+    })
+
+    menuEl.forEach( function (menu) {
+      menu.addEventListener('mouseenter', function () {
+        pointBarEl.classList.add('on');
+        gnbEl.classList.add('on');
+      })
+      menu.addEventListener('mouseleave', function () {
+        pointBarEl.classList.remove('on');
+        gnbEl.classList.remove('on');
+      })
+    })
+    
   </script>
 </body>
 </html>
