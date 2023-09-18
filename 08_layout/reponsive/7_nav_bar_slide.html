@@ -82,6 +82,23 @@
       display: none;
     }
 
+    header .m-nav {
+      width: 50%;
+      height: 100vh;
+      padding: 10px 20px;
+      background-color: var(--color-background);
+      position: fixed;
+      top: 0;
+      right: -50%;
+      transition: .5s;
+    }
+
+    header .m-nav div {
+      text-align: right;
+    }
+    header .m-nav .btn-close {
+      font-size: 48px;
+    }
     /* ~767px 이하에서 .navm .btn-group은 숨기고, .btn-hamburger는 보이도록 처리 */
     @media screen and (max-width: 767px) {
       header .nav, 
@@ -92,6 +109,11 @@
         display: block;
       }
     }
+
+    header .m-nav.active {
+      right: 0%;
+    }
+    
   </style>
 </head>
 <body>
@@ -138,5 +160,21 @@
     </nav>
   </header>
 
+  <script>
+    // Quiz
+    // 햄버거 버튼을 클릭하면 .m-nav 요소에 'active'라는 클래스 값 추가(in JS)
+    // 닫기 버튼을 클릭하면 .m-nav 요소에 'active'라는 클래스 값 제거(in JS)
+    // 'active'라는 클래스 값이 있으면 요소 보이기!(in CSS)
+    const btn_hamEl = document.querySelector('.btn-hamburger');
+    const btn_closeEl = document.querySelector('.btn-close');
+    const m_navEl = document.querySelector('.m-nav');
+
+    btn_hamEl.addEventListener('click', function () {
+      m_navEl.classList.add('active')
+    })
+    btn_closeEl.addEventListener('click', function () {
+      m_navEl.classList.remove('active')
+    })
+  </script>
 </body>
 </html>
