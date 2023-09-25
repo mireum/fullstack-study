@@ -10,10 +10,23 @@ body {
 a {
   text-decoration: none;
 }
+.item {
+  transition: .4s;
+}
 .inner {
   max-width: 1200px;
   margin: 0 auto;
 }
+.item__contents {
+  height: 0px;
+  overflow: hidden;
+  transition: .4s;
+}
+.item:hover > .item__contents {
+  height: 400px;
+  overflow: visible;
+}
+
 .main-menu {
   display: flex;
 }
