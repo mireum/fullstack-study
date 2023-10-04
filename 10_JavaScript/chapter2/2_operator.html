@@ -218,13 +218,30 @@
     let cc = undefined;
     let dd = 4;
     let ee = 'five';
-    let ff = aa || bb || cc || dd || ee; // dd가 첫 true 이므로 ee까지 가지 않고 dd를 반환하고 끝남
+    let ff = aa || bb || cc || dd || ee; // dd가 첫 true이므로 ee까지 가지 않고 dd를 반환하고 끝남
     document.write(ff, '<br>'); // 4
 
-
     
+    // 삼항 연산자
+    // 조건식 ? 값1 : 값2;
+    document.write('<h2>삼항 연산자</h2>');
+    result = false ? 'js' : 'hello';
+    document.write(result, '<br>');
 
+    const score = 75;
+    result = score >= 90 ? 'A' : (score >= 80 ? 'B' : 'C');
+    document.write(result, '<br>');
 
+    // 실습: 홀짝 판별기
+    // window.prompt('메세지', '기본값'): 입력을 요청하는 대화 상자
+    // 확인을 누르면 입력값이, 취소를 누르면 null을 반환
+    document.write('<h2>홀짝 판별기</h2>');
+    const number = prompt('숫자를 입력하세요', '0');
+    console.log(typeof number);
+
+    // % 연산 시 문자가 숫자로 자동 타입 변환이 일어남
+    result = Number(number) % 2 === 0 ? '짝수' : '홀수';
+    document.write(result);
 
 
 
