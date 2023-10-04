@@ -26,9 +26,8 @@
   
   // 3번 풀이
   const fourth = prompt('4분기 판매량은?', '0');
-  const avgSales = (3500 + Number(fourth)) / 4;
-  // console.log(avgSales);
-  const avg = avgSales >= (3500 / 3) ? '판매량이 평균 이상입니다.' : '판매량이 평균 미달입니다.';
+  const avgSales = (3500 / 3);
+  const avg = fourth >= avgSales ? '판매량이 평균 이상입니다.' : '판매량이 평균 미달입니다.';
   document.write(avg);
 
 </script>
