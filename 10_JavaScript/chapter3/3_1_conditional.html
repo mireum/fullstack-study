@@ -57,10 +57,82 @@
 
     // 응용: 정상적인 값이 들어왔는지 판단할 때
     // 취소를 누르면 userName이 false가 되므로 if문이 실행되지 않음
-    const userName = prompt('방문자의 이름은?', '');
-    if (userName) {
-      document.write(userName + '님 반갑습니다! 방문을 환영합니다.', '<br>');
+    // const userName = prompt('방문자의 이름은?', '');
+    // if (userName) {
+    //   document.write(userName + '님 반갑습니다! 방문을 환영합니다.', '<br>');
+    // }
+
+
+    // if ~ else문
+    // 조건식을 만족하면 if문 실행, 만족하지 않으면 else문 실행
+    // 조건식의 결과에 따라 두 가지 결과 중 하나를 실행시킬 때 사용
+
+    // const num = prompt('숫자 입력', '0');
+    // if (num % 2 === 0) {
+    //   document.write('짝수입니다.');
+    // } else {
+    //   document.write('홀수입니다.');
+    // }
+
+    // window.confirm('메세지'): 확인 상자는 사용자가 무언가를 확인하거나 수락하기를 원하는 경우에 사용
+    // 확인을 누르면 true, 취소를 누르면 false 반환
+    // const result = confirm('회원 탈퇴를 하시겠습니까?');
+    // if (result) {
+    //   document.write('탈퇴 처리되었습니다!');
+    // } else {
+    //   document.write('탈퇴 취소되었습니다!');
+    // }
+
+    // if ~ else if문
+    // 여러 if문 조건식 중 만족하는 것을 찾아 실행, 만족하는게 없으면 else문 실행
+    // 조건식의 결과에 따라 여러가지 결과 중 하나를 실행시킬 때 사용
+
+    // const month = prompt('현재는 몇 월입니까?');
+    // if (month >= 3 && month <=5) {
+    //   document.write('햇살 가득 봄이네요!!');
+    // } else if (month >= 6 && month <= 8) {
+    //   document.write('휴가 가기 좋은 여름이네요!!');
+    // } else if (month >= 9 && month <= 11) {
+    //   document.write('독서의 계절 가을이네요!!');
+    // } else if (month >= 1 && month <= 2 || month === '12') {
+    //   document.write('눈이 오는 겨울이네요!!')
+    // } else {
+    //   document.write('잘못 입력했습니다!');
+    // }
+    // else {
+    //   document.write('눈이 오는 겨울이네요!!');
+    // }
+
+    // Quiz: 명확히 하려면 else if문을 사용하여 12, 1~2 조건식 넣기
+
+
+    // 중첩 if문
+    // if (조건식1) {
+    //   if (조건식2) {
+    //     실행코드
+    //   }
+    //   실행코드
+    // }
+
+    const id = 'asdf';
+    const pw = '1234';
+    const userId = prompt('아이디는?');
+
+    // 아이디가 일치하지 않으면 굳이 비밀번호를 검사할 필요 없음
+    if (id === userId) {
+      const userPw = prompt('비밀번호는?');
+      if (pw === userPw) {
+        document.write(userId + '님 반갑습니다!');
+      } else {
+        alert('비밀번호가 일치하지 않습니다.');
+      }
+    } else {
+      alert('아이디가 일치하지 않습니다.');
     }
+
+
+
+
 
 
   </script>
