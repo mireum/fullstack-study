@@ -20,18 +20,20 @@
     if (score < 0 || score > 100) {
       alert('에러입니다.');
     } else {
-      if (grade <= 3) {
+      if (grade >= 1 && grade <= 3) {
         if (score >= 60) {
           document.write('합격');
         } else {
           document.write('불합격');
         }
-      } else {
+      } else if (grade >= 4 && grade <= 6) {
         if (score >= 70) {
           document.write('합격');
         } else {
           document.write('불합격');
         }
+      } else {
+        alert('정확한 학년을 입력하세요');
       }
     }
 

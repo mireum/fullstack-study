@@ -11,23 +11,47 @@
     // 그 수들의 최대값과 최소값, 합계와 평균을 구해서 브라우저에 출력하세요.
 
     // 풀이5
+    // 주의! 덧셈을 하거나 문자끼리 비교를 피하려면 숫자로 변환해줄 것!
     const a = Number(prompt('첫 번째 정수 입력', ''));
     const b = Number(prompt('두 번째 정수 입력', ''));
     const c = Number(prompt('세 번째 정수 입력', ''));
     let min = a;
     let max = a;
-
-    if (min < b) {
-      max = b;
-    } else {
-      min = b;
-    }
-
-    if (max < c) {
+    
+    if (min <= b) {
+        max = b;
+      } else {
+        min = b;
+      }
+  
+    if (max <= c) {
       max = c;
     } else {
       min = c;
     }
+
+    // if (a <= b && a <= c) {
+    //   min = a;
+    //   if (b < c) {
+    //     max = c;
+    //   } else {
+    //     max = b;
+    //   }
+    // } else if (b <= a && b <= c) {
+    //   min = b;
+    //   if (a < c) {
+    //     max = c;
+    //   } else {
+    //     max = a;
+    //   }
+    // } else {
+    //   min = c;
+    //   if (a < b) {
+    //     max = b;
+    //   } else {
+    //     max = a;
+    //   }
+    // }
 
     document.write(`최대값은 ${max}, 최소값은 ${min}`, '<br>');
     document.write(`합계는 ${a+b+c}, 평균은 ${(a+b+c) / 3}`);
