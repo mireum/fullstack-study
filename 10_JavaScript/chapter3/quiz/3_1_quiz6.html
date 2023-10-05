@@ -11,7 +11,28 @@
     // ('수학': '01', '영어': '02', '국어': '03', '국사': '04', 그 외: '00')
 
     // 풀이6
-    
+    const subject = prompt('과목을 입력하세요(수학, 영어, 국어, 국사 등)');
+    let subCode;
+    switch (subject) {
+      case '수학':
+        subCode = '01';
+        break;
+      case '영어':
+        subCode = '02';
+        break;
+      case '국어':
+        subCode = '03';
+        break;
+      case '국사':
+        subCode = '04';
+        break;
+      default:
+        subCode = '00';
+        break;
+    }
+
+    document.write('과목코드: ' + subCode);
+
   </script>
 </head>
 <body>
