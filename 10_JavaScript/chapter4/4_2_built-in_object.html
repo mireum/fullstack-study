@@ -144,19 +144,33 @@
     // 컴퓨터가 낸 것 이미지 출력
     document.write(`<img src="images/math_img_${com}.jpg">`);
 
-    const end = '';
-    if (gameNum === com) {
-      end = '비겼습니다!';
+    let end = '';
+    // if (gameNum === com) {
+    //   end = '비겼습니다!';
+    // } else {
+    //   if ((gameNum === 1 && com === 2) || (gameNum === 2 && com === 3) || (gameNum === 3 && com === 1)) {
+    //     end = '컴퓨터가 이겼습니다!';
+    //   } else {
+    //     end = '내가 이겼습니다!';
+    //   }
+    // }
+    
+    // 다른 방법: gameNum과 com의 차를 이용
+    // 0이면 비김 | 1또는 -2이면 내가 이김 | 그 외는 내가 짐
+    const whoWin = gameNum - com;
+    if (whoWin === 0) {
+      document.write('비겼다!');
+    } else if (whoWin === 1 || whoWin === -2) {
+      document.write('내가 이겼다!');
     } else {
-      if ((gameNum === 1 && com === 2) || (gameNum === 2 && com === 3) || (gameNum === 3 && com === 1)) {
-        end = '컴퓨터가 이겼습니다!';
-      } else {
-        end = '내가 이겼습니다!';
-      }
+      document.write('내가 졌다!');
     }
+    
+    document.write('<br>');
 
     // 누가 이겼는지 출력!!
-    
+    // document.write(end);
+    document.write(whoWin);
 
 
 
