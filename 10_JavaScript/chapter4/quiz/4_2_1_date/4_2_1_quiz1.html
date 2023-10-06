@@ -14,9 +14,10 @@
 
     // 풀이1
     const theDay = new Date(2023, 1, 20, 3, 12);
-    // const theYear = 
+    
+    document.write(theDay.toLocaleString(), '<br>');
 
-    document.write(theDay.getFullYear() + '/' + theDay.getMonth() + '/' +
+    document.write(theDay.getFullYear() + '/' + (theDay.getMonth()+1) + '/' +
     theDay.getDate() + ' ' + theDay.getHours() + ':' + theDay.getMinutes());
 
   </script>

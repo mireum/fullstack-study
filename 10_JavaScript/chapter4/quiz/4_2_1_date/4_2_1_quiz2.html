@@ -20,39 +20,41 @@
     
     
     // 풀이2-1
-    let date = new Date(2023, 0, 5);
+    let date = new Date(2023, 9, 8);
     let day = date.getDay();
-    // let dayName = '';
+    let dayName1 = '';
 
-    // switch (day) {
-    //   case 0:
-    //     dayName = 'SUN';
-    //     break;
-    //   case 1:
-    //     dayName = 'MON';
-    //     break;
-    //   case 2:
-    //     dayName = 'THE';
-    //     break;
-    //   case 3:
-    //     dayName = 'WHD';
-    //     break;
-    //   case 4:
-    //     dayName = 'THU';
-    //     break;
-    //   case 5:
-    //     dayName = 'FRI';
-    //     break;
-    //   case 6:
-    //     dayName = 'SAT';
-    //     break;
-    // }
-    // document.write('요일: ' + dayName);
+    switch (day) {
+      case 0:
+        dayName1 = 'SUN';
+        break;
+      case 1:
+        dayName1 = 'MON';
+        break;
+      case 2:
+        dayName1 = 'THE';
+        break;
+      case 3:
+        dayName1 = 'WED';
+        break;
+      case 4:
+        dayName1 = 'THU';
+        break;
+      case 5:
+        dayName1 = 'FRI';
+        break;
+      case 6:
+        dayName1 = 'SAT';
+        break;
+    }
+    document.write('요일: ' + dayName1, '<br>');
 
+    // 풀이2-2
     const dayName = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-    let out = dayName[day];
-    document.write('요일: ' + out);
 
+    document.write(`날짜: ${date.getFullYear()}. ${date.getMonth()+1}. ${date.getDate()}`,'<br>');
+    document.write(`요일: ${day}`,'<br>');
+    document.write('요일: ' + dayName[day]);
 
   </script>
 </head>
