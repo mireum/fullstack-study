@@ -15,22 +15,24 @@
     // ['-', '2', '-', '2', '5', '-', '4', '-', '6', '-', '8']
 
     const str = prompt('숫자를 입력하세요.');
-    // const result = [];
+    const result = [];
 
     // 풀이4
-    const result = str.slice();
-    let leng = result.length;
-
-    for (let i = 0; i < leng; i++) {
-      if (result[i] % 2 == 0) {
-        console.log(result[i]);
-        result[i+1] = result[i];
-        result[i]= '-';
-        leng++;
+    // for (let i = 0; i < str.length; i++) {
+    //   if (str[i] % 2 === 0) {
+    //     result.push('-');
+    //   }
+    //   result.push(str[i]);
+    // }
+    // console.log(result);
+    
+    for (const s of str) {
+      if (s % 2 === 0) {
+        result.push('-');
       }
+      result.push(s);
     }
     console.log(result);
-    
 
   </script>
 </head>

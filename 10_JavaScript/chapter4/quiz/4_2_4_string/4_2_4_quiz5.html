@@ -32,10 +32,25 @@
 
     // 풀이5
     const imgFileExt = ['jpg', 'png', 'gif'];
-    // let fileExt;
-    // const fileInput = document.querySelector('input[type=file]');
+    
+    
+    const fileInput = document.querySelector('input[type=file]');
+    fileInput.addEventListener('change', function () {
+      // debugger;
+      console.log(fileInput); // input DOM
+      console.log(fileInput.files); // FileList 객체
+      console.log(fileInput.files[0]); // File 객체
 
+      let fileName = fileInput.files[0].name;
+      const nameArray = fileName.split('.');
+      let fileExt = nameArray[1];
+      
+      if (!imgFileExt.includes(fileExt)) {
+        alert('잘못된 파일 확장자입니다.');
+      }
 
+    });
+    
   </script>
 </body>
 </html>

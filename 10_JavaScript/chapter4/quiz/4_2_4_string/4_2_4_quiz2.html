@@ -12,10 +12,10 @@
 
     // 풀이2
     const name = prompt('영문 이름을 입력하세요');
-    const phoneNum = prompt('연락처를 입력하세요');
-
     document.write(name.toUpperCase(), '<br>');
-    document.write(phoneNum.substring(0, 9) + '****');
+    
+    const phoneNum = prompt('연락처를 입력하세요');
+    document.write(phoneNum.substring(0, phoneNum.length-4) + '****');
 
   </script>
 </head>
