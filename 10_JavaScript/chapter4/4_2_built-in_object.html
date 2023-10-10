@@ -279,46 +279,18 @@
     console.log(yellowArr);
 
 
+    // 배열 객체의 메소드(3) - 검색
+    const fruits = ['Banana', 'Orange', 'Apple', 'Mango', 'Apple'];
 
+    // indexOf(): 지정된 값의 첫번째 인덱스를 반환, 찾을 수 없는 경우 -1을 반환
+    let index = fruits.indexOf('Apple');
+    console.log(index); // 2
+    index = fruits.indexOf('Apple', 3); // 검색 시작 위치 지정
+    console.log(index); // 4
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // includes(): 지정된 값이 포함된 경우 true, 포함되지 않은 경우 false(ES7차 문법)
+    console.log(fruits.includes('Mango'));
+    console.log(fruits.includes('Banana', 3)); // 검색 시작 위치 지정
 
 
 
