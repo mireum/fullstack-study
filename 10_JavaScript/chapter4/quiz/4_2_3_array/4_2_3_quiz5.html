@@ -18,11 +18,14 @@
 
     // 풀이5
     for (let i = 0; i < arrLength; i++) {
-      arr[i] = prompt('배열에 넣을 요소를 입력하세요');
+      arr[i] = prompt('배열에 넣을 데이터를 입력하세요');
+      // arr.push(prompt('배열에 넣을 데이터를 입력하세요'));
     }
 
-    document.write('배열의 첫번째 값: ' + arr.shift(), '<br>');
-    document.write('배열의 끝 값: ' + arr.pop(), '<br>');
+    if (arr.length > 0) {
+      document.write('배열의 첫번째 값: ' + arr.shift(), '<br>');
+      document.write('배열의 끝 값: ' + arr.pop(), '<br>');
+    }
 
   </script>
 </head>

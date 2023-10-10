@@ -14,12 +14,11 @@
 
     // 풀이3
     const hateFruits = prompt('먹기 싫은 과일을 입력하세요', '');
+    let index = fruits.indexOf(hateFruits);
     
     if (fruits.includes(hateFruits)) {
-      let index = fruits.indexOf(hateFruits);
       fruits.splice(index, 1);
       console.log(fruits);
-      
     } else {
       alert('제거할 과일이 없습니다.')
     }

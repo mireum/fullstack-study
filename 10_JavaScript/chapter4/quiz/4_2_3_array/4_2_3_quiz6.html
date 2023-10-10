@@ -16,20 +16,28 @@
     
     // 풀이6
     let ranNum;
-    let i = 0;
    
     while (lottoArr.length <= 5) {
       ranNum = Math.floor(Math.random() * 45) + 1;
-      if (lottoArr.includes(ranNum)) {
-        continue;
-      } else {
-        lottoArr[i] = ranNum;
-        i++;
+      if (!lottoArr.includes(ranNum)) {
+        lottoArr.push(ranNum);
       }
     }
 
     lottoArr.sort(function (a, b) { return a - b; })
-    document.write(lottoArr);
+    document.write(lottoArr, '<br>');
+
+    // 풀이 6-2
+    const lottoArr2 = [];
+
+    for (; lottoArr2.length < 6;) {
+      ranNum = Math.floor(Math.random() * 45) + 1;
+      if (!lottoArr.includes(ranNum)) {
+        lottoArr2.push(ranNum);
+      }
+    }
+    lottoArr2.sort(function (a, b) { return a - b; })
+    document.write(lottoArr2);
 
     </script>
 </head>
