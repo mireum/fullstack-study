@@ -15,27 +15,23 @@
     const lottoArr = []; // 빈 배열
     
     // 풀이6
-    const picked = [];
     let ranNum;
-    let j = 0;
-
-    if (j !== 6) {
-      for (let i = 0; i < 99; i++) {
-        ranNum = Math.floor(Math.random() * 45 + 1);
-        if (picked.includes(ranNum)) {
-          picked[i] = ranNum;
-          continue;
-        } else {
-          picked[i] = ranNum;
-          lottoArr[j] = ranNum;
-          j++;
-        }
+    let i = 0;
+   
+    while (lottoArr.length <= 5) {
+      ranNum = Math.floor(Math.random() * 45) + 1;
+      if (lottoArr.includes(ranNum)) {
+        continue;
+      } else {
+        lottoArr[i] = ranNum;
+        i++;
       }
     }
+
     lottoArr.sort(function (a, b) { return a - b; })
     document.write(lottoArr);
 
-  </script>
+    </script>
 </head>
 <body>
   
