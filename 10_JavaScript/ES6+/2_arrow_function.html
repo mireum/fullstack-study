@@ -67,22 +67,63 @@
         director: 'Nolan',
         rating: 9.6
       });
-      console.log(getFavoriteMovie3);
+    console.log(getFavoriteMovie3);
     
 
+    // () => {};
+    // 화살표 함수는 익명 함수
+    // 참조할 이름이 필요하다면 함수를 변수에 할당하면 됨
 
 
+    // Quiz
+    // 2.1 다음 중 화살표 함수를 문법에 맞게 활용한 예는?
+    let arr = [1, 2, 3];
 
+    // a)
+    // let func = arr.map(n -> n + 1);
 
+    // b)   <==
+    // let func = arr.map(n => n + 1);
 
+    // c)
+    // let func = arr.map(n ~> n + 1);
 
+    // Quiz2.2~2.4: 화살표 함수로 변경하기
+    // 2.2
+    function testFunc(arg) {
+      console.log(arg);
+    }
 
+    const testFunc2 = arg => console.log(arg);
 
+    // 2.3
+    function add(num1, num2) {
+      return num1 + num2;
+    }
 
+    const add2 = (num1, num2) => num1 + num2;
 
+    // 2.4
+    // function ask(question, yes, no) {
+    //   if (confirm(question)) yes();
+    //   else no();
+    // }
+    // ask(
+    //   '동의하십니까?',
+    //   function() { alert('동의하셨습니다.'); },
+    //   function() { alert('취소 버튼을 누르셨습니다.'); }
+    // );
+      
 
-
-
+    const ask2 = (question, yes, no) => {
+      if (confirm(question)) yes();
+      else no();
+    };
+    ask2(
+      '동의하십니까?',
+      () => alert('동의하셨습니다.') ,
+      () => alert('취소 버튼을 누르셨습니다.')
+    );
 
 
   </script>
