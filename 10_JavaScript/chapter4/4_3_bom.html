@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+    // 3. 브라우저 객체(BOM)
+    // 브라우저에 내장된 객체를 가리키고 브라우저를 제어 및 조작 가능
+    // 0) window는 브라우저 객체의 최상위 객체
+    
+    // 아래와 같은 하위 객체를 계층 구조로 포함
+    // 1) screen: 스크린 관련된 정보 제공(화면 정보)
+    // 2) location: 현재 브라우저의 위치 정보(URL 정보)
+    // 3) history: 브라우저에서 웹 서핑을 할 때 기록들을 가짐
+    // 4) navigator: OS 및 브라우저에 대한 다양한 정보를 가짐
+    // 5) document(DOM): 문서 객체, 웹 문서 관련
+
+    // 0) window 객체
+    // open(): 팝업 창을 나타낼 때 사용
+    // 지정한 URL 페이지를 새 브라우저 창에 나타낼 수 있다.
+    // 예: 광고 팝업 등 - 브라우저에서 팝업 차단을 할 수 있어 잘 안 쓰임
+
+    // open('URL', '새 창 이름', '새 창 옵션');
+    // window.open('https://www.google.com');
+
+    // 팝업 창 열고 닫기 예제
+    // window.open('winpopup.html', '팝업', 'width=300, height=400, left=300, top=50');
+
+    // alert(): 경고창을 나타낼 때 사용
+    // window.alert('경고 메시지');
+    // alert('잘못된 입력입니다.');
+
+    // prompt(): 질의응답 창을 나타낼 때 사용
+    // window.prompt('메시지', '기본값');
+    // 확인을 누르면 입력한 값을 반환, 취소를 누르면 null
+    // const age = prompt('당신의 나이는?', '0');
+    // console.log(age);
+
+    // confirm(): 확인/취소 창을 나타낼 때 사용
+    // window.confirm('메시지');
+    // 확인을 누르면 true를 반환, 취소를 누르면 false
+    // const remove = confirm('정말로 삭제하시겠습니까?');
+    // console.log(remove);
+
+    // 일정한 시간 간격으로 코드 실행하기(2가지)
+    // setInterval(): 일정한 시간 간격으로 코드를 반복 실행
+    // clearInterval(): 변수를 이용해 setInterval()을 취소
+    // clearInterval변수 = setInterval(반복 실행할 함수, 밀리초);
+    // clearInterval(변수);
+    let addNum = 0;
+    let subNum = 1000;
+
+    const counter = setInterval(function () {
+      addNum++;
+      console.log('addNum: ' + addNum);
+    }, 3000);
+
+    const timer = setInterval(function () {
+      subNum--;
+      console.log('subNum: ', + subNum);
+    }, 3000);
+
+    // setTimeout(): 일정 시간 뒤에 코드를 실행
+  </script>
+</head>
+<body>
+  <h1>일정 시간 간격으로 값 증감시키기</h1>
+  <p>콘솔을 열어 확인하세요.</p>
+  <button type="button" onclick="clearInterval(counter)">증가 정지</button>
+  <button type="button" onclick="clearInterval(timer)">감소 정지</button>
+</body>
+</html>
