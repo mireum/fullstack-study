@@ -93,10 +93,10 @@
     // 잘못된 pw 입력: alert('존재하지 않는 비밀번호입니다.');
     // 로그인 성공 시: document.write(id + '님 방문을 환영합니다!');
 
-    function login(userId, userPw) {
-      if (userId === dbId) {
-        if (userPw === dbPw) {
-          document.write(userId + '님 방문을 환영합니다!<br>');        
+    function login(id, pw) {
+      if (id === dbId) {
+        if (pw === dbPw) {
+          document.write(id + '님 방문을 환영합니다!<br>');        
         } else {
           alert('존재하지 않는 비밀번호입니다.');
         }
@@ -104,16 +104,79 @@
         alert('존재하지 않는 아이디입니다.');
       }
     } 
-    const userId = prompt('아이디?');
-    const userPw = prompt('비밀번호?');
+    // const userId = prompt('아이디?');
+    // const userPw = prompt('비밀번호?');
+    // login(userId, userPw);
 
-    login(userId, userPw);
+
+    // 함수에서 return문의 역할
+    // 데이터(결화값)를 반환
+    // 함수를 강제 종료
+    // function 함수명() {
+    //   실행코드;
+    //   return 값;
+
+    //   실행코드2; (실행X)
+    // }
+
+    function sum(num1, num2) {
+      return num1 + num2;
+    }
+    const result = sum(10, 20);
+    document.write('두 수의 합은: ' + result, '<br>');
+
+
+    // 두 과목의 점수를 입력받아 평균 점수 구하기
+    const arrSubject = ['국어', '수학'];
+
+    function testAvg(arrData) {
+      let sum = 0;
+      for (let i = 0; i < arrData.length; i++) {
+        sum += Number(prompt(arrData[i] + ' 점수는?', '0'));
+      }
+      return sum / arrData.length;
+    }
+
+    // const resultAvg = testAvg(arrSubject);
+    // document.write('평균 점수는 ' + resultAvg, '<br>');
+
+
+    // Quiz
+    // 이전/다음 버튼으로 이미지 넘기기
+    let imgNum = 1;
+
+    function gallery(direct) {
+      const imgTag = document.querySelector('.photo');
+      if (direct === 1) { // 다음
+        imgNum++;
+        if (imgNum === 9) {
+          imgNum = 1;
+        }
+        imgTag.setAttribute('src', `images/pic_${imgNum}.jpg`);
+      } else { // 이전
+        imgNum--;
+        if (imgNum === 0) {
+          imgNum = 8;
+        }
+        imgTag.setAttribute('src', `images/pic_${imgNum}.jpg`);
+      }
+    }
 
   </script>
 </head>
 <body>
   
   <button type="button" onclick="changeColor()">배경색 바꾸기</button>
+  
+  <div>
+    <p>
+      <button type="button" onclick="gallery(0)">이전</button>
+      <button type="button" onclick="gallery(1)">다음</button>
+    </p>
+    <p>
+      <img src="images/pic_1.jpg" alt="photo" class="photo">
+    </p>
+  </div>
 
 </body>
 </html>
