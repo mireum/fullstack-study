@@ -41,12 +41,13 @@
       console.log(fileInput.files); // FileList 객체
       console.log(fileInput.files[0]); // File 객체
 
-      let fileName = fileInput.files[0].name;
-      const nameArray = fileName.split('.');
-      let fileExt = nameArray[1];
+      const fileName = fileInput.files[0].name;
+      const fileExt = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+      // const nameArray = fileName.split('.');
+      // let fileExt = nameArray[1];
       
       if (!imgFileExt.includes(fileExt)) {
-        alert('잘못된 파일 확장자입니다.');
+        alert('이미지 파일이 아닙니다.');
       }
 
     });
