@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+    // 함수
+    // 여러 실행 코드들의 묶음
+    // 자주 사용하는 코드들(기능)을 저장했다가 필요할 때 호출해서 사용
+    // function 키워드를 사용하여 정의 => ES6차에서는 화살표 함수를 사용
+
+    // 1. 함수 선언문: 기명 함수로 정의
+    // function 함수명() {
+    //   실행코드;
+    // }
+
+    // 2. 함수 표현식: 익명 함수를 변수에 할당
+    // 변수 = function () {
+    //   실행코드;
+    // };
+    
+    // 위와 같이 정의된 함수는 즉시 실행되지 않음
+    // 메모리에 할당되어 있다가 함수가 호출되면 실행
+    // 1. 함수명();
+    // 2. 변수명();
+
+    function greeting() {
+      document.write('hello<br>');
+    }
+    greeting();
+
+    // (참고)(고급) 함수 선언문과 함수 표현식의 차이점
+    // 함수 선언문은 호이스팅(끌어 올리기)이 일어난다. 
+    // 해당 스코프(유효범위)의 최상단으로 끌어올려진 것과 같은 현상
+    // 변수나 함수 선언이 코드 실행보다 먼저 메모리에 할당(저장)되는 과정
+
+    let count = 0;
+
+    myFunc();
+
+    function myFunc() {
+      count++;
+      document.write('hello ' + count, '<br>');
+    }
+
+    myFunc();
+    
+
+
+    // theFunc(); // Cannot access 'theFunc' before initialization 호이스팅이 안됌
+
+    const theFunc = function () {
+      count++;
+      document.write('bye ' + count, '<br>');
+    };
+
+    theFunc();
+
+    // 버튼 클릭할 때마다 배경색이 바뀌도록 함수 만들기
+    const color = ['yellow', 'aqua', 'purple', 'white'];
+
+    let index = 0;
+    function changeColor() {
+      if (index >= color.length) {
+        index = 0;
+      }
+      const bodyTag = document.querySelector('body');
+      bodyTag.style.backgroundColor = color[index++]; // 후위 증가!!
+    }
+
+
+    // 매개변수가 있는 함수
+    // function 함수명(매개변수1, 매개변수2, ...) {
+    //   실행코드;
+    // }
+    // 함수명(인자값1, 인자값2, ...);
+    function introduce(name, age) { // 외부에서 받을 데이터가 있으면 매개변수 선언
+      document.write('안녕하세요. ' + name + '입니다.<br>');
+      document.write('나이는 ' + age + '살 입니다.<br>');
+    }
+    introduce('바방', 223); // 인자값(인수, 매개값)을 넘겨줌
+    introduce('바밥'); // 실행 가능, age는 undefined가 들어감
+    introduce('바밥', 434, '무의미한 데이터'); // 실행됨
+
+
+    // 로그인 함수 만들기 실습
+    const dbId = 'qwer';
+    const dbPw = '1234';
+
+    // 잘못된 id 입력: alert('존재하지 않는 아이디입니다.');
+    // 잘못된 pw 입력: alert('존재하지 않는 비밀번호입니다.');
+    // 로그인 성공 시: document.write(id + '님 방문을 환영합니다!');
+
+    function login(userId, userPw) {
+      if (userId === dbId) {
+        if (userPw === dbPw) {
+          document.write(userId + '님 방문을 환영합니다!<br>');        
+        } else {
+          alert('존재하지 않는 비밀번호입니다.');
+        }
+      } else {
+        alert('존재하지 않는 아이디입니다.');
+      }
+    } 
+    const userId = prompt('아이디?');
+    const userPw = prompt('비밀번호?');
+
+    login(userId, userPw);
+
+  </script>
+</head>
+<body>
+  
+  <button type="button" onclick="changeColor()">배경색 바꾸기</button>
+
+</body>
+</html>
