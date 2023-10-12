@@ -60,17 +60,16 @@
     // 객체의 key-value 쌍에 대한 반복은 어떻게 구현할까?
     // Object.keys()를 사용하면 객체의 모든 키를 배열로 가져온 후, 키에 대한 반복을 수행하면 값에 접근이 가능
     console.log(Object.keys(car));
-    for ( key of Object.keys(car)) {
+    for (key of Object.keys(car)) {
       const value = car[key];
       console.log(key, value);
     }
-
     // (참고) Object.entries(): 객체의 모든 키/값 쌍을 배열로 가져옴
     console.log(Object.entries(car));
     
 
     // 2. for in 루프
-    // ES1 feaature
+    // ES1 feature
     // (순서 없이) 객체의 속성(키값)을 반복
     // for (const key in object) {
     //   실행코드;

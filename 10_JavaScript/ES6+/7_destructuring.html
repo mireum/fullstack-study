@@ -80,7 +80,7 @@
     }
     printMovieInfo(movie);
 
-
+    
     // 2. 배열 구조 분해 할당
     // 배열을 구조 분해할 때는 객체와는 달리 중괄호가 아닌 대괄호[] 사용
 
@@ -170,12 +170,12 @@
     // salaries가 비어있으면 함수는 null을 반환해야 합니다.
     // 최대 급여를 받는 사람이 여러 명이라면 그 중 아무나 한 명 반환하면 됩니다.
 
-    function topSalary(salaries) { 
+    function topSalary(salaryList) { 
       let max = 0;
       let maxName = null;
-      if (!salaries) return null;
+      if (!salaryList) return null;
 
-      for (const obj of salaries) {
+      for (const obj of salaryList) {
         if (max < obj.salary) {
           [max, maxName] = [obj.salary, obj.name];
         }

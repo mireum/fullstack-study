@@ -27,7 +27,7 @@
     let mySnack = '';
     let change = 0;
 
-    if (money <= 0) {
+    if (money <= 0 || isNaN(money)) {
       alert('돈을 다시 넣어주세요.');
       location.reload();
     } else {
