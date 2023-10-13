@@ -7,6 +7,10 @@
 
 </head>
 <body>
+  <!-- * -->
+  <h2>입력한 값보다 나이가 많은 사람 찾기</h2>
+  <input type="number" id="ageToCheck" value="30">
+  <button type="button" onclick="searchFunc()">검색</button>
   
   <script>
     // 유용한 배열 메소드(ES5)
@@ -40,9 +44,77 @@
     console.log(newPersons);
 
 
+    // 2. filter(function(currentValue, index))
+    // 제공된 테스트 함수를 통과하는 요소들만 따로 추출하여 새 배열을 만듦
+    // 테스트 함수에서는 true, false를 반환해야 하며, 여기서 true를 반환하는 경우에만 새로운 배열에 포함됨
+    // 원래 배열을 변경하지 않음
+
+    // ages 배열에서 19세 이상인 모든 값들로 새 배열을 만들어 반환
+    const ages = [32, 33, 16, 40];  // 예상 결과: [32, 33, 40]
+    // const newAges = ages.filter((age) => {
+    //   return age >= 19;
+    // });
+    const newAges = ages.filter(age => age >= 19);
+    console.log(newAges);
+
+    // 활용Tip: 검색 기능(또는 필터링 기능) 또는 제거 기능 만들 때 유용
+    // * 참조
+    const students = [
+      {name: 'Qwer', age: 26},
+      {name: 'Pony', age: 32},
+      {name: 'Tony', age: 12},
+      {name: 'Moly', age: 23},
+      {name: 'Noni', age: 44}
+    ];
+
+    const searchFunc = () => {
+      const ageToCheckValue = document.querySelector('#ageToCheck').value;
+      // console.log(ageToCheckValue);
+      const searchStudents = students.filter((student) => {
+        return student.age > ageToCheckValue;
+      });
+      console.log(searchStudents);
+    };
+
+
+    // Quiz
+    // 배열의 filter() 함수를 사용하여 id 값이 2인 상품을 제거해보세요.
+    const products = [
+      { id: '1', title: 'snack', price: 1000 },
+      { id: '2', title: 'pen', price: 2000 },
+      { id: '3', title: 'candy', price: 500 },
+      { id: '4', title: 'note', price: 1800 },
+      { id: '5', title: 'case', price: 2300 }
+    ];
+
+    const newProducts = products.filter(prod => prod.id !== '2')
+    console.log(newProducts);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
   </script>
 </body>
 </html>
