@@ -36,9 +36,10 @@
     
     const fileInput = document.querySelector('input[type=file]');
     fileInput.addEventListener('change', function () {
-      // debugger;
+      // debugger; // 코드가 멈추고 한 줄씩 실행할 수 있음
       console.log(fileInput); // input DOM
       console.log(fileInput.files); // FileList 객체
+      console.log(Array.from(fileInput.files)); // 실제 배열로 변환   <=======
       console.log(fileInput.files[0]); // File 객체
 
       const fileName = fileInput.files[0].name;
