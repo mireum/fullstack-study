@@ -111,6 +111,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 console.log(res); //Response 객체
 =======
 >>>>>>> 37872db ('11')
@@ -119,6 +120,9 @@
 >>>>>>> b0fca69 (l)
 =======
 >>>>>>> 37872db ('11')
+=======
+                console.log(res); //Response 객체
+>>>>>>> b0fca69 (l)
                 return res.json(); // 응답을 JS 객체 형식으로 변환
             })
             .then(res => {
@@ -127,6 +131,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b0fca69 (l)
 =======
 >>>>>>> b0fca69 (l)
             })
@@ -137,6 +144,7 @@
 
         // 예제2 리팩터링
         // Quiz
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -223,6 +231,17 @@
 =======
             });
 >>>>>>> 37872db ('11')
+=======
+        async function asyncFunc() {
+            const obj = await fetch('https://api.github.com/users/fkdkskdfjfk');
+            const asy = await obj.json();
+            console.log(asy);
+            const suc = await asy;
+            console.log(suc);
+            
+        }
+        asyncFunc();
+>>>>>>> b0fca69 (l)
     </script>
 </head>
 <body>
