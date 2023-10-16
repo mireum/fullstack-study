@@ -134,6 +134,9 @@
             const userInfo = await res.json();
             console.log(userInfo);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e3adb4d (sdf)
 
             // Quiz: try/catch로 에러 처리 추가
             try {
@@ -184,16 +187,23 @@
                 // 에러 발생 가능한 코드들을 여기에
                 const response = await fetch('api-url');
                 console.log(response);
-                if () {
-                    
+                if (!response.ok) {
+                    throw new Error(`${response.status} (${response.statusText})`);
                 }
+            } catch (err) {
+                console.error(err);
             }
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
         asyncFunc();
 >>>>>>> b0fca69 (l)
 =======
 >>>>>>> 6170f09 (qq)
+=======
+        asyncFunc();
+
+>>>>>>> e3adb4d (sdf)
     </script>
 </head>
 <body>
