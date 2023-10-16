@@ -126,10 +126,14 @@
         // 예제2 리팩터링
         // Quiz
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e3c5ce4 (kk)
         const getGithubUserInfo = async username => {
             const res = await fetch(`https://api.github.com/users/${username}`);
             const userInfo = await res.json();
             console.log(userInfo);
+<<<<<<< HEAD
 
             // Quiz: try/catch로 에러 처리 추가
             try {
@@ -167,6 +171,11 @@
             });
 >>>>>>> 37872db ('11')
 =======
+=======
+        };
+        getGithubUserInfo('fkdkskdfjfk');
+
+>>>>>>> e3c5ce4 (kk)
         async function asyncFunc() {
             const obj = await fetch('https://api.github.com/users/fkdkskdfjfk');
             const asy = await obj.json();
