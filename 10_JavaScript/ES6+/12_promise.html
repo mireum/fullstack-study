@@ -43,7 +43,7 @@
       // 비동기적으로 수행하고 싶은 코드를 여기에 작성
       console.log('네트워크 요청 작업을 수행 중...');
 
-      const resultFlag = false; // 테스트를 위해 기능 수행 결과를 임의로 만듦
+      const resultFlag = true; // 테스트를 위해 기능 수행 결과를 임의로 만듦
 
       setTimeout(() => {
         // 성공 시 resolve(), 실패 시 reject() 두 콜백 중 하나를 호출해야 함
@@ -63,9 +63,68 @@
       })
       .catch((err) => { // 위에서 만든 프로미스가 문제가 발생한다면(실패 시) err**를 잡아서 처리
         console.error(err);
+      })
+      .finally(() => { // 성공/실패와 상관없이 무조건 실행
+        console.log('마지막에 무조건 실행');
       });
 
-    
+    // 프로미스 확인용 로그
+    // console.log(myPromise);
+    // setTimeout(() => {
+    //   console.log(myPromise);
+    // }, 2000);
+
+
+    // 정리:
+    // 프로미스가 성공할 때의 값을 얻는 데 .then()을 사용
+    // 프로미스가 실패할 때의 오류를 처리하는 데 .catch()를 사용
+
+
+    // 프로미스 예제2
+    // fetch()를 사용한 JSONPlaceholder API 사용
+    // fetch()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </script>
 </head>
 <body>
