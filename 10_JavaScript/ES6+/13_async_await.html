@@ -106,6 +106,13 @@
 
         // 예제2 리팩터링
         // Quiz
+        const getGithubUserInfo = async username => {
+            const res = await fetch(`https://api.github.com/users/${username}`);
+            const userInfo = await res.json();
+            console.log(userInfo);
+        };
+        getGithubUserInfo('fkdkskdfjfk');
+
         async function asyncFunc() {
             const obj = await fetch('https://api.github.com/users/fkdkskdfjfk');
             const asy = await obj.json();
