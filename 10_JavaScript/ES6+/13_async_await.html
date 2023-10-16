@@ -149,6 +149,7 @@
         // 3-2. 오류 처리
         // 일반적인 프로미스에서는 catch()를 사용하여 오류들을 처리
         // async/await도 비슷 - try/catch 구문 사용
+<<<<<<< HEAD
         async function asyncFunc() {
             try {
                 // 에러 발생 가능한 코드들을 여기에
@@ -176,16 +177,23 @@
         getGithubUserInfo('fkdkskdfjfk');
 
 >>>>>>> e3c5ce4 (kk)
+=======
+>>>>>>> 6170f09 (qq)
         async function asyncFunc() {
-            const obj = await fetch('https://api.github.com/users/fkdkskdfjfk');
-            const asy = await obj.json();
-            console.log(asy);
-            const suc = await asy;
-            console.log(suc);
-            
+            try {
+                // 에러 발생 가능한 코드들을 여기에
+                const response = await fetch('api-url');
+                console.log(response);
+                if () {
+                    
+                }
+            }
         }
+<<<<<<< HEAD
         asyncFunc();
 >>>>>>> b0fca69 (l)
+=======
+>>>>>>> 6170f09 (qq)
     </script>
 </head>
 <body>
