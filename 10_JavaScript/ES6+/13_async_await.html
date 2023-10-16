@@ -110,6 +110,14 @@
             const res = await fetch(`https://api.github.com/users/${username}`);
             const userInfo = await res.json();
             console.log(userInfo);
+
+            // Quiz: try/catch로 에러 처리 추가
+            try {
+                const res = await fetch(`https://api.github.com/users/${username}`);                
+                console.log(res);
+            } catch (err) {
+                console.error(err);
+            }
         };
         getGithubUserInfo('fkdkskdfjfk');
 
@@ -122,11 +130,15 @@
                 // 에러 발생 가능한 코드들을 여기에
                 const response = await fetch('api-url');
                 console.log(response);
-                if () {
-                    
+                if (!response.ok) {
+                    throw new Error(`${response.status} (${response.statusText})`);
                 }
+            } catch (err) {
+                console.error(err);
             }
         }
+        asyncFunc();
+
     </script>
 </head>
 <body>
