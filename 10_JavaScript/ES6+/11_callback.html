@@ -174,8 +174,49 @@
     // 기다리는 시점마다 콜백을 중첩해야 하므로 반복하다보면 코드가 피라미드 모양으로 복잡해진다.
 
 
+    // 콜백 지옥의 예2
+    const loginUser = (id, password, onSuccess, onError) => {
+      // 2초간 네트워크 통신을 하는 것처럼 꾸밈
+      setTimeout(() => {
+        if (id === 'qwer' && password === '1234') {
+          // 로그인과 관련된 작업을 하고 서버에서 받아온 유저 정보(여기서는 그냥 id)를 콜백 함수에 전달함
+          onSuccess(id);
+        } else {
+          onError(new Error('존재하지 않음'));
+        }
+      }, 2000);
+    };
 
+    const getRoles = (userId, onSuccess, onError) => {
+      setTimeout(() => {
+        if (userId = 'qwer') {
+          // 권한을 가져오는 작업을 하고 받아온 권한 정보를 콜백 함수에 전달함
+          onSuccess({ name: 'JW choi', role: 'admin' });
+        } else {
+          onError(new Error('접근 권한 없음'));
+        }
+      }, 1000);
+    };
 
+    const id = prompt('아이디?');
+    const password = prompt('비밀번호?');
+
+    loginUser(id, password, (userId) => {
+      // 로그인에 성공했다면 매개 변수로 받아온 userId를 이용하여 권한을 받아옴
+      getRoles(userId, (userInfo) => {
+        // 사용자의 권한을 잘 받아왔을 때
+        alert(`Welcome ${userInfo.name} (${userInfo.role})`);
+      }, () => {  // 권한 얻기 에러 발생 시 호출될 콜백 함수
+
+      });
+    }, (error) => { // 로그인 에러 발생 시 호출된 콜백 함수
+      console.error(error);
+    });
+    // 콜벡 체인을 사용하지 않으면 비동기 함수들이 동기적으로 처리가 안됨
+    // 근데 콜백 체인이 반복되면 콜백 지옥이 됨
+    // 문제점
+    // 1) 가독성이 떨어진다.
+    // 2) 디버깅, 유지보수가 힘들다.
 
 
 
