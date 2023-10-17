@@ -11,4 +11,11 @@
 
 - index.html:
   콘텐츠가 렌더링 될 단 하나의 템플릿 페이지
-  Root Dom Node를 갖고 있음
+  Root DOM Node를 갖고 있음
+
+- index.js:
+  Root DOM Node에 App 컴포넌트를 렌더링
+
+- App.js:
+  실제 보여질 컴포넌트
+  사용 예> header-section-main-footer 또는 라우터 작성
