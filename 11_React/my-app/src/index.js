@@ -7,6 +7,7 @@ import JsxUse from './chapter3/3.4/JsxUse';
 import Library from './chapter3/Library';
 import Clock from './chapter4/Clock';
 import PropsUse from './chapter5/5.3/PropsUse';
+import CommentList from './chapter5/CommentList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -27,7 +28,8 @@ root.render(
   // <Library />
 
   // <Clock />
-  <PropsUse />
+  // <PropsUse />
+  <CommentList />
 );
 
 // If you want to start measuring performance in your app, pass a function
