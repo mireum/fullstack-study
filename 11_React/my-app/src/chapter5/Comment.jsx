@@ -35,6 +35,7 @@ const styles = {
 
 // 댓글들은 반복되므로 재사용 가능한 컴포넌트로 만듦
 function Comment(props) {
+  // console.log(props);
   return (
     <div style={styles.wrapper}>
       {/* 사람 모양의 프로필 이미지 */}

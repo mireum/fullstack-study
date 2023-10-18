@@ -1,3 +1,5 @@
+import Avatar from "./Avatar";
+
 function UserInfo(props) {
   return (
     <div className="user-info">
