@@ -16,6 +16,8 @@ import Toggle from './chapter8/8.1/Toggle';
 import MyButton from './chapter8/8.2/MyButton';
 import ConfirmButton from './chapter8/ConfirmButton';
 import Greeting from './chapter9/9.1/Greeting';
+import LoginControl from './chapter9/9.2/LoginControl';
+import LoginControlRefactoring from './chapter9/9.3/LoginControlRefactoring';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -60,7 +62,9 @@ root.render(
   // <ConfirmButton />
 
   // 9장 예제
-  <Greeting isLoggedIn={true}/>
+  // <Greeting isLoggedIn={true}/>
+  // <LoginControl />
+  <LoginControlRefactoring />
 );
 
 // If you want to start measuring performance in your app, pass a function
