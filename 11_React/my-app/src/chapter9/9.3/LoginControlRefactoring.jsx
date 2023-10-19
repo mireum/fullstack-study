@@ -33,8 +33,8 @@ function LoginControlRefactoring() {
       {/* Greeting 컴포넌트의 재사용 */}
       <Greeting isLoggedIn={isLoggedIn}/>
       {isLoggedIn
-       ? <LogoutButton onClick={handleLogoutClick}/> 
-       : <LoginButton onClick={handleLoginClick}/>
+       ? <LogoutButton onClick={handleLogoutClick} /> 
+       : <LoginButton onClick={handleLoginClick} />
       }
     </>
   );
