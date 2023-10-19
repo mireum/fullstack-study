@@ -19,6 +19,7 @@ import Greeting from './chapter9/9.1/Greeting';
 import LoginControl from './chapter9/9.2/LoginControl';
 import LoginControlRefactoring from './chapter9/9.3/LoginControlRefactoring';
 import Mailbox from './chapter9/9.3/Mailbox';
+import MainPage from './chapter9/9.4/MainPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -70,7 +71,8 @@ root.render(
   // <Greeting isLoggedIn={true}/>
   // <LoginControl />
   // <LoginControlRefactoring />
-  <Mailbox unreadMessages={messages} />
+  // <Mailbox unreadMessages={messages} />
+  <MainPage />
 );
 
 // If you want to start measuring performance in your app, pass a function
