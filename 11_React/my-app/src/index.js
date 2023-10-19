@@ -10,6 +10,7 @@ import PropsUse from './chapter5/5.3/PropsUse';
 import CommentList from './chapter5/CommentList';
 import CommentEx from './chapter5/5.6/CommentEx';
 import NotificationList from './chapter6/NotificationList';
+import Counter from './chapter7/7.2/Counter';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -42,7 +43,10 @@ root.render(
   // />
 
   // 6장 예제
-  <NotificationList />
+  // <NotificationList />
+
+  // 7장 예제
+  <Counter />
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -40,9 +40,9 @@ class NotificationList extends React.Component {
         });
       } else {
         // 실습2: 언마운트 시키기 위해 작성
-        this.setState({
-          notifications: [],
-        });
+        // this.setState({
+        //   notifications: [],
+        // });
 
         clearInterval(timer);
       }
