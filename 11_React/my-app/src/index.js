@@ -12,6 +12,8 @@ import CommentEx from './chapter5/5.6/CommentEx';
 import NotificationList from './chapter6/NotificationList';
 import Counter from './chapter7/7.2/Counter';
 import SetStateMerge from './chapter7/7.2/SetStateMerge';
+import Toggle from './chapter8/8.1/Toggle';
+import MyButton from './chapter8/8.2/MyButton';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -48,7 +50,11 @@ root.render(
 
   // 7장 예제
   // <Counter />
-  <SetStateMerge />
+  // <SetStateMerge />
+
+  // 8장 예제
+  // <Toggle />
+  <MyButton />
 );
 
 // If you want to start measuring performance in your app, pass a function
