@@ -27,7 +27,7 @@ class NotificationList extends React.Component {
     };
   }
 
-  // 컴포넌트가 생성될 때 호출되는 메소드
+  // 컴포넌트가 생성될 때 호출되는 메소드 <=== 컴포넌트가 마운팅된 직후에 실행
   componentDidMount() {
     const { notifications } = this.state; // ES6차 구조 분해 할당
     timer = setInterval(() => {
@@ -40,9 +40,9 @@ class NotificationList extends React.Component {
         });
       } else {
         // 실습2: 언마운트 시키기 위해 작성
-        // this.setState({
-        //   notifications: [],
-        // });
+        this.setState({
+          notifications: [],
+        });
 
         clearInterval(timer);
       }
