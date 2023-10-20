@@ -31,9 +31,7 @@ function AttendanceBook() {
   return (
     <ul>
       {/* Quiz: 배열을 반복 렌더링 해보기 */}
-      {list.map((e) => {
-        return <li>{e.name} ({e.email})</li>
-      })}
+      {list.map( e => <li key={e.id}>{e.name} ({e.email})</li> )}
     </ul>
   );
 }
