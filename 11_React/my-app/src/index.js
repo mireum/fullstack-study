@@ -23,6 +23,7 @@ import MainPage from './chapter9/9.4/MainPage';
 import LandingPage from './chapter9/9.4/LandingPage';
 import NumberList from './chapter10/10.1/NumberList';
 import ListKey from './chapter10/10.1/ListKey';
+import AttendanceBook from './chapter10/AttendanceBook';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -80,7 +81,8 @@ root.render(
 
   // 10장 예제
   // <NumberList />
-  <ListKey />
+  // <ListKey />
+  <AttendanceBook />
 
 );
 
