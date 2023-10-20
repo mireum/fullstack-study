@@ -21,6 +21,7 @@ import LoginControlRefactoring from './chapter9/9.3/LoginControlRefactoring';
 import Mailbox from './chapter9/9.3/Mailbox';
 import MainPage from './chapter9/9.4/MainPage';
 import LandingPage from './chapter9/9.4/LandingPage';
+import NumberList from './chapter10/10.1/NumberList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -74,7 +75,11 @@ root.render(
   // <LoginControlRefactoring />
   // <Mailbox unreadMessages={messages} />
   // <MainPage />
-  <LandingPage />
+  // <LandingPage />
+
+  // 10장 예제
+  <NumberList />
+  
 );
 
 // If you want to start measuring performance in your app, pass a function
