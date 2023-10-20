@@ -21,7 +21,7 @@ function Toolbar(props) {
             로그인/로그아웃 버튼이 바뀌도록 조건부 렌더링
             로그인 상태이면 인사말이 나오도록 조건부 렌더링
         */}
-        <span style={styles.greeting}>환영합니다!</span>
+        {!isLoggedIn && <span style={styles.greeting}>환영합니다!</span> }
 
         {!isLoggedIn && <button onClick={onClickLogin}>로그아웃</button> }
         {isLoggedIn && <button onClick={onClickLogout}>로그인</button> }

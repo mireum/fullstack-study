@@ -23,7 +23,7 @@ function LandingPage() {
         onClickLogin={handleClickLogin} 
         onClickLogout={handleClickLogout}
       />
-      {!isLoggedIn &&  <div style={{padding: 16}}>😀리액트 공부 사이트</div> }
+      <div style={{padding: 16}}>😀리액트 공부 사이트</div>
       {/* 윈도우즈 이모지 단축키: 윈도우키 + 마침표(.) */}
     </div>
   );
