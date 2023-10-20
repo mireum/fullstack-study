@@ -22,6 +22,7 @@ import Mailbox from './chapter9/9.3/Mailbox';
 import MainPage from './chapter9/9.4/MainPage';
 import LandingPage from './chapter9/9.4/LandingPage';
 import NumberList from './chapter10/10.1/NumberList';
+import ListKey from './chapter10/10.1/ListKey';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -78,8 +79,9 @@ root.render(
   // <LandingPage />
 
   // 10장 예제
-  <NumberList />
-  
+  // <NumberList />
+  <ListKey />
+
 );
 
 // If you want to start measuring performance in your app, pass a function
