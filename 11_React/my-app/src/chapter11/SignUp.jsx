@@ -45,6 +45,7 @@ function SignUp() {
         <input 
           type="text" 
           onChange={handleChangeName}
+          // value={name}
         />
       </label>
 
