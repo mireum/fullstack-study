@@ -16,7 +16,7 @@ function FlavorForm() {
     <form onSubmit={handleSubmit}>
       <label>
       좋아하는 맛 선택:
-      <select value={['lime', 'mango']} onChange={handleChange}>
+      <select value={value} onChange={handleChange}>
         <option value="grapefruit">자몽</option>
         <option value="lime">라임</option>
         <option value="coconut">코코넛</option>

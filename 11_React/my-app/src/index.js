@@ -30,6 +30,7 @@ import FlavorForm from './chapter11/11.3/FlavorForm';
 import TextInputWithFocusButton from './chapter7/7.6/TextInputWithFocusButton';
 import FileInput from './chapter11/11.3/FileInput';
 import Reservation from './chapter11/11.4/Reservation';
+import SignUp from './chapter11/SignUp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -96,7 +97,8 @@ root.render(
   // <EssayForm />
   // <FlavorForm />
   // <FileInput />
-  <Reservation />
+  // <Reservation />
+  <SignUp />
 
 );
 
