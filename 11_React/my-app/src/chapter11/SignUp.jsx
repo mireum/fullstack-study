@@ -45,7 +45,7 @@ function SignUp() {
         <input 
           type="text" 
           onChange={handleChangeName}
-          // value={name}
+          value={name} // 이걸 안 하면 state에 들어있는 값이 아닌 내가 타이핑한 값이 보이는 것. 입력에 어떤 처리를 한다면 달라질 수 있음
         />
       </label>
 
