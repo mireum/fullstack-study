@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
 function PostListItem(props) {
-  const { posts, setPosts,  setShowPostDetail,
-    currentIndex, setCurrentIndex, likeCount, setLikeCount} = props;
+  const { posts, setPosts, currentIndex,  likeCount} = props;
   
-
+  console.log(posts);
   return (
     <div>
       {/* 포스트 목록 */}
