@@ -96,6 +96,11 @@ function App() {
                     return index !== idx;  
                   });
                   setPosts(filteredPosts);
+
+                  // (버그 수정) 삭제 시 해당 포스트의 좋아요 카운트도 같이 삭제
+                  const copyLikeCount = [...likeCount];
+                  copyLikeCount.splice(index, 1);
+                  setLikeCount(copyLikeCount);
                 }}>
                   🗑
                 </span>
@@ -112,16 +117,23 @@ function App() {
       1) input을 제어 컴포넌트로 만들어서 사용자가 입력한 값을 state로 저장해서 관리
       2) 등록 버튼 클릭 시 posts 상태에 맨 앞에 새로운 데이터 추가
       */}
-      <input type='text' onChange={(e) => {
-        console.log(e.target);
+      <input type='text' value={value} onChange={(e) => {
         setValue(e.target.value);
       }}/>
       <button type='button' onClick={(e) => {
         // div 하나를 새로 생성 X
         // posts state에 요소 하나 추가하면 자동으로 렌더링 O
-        const copiedPost = [...posts];
-        copiedPost.unshift(value);
-        setPosts(copiedPost);
+        // const copyPosts = [...posts];
+        // copyPosts.unshift(value);
+
+        // 또는 spread 연산자로!
+        const copyPosts = [value, ...posts];
+        setPosts(copyPosts);
+        setValue('');
+
+        // (버그 수정) 포스트 하나 추가 시 좋아요 카운트도 같이 추가
+        const copyLikeCount = [0, ...likeCount];
+        setLikeCount(copyLikeCount);
       }}>
         포스트 등록
       </button>
@@ -136,3 +148,15 @@ function App() {
 }
 
 export default App;
+
+
+// 배열이나 객체 형태의 state 변경할 때 주의!
+// 1. state 변경 함수(set함수)의 특징
+// 기존 state가 신규 state랑 같은 경우, 변경 안 함
+// 2. 배열/객체의 특징
+// 변수에 주소(참조)값이 저장됨
+
+// (참고) 왜 새로고침하면 다 없어질까?
+// 새로고침 시 HTML/CSS/JS 파일을 다시 읽어오기 때문
+// 데이터를 유지하려면 서버에 보내서 DB에 영구 저장하고
+// 새로고침 발생 시 DB에서 다시 읽어오면 됨
