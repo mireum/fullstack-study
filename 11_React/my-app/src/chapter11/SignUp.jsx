@@ -19,23 +19,38 @@ import { useState } from "react";
 // 1) form 태그 및 submit 이벤트를 사용해도 되고 button 태그의 click 이벤트를 사용해도 됨
 // 2) 각각의 state를 여러 개 만들어도 되고 객체 형태로 한번에 관리해도 됨
 function SignUp() {
-  // const [name, setName] = useState('');
-  // const [gender, setGender] = useState('남자');
-
+  
   // 객체 형태로 관리
   const [inputs, setInputs] = useState({
     name: '',
     gender: '남자'
   });
   const { name, gender } = inputs;
-
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    // 방법1
+    // const copyObj = {
+    //   ...inputs
+    // };
+    // copyObj[name] = value;
+    // setInputs(copyObj);
+
+    // 방법2
+    // setInputs({
+    //   ...inputs,
+    //   [name]: value
+    // });
+
     setInputs(prevInputs => ({
       ...prevInputs,
       [name]: value 
     }))
   };
+
+  // const [name, setName] = useState('');
+  // const [gender, setGender] = useState('남자');
 
   // const handleChangeName = (e) => {
   //   // console.log(e.target.value);

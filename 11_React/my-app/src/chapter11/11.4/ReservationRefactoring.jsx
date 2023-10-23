@@ -12,6 +12,7 @@ function ReservationRefactoring() {
   const { breakfast, numberOfGuests, roomType } = inputs; // 구조 분해 할당을 통해 값 추출
   
   const handleInputChange = (e) => {
+    // debugger; // e객체의 속성들을 볼 수 있다
     // console.log(e.target); // 현재 이벤트가 발생한 대상 객체
     const { type, name, checked, value } = e.target;
     // console.log(type, name, checked, value);
