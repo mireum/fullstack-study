@@ -12,30 +12,14 @@ import PostListItem from './components/PostListItem';
 
 function App() {
   // 서버에서 가져온 데이터라고 가정
-  // const [posts, setPosts] = useState(['리액트 잘 쓰려면?', 
-  // '자바스크립트 핵심 문법', '스타일링 가이드']);
+  const [posts, setPosts] = useState(['리액트 잘 쓰려면?', 
+  '자바스크립트 핵심 문법', '스타일링 가이드']);
 
-  // const [showPostDetail, setShowPostDetail] = useState(false);
-  // const [currentIndex, setCurrentIndex] = useState(0);
-  // const [likeCount, setLikeCount] = useState([0, 0, 0]);
-  // const [value, setValue] = useState('');
-  
-  const [posts, setPosts] = useState({
-    postContent: ['리액트 잘 쓰려면?', '자바스크립트 핵심 문법', '스타일링 가이드'],
-    showPostDetail: false,
-    currentIndex: 0,
-    likeCount: [0, 0, 0],
-    value: ''
-  });
-  const { postContent, showPostDetail, currentIndex, likeCount, value } = posts;
+  const [showPostDetail, setShowPostDetail] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [likeCount, setLikeCount] = useState([0, 0, 0]);
+  const [value, setValue] = useState('');
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setPosts(prevInputs => ({
-      ...prevInputs,
-      [name]: value 
-    }))
-  };
 
   return (
     <>
@@ -51,8 +35,10 @@ function App() {
       </header>
 
       <div className='inner'>
-        <PostListItem postContent={postContent} setPosts={setPosts}
-          currentIndex={currentIndex} likeCount={likeCount} 
+        <PostListItem posts={posts} setPosts={setPosts}
+          setShowPostDetail={setShowPostDetail}
+          currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}
+          likeCount={likeCount} setLikeCount={setLikeCount}
         />
       </div>
 
@@ -63,7 +49,9 @@ function App() {
       1) input을 제어 컴포넌트로 만들어서 사용자가 입력한 값을 state로 저장해서 관리
       2) 등록 버튼 클릭 시 posts 상태에 맨 앞에 새로운 데이터 추가
       */}
-      <input type='text' value={value} name='value' onChange={handleInputChange} />
+      <input type='text' value={value} onChange={(e) => {
+        setValue(e.target.value);
+      }}/>
       <button type='button' onClick={(e) => {
         // div 하나를 새로 생성 X
         // posts state에 요소 하나 추가하면 자동으로 렌더링 O
@@ -71,9 +59,9 @@ function App() {
         // copyPosts.unshift(value);
 
         // 또는 spread 연산자로!
-        const copyPosts = [value, ...postContent];
+        const copyPosts = [value, ...posts];
         setPosts(copyPosts);
-        // setValue('');
+        setValue('');
 
         // (버그 수정) 포스트 하나 추가 시 좋아요 카운트도 같이 추가
         const copyLikeCount = [0, ...likeCount];
@@ -85,6 +73,7 @@ function App() {
 
       {/* Quiz: 조건부 렌더링 */}
       {showPostDetail && <PostDetail posts={posts} currentIndex={currentIndex} setPosts={setPosts} />}
+
 
     </>
   );
