@@ -19,18 +19,33 @@ import { useState } from "react";
 // 1) form 태그 및 submit 이벤트를 사용해도 되고 button 태그의 click 이벤트를 사용해도 됨
 // 2) 각각의 state를 여러 개 만들어도 되고 객체 형태로 한번에 관리해도 됨
 function SignUp() {
-  const [name, setName] = useState('');
-  const [gender, setGender] = useState('남자');
+  // const [name, setName] = useState('');
+  // const [gender, setGender] = useState('남자');
 
-  const handleChangeName = (e) => {
-    // console.log(e.target.value);
-    setName(e.target.value)
+  // 객체 형태로 관리
+  const [inputs, setInputs] = useState({
+    name: '',
+    gender: '남자'
+  });
+  const { name, gender } = inputs;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputs(prevInputs => ({
+      ...prevInputs,
+      [name]: value 
+    }))
   };
 
-  const handleChangeGender = (e) => {
-    console.log(e.target.value);
-    setGender(e.target.value);
-  };
+  // const handleChangeName = (e) => {
+  //   // console.log(e.target.value);
+  //   setName(e.target.value)
+  // };
+
+  // const handleChangeGender = (e) => {
+  //   console.log(e.target.value);
+  //   setGender(e.target.value);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,7 +59,8 @@ function SignUp() {
         이름: 
         <input 
           type="text" 
-          onChange={handleChangeName}
+          name="name"
+          onChange={handleInputChange}
           value={name} // 이걸 안 하면 state에 들어있는 값이 아닌 내가 타이핑한 값이 보이는 것. 입력에 어떤 처리를 한다면 달라질 수 있음
         />
       </label>
@@ -53,7 +69,7 @@ function SignUp() {
 
       <label>
         성별:
-        <select value={gender} onChange={handleChangeGender}>
+        <select value={gender} name="gender" onChange={handleInputChange}>
           <option value="남자">남자</option>
           <option value="여자">여자</option>
         </select>

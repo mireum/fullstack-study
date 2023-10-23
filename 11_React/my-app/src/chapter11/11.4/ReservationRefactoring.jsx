@@ -56,7 +56,6 @@ function ReservationRefactoring() {
   };
 
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`조식 여부: ${breakfast}, 투숙객 수: ${numberOfGuests}, 룸 타입: ${roomType}`);
