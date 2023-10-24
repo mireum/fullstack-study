@@ -11,14 +11,14 @@ function UnitCounter(props) {
   return (
     <>
       {/* Local State */}
-      <button onClick={() => setLocalLength(Math.max(localLength - 1, 0)) }>-</button>
+      {/* <button onClick={() => setLocalLength(Math.max(localLength - 1, 0)) }>-</button>
       {localLength}
-      <button onClick={() => setLocalLength(localLength + 1)}>+</button>
+      <button onClick={() => setLocalLength(localLength + 1)}>+</button> */}
 
       {/* shared state */}
-      {/* <button onClick={() => onLengthChange(Math.max(length - 1, 0)) }>-</button>
+      <button onClick={() => onLengthChange(Math.max(length - 1, 0)) }>-</button>
       {length}
-      <button onClick={() => onLengthChange(length + 1) }>+</button> */}
+      <button onClick={() => onLengthChange(length + 1) }>+</button>
     </>
   );
 }
