@@ -4,6 +4,10 @@ function PostListItem(props) {
   const { posts, setPosts,  setShowPostDetail,
     currentIndex, setCurrentIndex, likeCount, setLikeCount} = props;
   
+  // const contents = {
+  //   date: ,
+  //   user:
+  // };
 
   return (
     <div>

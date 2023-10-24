@@ -32,6 +32,8 @@ import FileInput from './chapter11/11.3/FileInput';
 import Reservation from './chapter11/11.4/Reservation';
 import SignUp from './chapter11/SignUp';
 import ReservationRefactoring from './chapter11/11.4/ReservationRefactoring';
+import UnitCounter from './chapter12/UnitCounter';
+import UnitCalculator from './chapter12/UnitCalculator';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -99,9 +101,11 @@ root.render(
   // <FlavorForm />
   // <FileInput />
   // <Reservation />
-  <SignUp />
+  // <SignUp />
   // <ReservationRefactoring />
 
+  // 12장 예제
+  <UnitCalculator />
 );
 
 // If you want to start measuring performance in your app, pass a function
