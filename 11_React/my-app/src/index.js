@@ -36,6 +36,7 @@ import UnitCounter from './chapter12/UnitCounter';
 import UnitCalculator from './chapter12/UnitCalculator';
 import WelcomeDialog from './chapter13/13.1.1.1/WelcomeDialog';
 import SplitPaneSection from './chapter13/13.1.1.2/SplitPaneSection';
+import DialogContainer from './chapter13/13.1.2/DialogContainer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -111,7 +112,8 @@ root.render(
 
   // 13장 예제
   // <WelcomeDialog />
-  <SplitPaneSection />
+  // <SplitPaneSection />
+  <DialogContainer />
 
 );
 
