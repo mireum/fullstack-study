@@ -34,6 +34,8 @@ import SignUp from './chapter11/SignUp';
 import ReservationRefactoring from './chapter11/11.4/ReservationRefactoring';
 import UnitCounter from './chapter12/UnitCounter';
 import UnitCalculator from './chapter12/UnitCalculator';
+import WelcomeDialog from './chapter13/13.1.1.1/WelcomeDialog';
+import SplitPaneSection from './chapter13/13.1.1.2/SplitPaneSection';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -105,7 +107,12 @@ root.render(
   // <ReservationRefactoring />
 
   // 12장 예제
-  <UnitCalculator />
+  // <UnitCalculator />
+
+  // 13장 예제
+  // <WelcomeDialog />
+  <SplitPaneSection />
+
 );
 
 // If you want to start measuring performance in your app, pass a function
