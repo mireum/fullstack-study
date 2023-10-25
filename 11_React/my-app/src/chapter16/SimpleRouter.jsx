@@ -40,8 +40,11 @@ function SimpleRouter(props) {
   return (
     <BrowserRouter>
       <Routes>
+        {/* /로 접속하면 MainPage 컴포넌트가 렌더링 */}
+        {/* /places로 접속하면 PlacePage 컴포넌트가 렌더링 */}
+        {/* /games로 접속하면 GamePage 컴포넌트가 렌더링 */}
         <Route path='/' element={<MainPage />}/>
-        <Route path='/place' element={<PlacePage />}/>
+        <Route path='/places' element={<PlacePage />}/>
         <Route path='/games' element={<GamePage />}/>
       </Routes>
     </BrowserRouter>
