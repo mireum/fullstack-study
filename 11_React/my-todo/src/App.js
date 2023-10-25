@@ -78,13 +78,25 @@ function App() {
     nextId.current += 1; // nextId에 1씩 더하기
   };
 
+
+  // todos 배열에서 id값으로 항목을 지우기 위한 함수 정의
+  const handleRemove = (id) => {
+    // 방법1
+    const copyTodos = [...todos];
+    const targetIndex = todos.findIndex(todo => todo.id === id);  // 반복 돌면서 가져온 id === 내가 누른 항목의 id
+    copyTodos.splice(targetIndex, 1);
+    setTodos(copyTodos);
+
+
+  };
+
   return (
     <>
       {/* <Reset /> */}
       <GlobalStyle />
       <TodoTemplate>
         <TodoInsert onInsert={handleInsert} />
-        <TodoList todos={todos} />
+        <TodoList todos={todos} onRemove={handleRemove} />
       </TodoTemplate>
     </>
   );
