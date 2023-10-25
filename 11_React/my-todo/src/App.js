@@ -3,7 +3,7 @@ import reset, { Reset } from "styled-reset";
 import TodoTemplate from "./components/TodoTemplate";
 import TodoInsert from "./components/TodoInsert";
 import TodoList from "./components/TodoList";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // 패키지 설치
 // npm install styled-components styled-reset react-icons
@@ -54,14 +54,33 @@ function App() {
 
   // todos 배열에 새 객체를 추가하기 위한 함수 정의
   // 새 객체를 만들 때마다 id값에 1씩 더해줘야 하는데 useRef()를 사용하여 변수 생성
-  
+  // id값은 렌더링되는 정보가 아님(화면에 보이지도 않고, 이 값이 바뀐다고 해서 컴포넌트가 재렌더링 될 필요도 없음)
+  const nextId = useRef(4);
+
+  const handleInsert = (text) => {
+    const todo = {
+      id: nextId.current,
+      text, // 변수명과 같아서 생략(ES6)
+      checked: false
+    };
+
+    // 방법1
+    const copyTodos = [...todos];
+    copyTodos.push(todo);
+    setTodos(copyTodos);  // 새로운 배열을 만들어 넣어줌
+    nextId.current += 1; // nextId에 1씩 더하기
+
+    // 방법2
+    // setTodos()
+
+  };
 
   return (
     <>
       {/* <Reset /> */}
       <GlobalStyle />
       <TodoTemplate>
-        <TodoInsert />
+        <TodoInsert onInsert={handleInsert} />
         <TodoList todos={todos} />
       </TodoTemplate>
     </>
