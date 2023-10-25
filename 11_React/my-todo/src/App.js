@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import reset, { Reset } from "styled-reset"; 
+import reset from "styled-reset"; 
 import TodoTemplate from "./components/TodoTemplate";
 import TodoInsert from "./components/TodoInsert";
 import TodoList from "./components/TodoList";
@@ -21,6 +21,7 @@ import { useRef, useState } from "react";
 // createGrobalStyle을 이용하여 컴포넌트를 만들고 가장 첫 번째로 렌더링하면 됨
 const GlobalStyle = createGlobalStyle`
   /* reset css */
+  /* { Reset } import옆에 써줘야함 */
   ${reset}
 
   /* 글로벌(공통) 스타일 */
@@ -95,13 +96,29 @@ function App() {
 
   };
 
+  // todos 배열의 특정 요소를 수정하기 위한 함수 정의
+  const handleToggle = (id) => {
+    // 방법1
+    // const copyTodos = [...todos];
+    // const target = todos.find(todo => todo.id === id);
+    // console.log(target);
+    // target.checked = !target.checked;
+    // const targetIndex = todos.findIndex(todo => todo.id === id);
+    // copyTodos[targetIndex] = target;
+    // setTodos(copyTodos);
+
+    // 방법2 - 배열의 메소드 이용
+    // 불변성을 유지하면서 배열의 특정 요소를 업데이트 해야할 때 map() 활용
+    setTodos(todos.map(todo => todo.id === id ? { ...todo, checked: !todo.checked } : todo));
+  };
+
   return (
     <>
       {/* <Reset /> */}
       <GlobalStyle />
       <TodoTemplate>
         <TodoInsert onInsert={handleInsert} />
-        <TodoList todos={todos} onRemove={handleRemove} />
+        <TodoList todos={todos} onRemove={handleRemove} onToggle={handleToggle} />
       </TodoTemplate>
     </>
   );
