@@ -65,14 +65,17 @@ function App() {
     };
 
     // 방법1
-    const copyTodos = [...todos];
-    copyTodos.push(todo);
-    setTodos(copyTodos);  // 새로운 배열을 만들어 넣어줌
+    // const copyTodos = [...todos];
+    // copyTodos.push(todo);
+    // setTodos(copyTodos);  // 새로운 배열을 만들어 넣어줌
+    
+    // 편법
+    // setTodos([...todos, todo]);
+
+    // 방법2 - 배열의 메소드 이용
+    setTodos(todos.concat(todo));
+    
     nextId.current += 1; // nextId에 1씩 더하기
-
-    // 방법2
-    // setTodos()
-
   };
 
   return (

@@ -52,17 +52,31 @@ function TodoInsert({ onInsert }) {
   const handleSubmit = (e) => {
     e.preventDefault(); // 새로고침 막음
 
+    // 유효성 검사 추가 - 빈 문자일 때 추가 X
+    if (!value) { // '', null, undefined
+      alert('무엇을 할 지 내용을 입력하세요!');
+      return; // 아래 코드 실행 안되도록 함수 종료
+    }
+
     onInsert(value);
     setValue('');
   };
 
   return (
+    // form 태그 사용 시 input에서 엔터키를 눌렀을 때도 submit 이벤트가 발생
+    // (참고) 일반적으로 keyup 이벤트를 통해 엔터키를 감지하는 로직을 작성
     <TodoInsertWrapper onSubmit={handleSubmit}>
       <StyledInput 
         type='text' 
         placeholder='할 일을 입력하세요.'
         value={value} 
         onChange={handleChange}
+        // onKeyUp={(e) => {
+        //   console.log(e.key);
+        //   if (e.key === 'Enter') {
+
+        //   }
+        // }}
       />
       <StyledButton type='submit'>
         <MdAdd />
