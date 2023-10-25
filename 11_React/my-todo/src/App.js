@@ -3,7 +3,8 @@ import reset from "styled-reset";
 import TodoTemplate from "./components/TodoTemplate";
 import TodoInsert from "./components/TodoInsert";
 import TodoList from "./components/TodoList";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 // 패키지 설치
 // npm install styled-components styled-reset react-icons
@@ -36,23 +37,38 @@ function App() {
   // id, 내용, 완료 여부
   // TodoList에 props로 전달
   const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: '수업 교안 작성하기',
-      checked: true
-    },
-    {
-      id: 2,
-      text: '시험 채점하기',
-      checked: true
-    },
-    {
-      id: 3,
-      text: '단계별 실습 예제 만들기',
-      checked: false
-    }
+    // {
+    //   id: 1,
+    //   text: '수업 교안 작성하기',
+    //   checked: true
+    // },
+    // {
+    //   id: 2,
+    //   text: '시험 채점하기',
+    //   checked: true
+    // },
+    // {
+    //   id: 3,
+    //   text: '단계별 실습 예제 만들기',
+    //   checked: false
+    // }
   ]);
 
+
+  // 로컬 스토리지에서 가져오기
+  useEffect(() => {
+    const dbTodos = JSON.parse(localStorage.getItem('todos')) || []; // 빈 배열 넣어줘야 null 안 뜸
+    setTodos(dbTodos);
+  }, []);
+
+
+  // 로컬 스토리지에 저장(주의: DB가 아님, DB처럼 쓰면 안됨!!)
+  // 추가, 수정, 삭제 각 함수에 넣어도 되지만, useEffect()를 활용하면 한 번에 처리 가능!
+  // todos가 변경될 때마다 실행해라!
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+  // 의존성 배열이 비어있으면 코드가 mounting될 때 한번만 함수가 실행됨
 
   // todos 배열에 새 객체를 추가하기 위한 함수 정의
   // 새 객체를 만들 때마다 id값에 1씩 더해줘야 하는데 useRef()를 사용하여 변수 생성
@@ -60,8 +76,10 @@ function App() {
   const nextId = useRef(4);
 
   const handleInsert = (text) => {
+    // console.log(uuidv4());
     const todo = {
-      id: nextId.current,
+      // id: nextId.current,
+      id: uuidv4(),
       text, // 변수명과 같아서 생략(ES6)
       checked: false
     };
@@ -125,3 +143,19 @@ function App() {
 }
 
 export default App;
+
+
+// HTML 웹 스토리지란?
+// 브라우저에서 제공하는 데이터 저장소
+// 사용자의 브라우저 내에 로컬로 데이터를 저장할 수 있음
+// key-value 형태로 저장
+// 최대 5MB까지 문자만 저장가능
+// 콘솔 창에서 연습해보기
+
+// 웹 스토리지는 origin(도메인 및 프로토콜)당입니다. 
+// 같은 출처의 모든 페이지는 동일한 데이터를 저장하고 액세스할 수 있습니다.
+
+// HTML 웹 스토리지 객체
+// HTML 웹 스토리지는 클라이언트에 데이터를 저장하기 위한 두 가지 객체를 제공합니다.
+// window.localStorage - 만료 날짜 없이 데이터를 저장
+// window.sessionStorage - 한 세션에 대한 데이터 저장(브라우저 탭을 닫으면 데이터가 손실됨)
