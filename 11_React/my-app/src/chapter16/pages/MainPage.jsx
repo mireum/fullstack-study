@@ -13,8 +13,8 @@ function MainPage(props) {
     <div>
       <h1>메인 페이지</h1>
       <ul>
-        <li onClick={() => { navigate('/places'); }}>장소</li>
-        <li onClick={() => { navigate('/games'); }}>게임</li>
+        {/* <li onClick={() => { navigate('/places'); }}>장소</li>
+        <li onClick={() => { navigate('/games'); }}>게임</li> */}
 
         {/* a태그 역할의 Link 컴포넌트 */}
         {/* 차이점?
