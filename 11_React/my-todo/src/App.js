@@ -52,6 +52,7 @@ function App() {
     }
   ]);
 
+
   // todos 배열에 새 객체를 추가하기 위한 함수 정의
   // 새 객체를 만들 때마다 id값에 1씩 더해줘야 하는데 useRef()를 사용하여 변수 생성
   // id값은 렌더링되는 정보가 아님(화면에 보이지도 않고, 이 값이 바뀐다고 해서 컴포넌트가 재렌더링 될 필요도 없음)
@@ -73,6 +74,7 @@ function App() {
     // setTodos([...todos, todo]);
 
     // 방법2 - 배열의 메소드 이용
+    // 불변성을 지키면서 배열의 요소를 추가해야할 때 concat() 사용
     setTodos(todos.concat(todo));
     
     nextId.current += 1; // nextId에 1씩 더하기
@@ -82,11 +84,14 @@ function App() {
   // todos 배열에서 id값으로 항목을 지우기 위한 함수 정의
   const handleRemove = (id) => {
     // 방법1
-    const copyTodos = [...todos];
-    const targetIndex = todos.findIndex(todo => todo.id === id);  // 반복 돌면서 가져온 id === 내가 누른 항목의 id
-    copyTodos.splice(targetIndex, 1);
-    setTodos(copyTodos);
+    // const copyTodos = [...todos];
+    // const targetIndex = todos.findIndex(todo => todo.id === id);  // 반복 돌면서 가져온 id === 내가 누른 항목의 id
+    // copyTodos.splice(targetIndex, 1);
+    // setTodos(copyTodos);
 
+    // 방법2 - 배열의 메소드 이용
+    // 불변성을 지키면서 배열의 요소를 제거해야할 때 filter() 사용
+    setTodos(todos.filter(todo =>  todo.id !== id));
 
   };
 
