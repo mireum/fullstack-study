@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MdAdd } from "react-icons/md";
 
@@ -43,9 +43,20 @@ const StyledButton = styled.button`
 // state를 통해 input의 상태를 관리
 
 function TodoInsert(props) {
+  const [value, setValue] = useState('');
+
+  const handleChange = (e) => {
+    setValue(e.target.value)
+  };
+
   return (
     <TodoInsertWrapper>
-      <StyledInput type='text' placeholder='할 일을 입력하세요.' />
+      <StyledInput 
+        type='text' 
+        placeholder='할 일을 입력하세요.'
+        value={value} 
+        onChange={handleChange}
+      />
       <StyledButton type='submit'>
         <MdAdd />
       </StyledButton>

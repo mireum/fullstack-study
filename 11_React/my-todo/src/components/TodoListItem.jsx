@@ -1,6 +1,6 @@
 import React from 'react';
 import { MdCheckBox, MdCheckBoxOutlineBlank, MdRemoveCircleOutline } from 'react-icons/md';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const TodoListItemWrapper = styled.div`
   padding: 1rem;
@@ -26,12 +26,24 @@ const CheckBox = styled.div`
   svg {
     /* 아이콘 스타일링 */
     font-size: 1.5rem;
+
+    /* 체크박스 체크되었을 때 보여줄 스타일 */
+    color: ${props => props.checked && '#22b8cf'};
   }
 `;
 
 const Text = styled.div`
   margin-left: 0.5rem;
   flex: 1;  // 차지할 수 있는 영역 모두 차지
+
+  /* 체크되었을 때 보여줄 스타일 */
+  /* 조건부 스타일링 시 여러 개의 css를 설정할 때는 아래와 같이 사용 */
+  ${props => props.checked &&
+    css`
+      color: #adb5bd;
+      text-decoration: line-through;
+    `
+  }
 `;
 
 const Remove = styled.div`
@@ -50,14 +62,15 @@ const Remove = styled.div`
 // todo 객체를 props로 받아와 상태에 따라 다른 스타일의 UI를 보여줌
 function TodoListItem(props) {
   console.log(props);
-  const { id, text, checked } = props.todo;
+  // const { id, text, checked } = props.todo;
+  const { todo: { id, text, checked } } = props;
 
   return (
     <TodoListItemWrapper>
-      <CheckBox>
+      <CheckBox checked={checked}>
         { checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </CheckBox>
-      <Text>{text}</Text>
+      <Text checked={checked}>{text}</Text>
       <Remove>
         <MdRemoveCircleOutline />
       </Remove>
