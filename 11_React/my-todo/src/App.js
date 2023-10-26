@@ -60,6 +60,7 @@ function App() {
     const dbTodos = JSON.parse(localStorage.getItem('todos')) || []; // 빈 배열 넣어줘야 null 안 뜸
     setTodos(dbTodos);
   }, []);
+  // 의존성 배열이 비어있으면 코드가 mounting될 때 한번만 함수가 실행됨
 
 
   // 로컬 스토리지에 저장(주의: DB가 아님, DB처럼 쓰면 안됨!!)
@@ -68,8 +69,8 @@ function App() {
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
-  // 의존성 배열이 비어있으면 코드가 mounting될 때 한번만 함수가 실행됨
 
+  
   // todos 배열에 새 객체를 추가하기 위한 함수 정의
   // 새 객체를 만들 때마다 id값에 1씩 더해줘야 하는데 useRef()를 사용하여 변수 생성
   // id값은 렌더링되는 정보가 아님(화면에 보이지도 않고, 이 값이 바뀐다고 해서 컴포넌트가 재렌더링 될 필요도 없음)
