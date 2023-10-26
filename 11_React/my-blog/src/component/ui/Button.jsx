@@ -9,12 +9,14 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-
+// 공통 버튼 컴포넌트
 function Button(props) {
+  const { title, onClick } = props;
+
   return (
-    <div>
-      
-    </div>
+    // props로 받아온 title이 있을 때는 title 값을 보여주고 아니면 기본값 '버튼'
+    // 클릭했을 때 어떤 동작을 할 것인가는 상위 컴포넌트에서 받아옴
+    <StyledButton onClick={onclick}>{title || '버튼'}</StyledButton>
   );
 }
 

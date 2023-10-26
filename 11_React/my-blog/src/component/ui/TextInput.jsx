@@ -3,18 +3,18 @@ import styled from 'styled-components';
 
 const StyledTextarea = styled.textarea`
   width: calc(100% - 32px);
-  height: ${props => props.height && props.height + 'px'};
+  height: ${props => props.height && props.height + 'px'}; // 받아와서 px 붙이기
   padding: 16px;
   font-size: 16px;
   line-height: 20px;
 `;
 
-
+// 공통 텍스트 입력 컴포넌트
 function TextInput(props) {
+  const { height, value, onChange } = props;
+
   return (
-    <div>
-      
-    </div>
+    <StyledTextarea height={height} value={value} onChange={onChange} />
   );
 }
 

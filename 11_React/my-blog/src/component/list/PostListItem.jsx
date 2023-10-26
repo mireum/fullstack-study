@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: calc(100% - 32px);
@@ -18,17 +19,23 @@ const Wrapper = styled.div`
   }
 `;
 
-const TitleText = styled.p`
+const TitleText = styled.p` // 클래스로 선언해도 된다
   font-size: 20px;
   font-weight: 500;
 `;
 
-
+// 글의 제목만 표시해주는 컴포넌트
 function PostListItem(props) {
+  const { post: { id, title } } = props;
+
+  const navigate = useNavigate();
+
   return (
-    <div>
-      
-    </div>
+    <Wrapper onClick={() => {
+      navigate(`/post/${id}`); // 여기서 id값은 URL 파라미터로 사용할 예정
+    }}>
+      <TitleText>{title}</TitleText>
+    </Wrapper>
   );
 }
 
