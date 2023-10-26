@@ -23,12 +23,13 @@ const ContentText = styled.p`
   white-space: pre-wrap;
 `;
 
-
+// 댓글의 내용만 표시해주는 컴포넌트
 function CommentListItem(props) {
+  const { comment } = props;
   return (
-    <div>
-      
-    </div>
+    <Wrapper>
+      <ContentText>{comment.content}</ContentText>
+    </Wrapper>
   );
 }
 
