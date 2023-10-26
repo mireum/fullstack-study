@@ -86,9 +86,9 @@ root.render(
   // 7장 예제
   // <Counter />
   // <SetStateMerge />
-  // <TextInputWithFocusButton />
+  <TextInputWithFocusButton />
   // <ComponentVariable />
-  <CounterEffect />
+  // <CounterEffect />
 
   // 8장 예제
   // <Toggle />
