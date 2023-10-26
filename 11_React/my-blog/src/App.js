@@ -25,7 +25,12 @@ function App() {
         <Route path='/post/:postId' element={<PostViewPage />} />
         {/* 여기서 :postId는 동적으로 변하는 파라미터를 위한 값 => URL 파라미터 */}
         {/* 경로에 콜론(:)을 쓰고 파라미터명을 입력하면 연결된 컴포넌트에서 
-          useParams() 훅을 사용해 postId 이름으로 해당 값을 가져올 수 있음 */}
+          useParams() 훅을 사용해 postId 이름으로 해당 값을 가져올 수 있음 
+          /:postId/:text 이런 식으로 계속 이어 쓸 수 있음 */}
+        
+        {/* <Route path='/post/:postId/:test?' element={<PostViewPage />} /> */}
+        {/* ?는 들어올 수도 있고 안 들어올 수도 있다는 뜻, 있으면 화면에 나타남 */}
+
 
       </Routes>
     </BrowserRouter>
