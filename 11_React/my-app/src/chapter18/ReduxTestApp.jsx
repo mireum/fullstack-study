@@ -19,7 +19,7 @@ export default ReduxTestApp;
 // Redux: 전역 상태 관리 라이브러리
 // 참고로 redux toolkit이라는 라이브러리를 설치할 건데 redux의 개선 버전임
 // 사용법(문법)이 좀 더 쉬워짐
-// Redux 개발팀에서 Redux 표준은 RTK를 쓰라고 권장함
+// Redux 개발팀에서 Redux 표준은 RTK(Redux Tool Kit)를 쓰라고 권장함
 
 // Redux Toolkit and React-Redux 설치하기
 // npm install @reduxjs/toolkit react-redux
