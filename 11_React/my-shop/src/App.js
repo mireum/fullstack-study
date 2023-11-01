@@ -2,6 +2,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import 'bootstrap/dist/css/bootstrap.min.css';  // bootstrap CSS 추가
 import Layout from "./pages/Layout";
 import { Route, Routes } from "react-router-dom";
+import Main from "./pages/Main";
 
 const GlobalStyle = createGlobalStyle`
   /* 글로벌(공통) 스타일 */
@@ -39,8 +40,11 @@ function App() {
       {/* src/pages/Layout.js */}
 
       <Routes>
-        <Route path="/" element={<Layout />}/>
-          <Route path="cart" element={undefined} />
+        <Route path="/" element={<Layout />}>
+          {/* index: index route(여기서는 default child route) */}
+          <Route index element={<Main />} /> 
+          {/* <Route path="cart" element={undefined} /> */}
+        </Route>
       </Routes>
     </>
   );
