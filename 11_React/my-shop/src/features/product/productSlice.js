@@ -23,7 +23,7 @@ const productSlice = createSlice({
 export const { getAllProducts, getSelectedProduct } = productSlice.actions;
 
 // 선택자 함수
-export const selectProductList = (state) => state.product.productList;
+export const selectProductList = (state) => state.product.productList; // product는 store에서 지정한 이름
 export const selectSelectedProductList = (state) => state.product.selectedProduct;
 
 // 리듀서 함수들

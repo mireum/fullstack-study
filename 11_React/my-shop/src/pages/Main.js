@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { Col, Container, Row } from 'react-bootstrap';
 import axios from "axios";
 
-
 // 리액트(JS)에서 이미지 파일 가져오기
 import yonexImg from "../images/yonex.jpg";
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProducts, selectProductList } from '../features/product/productSlice';
+import ProductListItem from '../components/ProductListItem';
 
 const MainBackground = styled.div`
   height: 500px;
@@ -16,13 +18,16 @@ const MainBackground = styled.div`
 `;
 
 function Main(props) {
+  const dispatch = useDispatch(); // store에 넣을 때
+  const productList = useSelector(selectProductList); // store에서 꺼내올 때
+
   // 처음 마운트 됐을 때 서버에 상품 목록 데이터를 요청하고 
   // 그 결과를 리덕스 스토어에 전역 상태로 저장
   useEffect(() => {
     // 서버에 상품 목록 요청
     axios.get('https://my-json-server.typicode.com/fkdkskdfjfk/db.json/products')
       .then((response) => {
-        // 
+        dispatch(getAllProducts(response.data));
       })
       .catch((error) => {
         console.error(error);
@@ -43,7 +48,7 @@ function Main(props) {
           <Row>
             {/* 부트스트랩을 이용한 반응형 작업 */}
             {/* md ≥768px 이상에서 전체 12등분 중 4:4:4로 보여줌 */}
-            <Col md={4}>
+            {/* <Col md={4}>
               <img src='https://www.yonexmall.com/shop/data/goods/1645767865278s0.png' width="80%"/>
               <h4>상품명</h4>
               <p>상품가격</p>
@@ -57,7 +62,16 @@ function Main(props) {
               <img src='https://www.yonexmall.com/shop/data/goods/1645767865278s0.png' width="80%"/>
               <h4>상품명</h4>
               <p>상품가격</p>
-            </Col>
+            </Col> */}
+
+            {/* ProductListItem 컴포넌트 만들어서 반복 렌더링으로 바꾸고 데이터 바인딩 */}
+            {/* Quiz: 
+              1) 반복적인 상품 아이템을 src/components/ProductListItem 컴포넌트로 만들기
+              2) productList 배열을 반복하며 ProductListItem 컴포넌트를 렌더링 하기
+              3) 상품 정보를 props로 넘겨서 데이터 바인딩 하기
+            */}
+            {productList.map((prod) => <ProductListItem key={prod.id} prod={prod}/>)}
+
           </Row>
         </Container>
       </section>
