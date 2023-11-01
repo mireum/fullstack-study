@@ -1,10 +1,12 @@
 import React from 'react';
 import Counter from './features/Counter';
+import ProductList from './features/ProductList';
 
 function ReduxTestApp(props) {
   return (
     <>
       <Counter />
+      <ProductList />
     </>
   );
 }

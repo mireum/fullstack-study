@@ -45,6 +45,7 @@ function Counter(props) {
           Add Amount
         </button>
       </div>
+
     </>
   );
 }
