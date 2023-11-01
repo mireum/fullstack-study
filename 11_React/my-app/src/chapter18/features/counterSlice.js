@@ -44,3 +44,14 @@ export const { increment, decrement } = counterSlice.actions;
 
 // 위에서 정의한 리듀서 함수들
 export default counterSlice.reducer;
+
+
+// (정리)
+// 그래서 앞으로 Redux의 state를 변경하려면?
+// 1) state 변경 함수(리듀서) 만들기
+// 2) 다른 데서 사용할 수 있게 export
+// 3) 수정을 원할 때 그 함수를 실행해달라고 store에 요청을 해야됨=> dispatch() 함수를 사용하여 store에 액션을 보냄
+
+// 쉽게 이벤트에 비유하자면, 
+// 이벤트 -> 해당 이벤트 핸들러
+// 액션 -> 해당 리듀서
