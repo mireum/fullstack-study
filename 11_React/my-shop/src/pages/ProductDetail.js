@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getSelectedProduct, selectSelectedProduct } from '../features/product/productSlice';
+import { clearSelectedProduct, getSelectedProduct, selectSelectedProduct } from '../features/product/productSlice';
 import axios from 'axios';
 import styled, { keyframes } from 'styled-components';
+import { toast } from 'react-toastify';
 
 // 스타일드 컴포넌트를 이용한 애니메이션 속성 적용
 const highlight = keyframes`
@@ -22,6 +23,10 @@ function ProductDetail(props) {
   const dispatch = useDispatch();
   const product = useSelector(selectSelectedProduct);
   
+  // 숫자 포맷 적용
+  const formatter = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW'});
+
+
   const [showInfo, setShowInfo] = useState(true); // Info Alert창 상태
   const [orderCount, setOrderCount] = useState(1); // 주문 수량 상태
 
@@ -39,6 +44,10 @@ function ProductDetail(props) {
     };
     fetchProductById();
     
+    // 상세 페이지가 언마운트 될 때 전역 상태 초기화(나가도 이전 상세 페이지가 남아있는 버그 수정)
+    return () => {
+      dispatch(clearSelectedProduct());
+    };
   }, []);
   
   useEffect(() => {
@@ -55,6 +64,7 @@ function ProductDetail(props) {
   const handleChangeOrderCount = (e) => {
     // 숫자 외 입력 시 유효성 검사
     if (isNaN(e.target.value)) {
+      toast.error('숫자를 입력하세요!'); // toast 쓰는 쪽에서도 옵션 넣을 수 있다. App.js에서 쓴 건 공통
       return;
     }
     setOrderCount(Number(e.target.value));
@@ -83,7 +93,7 @@ function ProductDetail(props) {
         <Col md={6}>
           <h4 className='pt-5'>{title}</h4>
           <p>{content}</p>
-          <p>₩{price}</p>
+          <p>{formatter.format(price)}</p>
 
           <Col md={4} className='m-auto mb-3'>
             <Form.Control type="text" value={orderCount} onChange={handleChangeOrderCount}/>
