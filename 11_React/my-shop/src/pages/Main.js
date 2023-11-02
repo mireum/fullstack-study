@@ -6,7 +6,7 @@ import axios from "axios";
 // 리액트(JS)에서 이미지 파일 가져오기
 import yonexImg from "../images/yonex.jpg";
 import { useDispatch, useSelector } from 'react-redux';
-import { addMoreProducts, getAllProducts, selectProductList } from '../features/product/productSlice';
+import { addMoreProducts, getAllProducts, getMoreProductsAsync, selectProductList, selectStatus } from '../features/product/productSlice';
 import ProductListItem from '../components/ProductListItem';
 import { getMoreProducts } from '../api/productAPI';
 
@@ -21,6 +21,7 @@ const MainBackground = styled.div`
 function Main(props) {
   const dispatch = useDispatch(); // store에 넣을 때
   const productList = useSelector(selectProductList); // store에서 꺼내올 때
+  const status = useSelector(selectStatus); // API 요청 상태(로딩 상태)
 
   // 처음 마운트 됐을 때 서버에 상품 목록 데이터를 요청하고 
   // 그 결과를 리덕스 스토어에 전역 상태로 저장
@@ -38,6 +39,10 @@ function Main(props) {
   const handleGetMoreProduct = async () => {
     const result = await getMoreProducts();
     dispatch(addMoreProducts(result));
+  };
+
+  const handleGetMoreProductAsync = () => { // async 할 필요 x
+    dispatch(getMoreProductsAsync());
   };
 
   return (
@@ -88,6 +93,11 @@ function Main(props) {
         {/* HTTP 요청 코드를 함수로 만들어서 api 폴더로 추출 */}
         <Button variant='secondary' className='mb-4' onClick={handleGetMoreProduct} >
           더보기
+        </Button>
+
+        {/* thunk를 이용한 비동기 작업 처리하기 */}
+        <Button variant='secondary' className='mb-4' onClick={handleGetMoreProductAsync} >
+          더보기 {status}
         </Button>
       </section>
     </>
