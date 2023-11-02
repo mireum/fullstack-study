@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Button, Col, Container, Row } from 'react-bootstrap';
+import { Alert, Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getSelectedProduct, selectSelectedProduct } from '../features/product/productSlice';
@@ -23,6 +23,7 @@ function ProductDetail(props) {
   const product = useSelector(selectSelectedProduct);
   
   const [showInfo, setShowInfo] = useState(true); // Info Alert창 상태
+  const [orderCount, setOrderCount] = useState(1); // 주문 수량 상태
 
   // 상품 상세보기가 처음 마운트 됐을 때 서버에 상품 id를 이용하여 데이터를 오청하고
   // 그 결과를 리덕스 스토어에 저장
@@ -51,6 +52,13 @@ function ProductDetail(props) {
     };
   }, []);
 
+  const handleChangeOrderCount = (e) => {
+    // 숫자 외 입력 시 유효성 검사
+    if (isNaN(e.target.value)) {
+      return;
+    }
+    setOrderCount(Number(e.target.value));
+  }
   
   // 없는 상품일 때 예외 처리
   if (!product) {
@@ -76,6 +84,11 @@ function ProductDetail(props) {
           <h4 className='pt-5'>{title}</h4>
           <p>{content}</p>
           <p>₩{price}</p>
+
+          <Col md={4} className='m-auto mb-3'>
+            <Form.Control type="text" value={orderCount} onChange={handleChangeOrderCount}/>
+          </Col>
+
           <Button variant='primary'>주문하기</Button>
         </Col>
       </Row>
