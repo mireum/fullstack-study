@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addMoreProducts, getAllProducts, getMoreProductsAsync, selectProductList, selectStatus } from '../features/product/productSlice';
 import ProductListItem from '../components/ProductListItem';
 import { getMoreProducts } from '../api/productAPI';
+import { PacmanLoader, ScaleLoader } from "react-spinners";
 
 const MainBackground = styled.div`
   height: 500px;
@@ -83,6 +84,16 @@ function Main(props) {
             */}
             {productList.map((prod) => <ProductListItem key={prod.id} prod={prod}/>)}
 
+            {/* 로딩 만들기 */}
+            {status === 'loading' &&
+              <div style={{display:'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <ScaleLoader
+                  color="#36d7b7"
+                  height={40}
+                />
+                {/* <PacmanLoader color="#36d7b7" /> */}
+              </div>
+            }
           </Row>
         </Container>
 
