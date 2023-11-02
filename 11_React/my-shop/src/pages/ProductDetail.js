@@ -31,6 +31,7 @@ function ProductDetail(props) {
   const [showInfo, setShowInfo] = useState(true); // Info Alert창 상태
   const [orderCount, setOrderCount] = useState(1); // 주문 수량 상태
   const [showTabIndex, setShowTabIndex] = useState(0); // 상세보기 탭 상태
+  const [showTab, setShowTab] = useState('detail');
 
   // 상품 상세보기가 처음 마운트 됐을 때 서버에 상품 id를 이용하여 데이터를 오청하고
   // 그 결과를 리덕스 스토어에 저장
@@ -106,18 +107,23 @@ function ProductDetail(props) {
       </Row>
 
       {/* 탭 버튼 UI 만들기 */}
+      {/* 주석인 <Nav.Link>는 방법1, 2의 경우. 그 아래 Nav는 방법3번 */}
       <Nav variant="tabs" defaultActiveKey="link-0" className='my-3'>
         <Nav.Item>
-          <Nav.Link eventKey="link-0" onClick={() => setShowTabIndex(0)}>상세정보</Nav.Link>
+          {/* <Nav.Link eventKey="link-0" onClick={() => setShowTabIndex(0)}>상세정보</Nav.Link> */}
+          <Nav.Link eventKey="link-0" onClick={() => setShowTab('detail')}>상세정보</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-1" onClick={() => setShowTabIndex(1)}>리뷰</Nav.Link>
+          {/* <Nav.Link eventKey="link-1" onClick={() => setShowTabIndex(1)}>리뷰</Nav.Link> */}
+          <Nav.Link eventKey="link-1" onClick={() => setShowTab('review')}>리뷰</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-2" onClick={() => setShowTabIndex(2)}>Q&amp;A</Nav.Link>
+          {/* <Nav.Link eventKey="link-2" onClick={() => setShowTabIndex(2)}>Q&amp;A</Nav.Link> */}
+          <Nav.Link eventKey="link-2" onClick={() => setShowTab('qa')}>Q&amp;A</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-3" onClick={() => setShowTabIndex(3)}>반품/교환정보</Nav.Link>
+          {/* <Nav.Link eventKey="link-3" onClick={() => setShowTabIndex(3)}>반품/교환정보</Nav.Link> */}
+          <Nav.Link eventKey="link-3" onClick={() => setShowTab('exchange')}>반품/교환정보</Nav.Link>
         </Nav.Item>
       </Nav>
 
@@ -135,8 +141,33 @@ function ProductDetail(props) {
       } */}
 
       {/* 방법2: 컴포넌트로 추출 */}
-      <TabContents showTabIndex={showTabIndex} />
+      {/* <TabContents showTabIndex={showTabIndex} /> */}
+
+      {/* 방법3: 배열이나 객체 형태로 만들어서 조건부 렌더링(편법) */}
+      {/* 배열 형태 */}
+      {/* {
+        [
+          <div>탭 내용1</div>,
+          <div>탭 내용2</div>,
+          <div>탭 내용3</div>,
+          <div>탭 내용4</div>
+        ][showTabIndex]
+      } */}
+
+      {/* {[1,2,3][0]} => {1} */}
+
+      {/* Quiz: 객체 형태 */}
+      {
+        {
+          'detail': <div>탭 내용1</div>,
+          'review': <div>탭 내용2</div>,
+          'qa': <div>탭 내용3</div>,
+          'exchange': <div>탭 내용4</div>
+        }[showTab]
+        // 대괄호 표기법으로 써야 변수로 인식함.
+      }
       
+
     </Container>
   );
 }
