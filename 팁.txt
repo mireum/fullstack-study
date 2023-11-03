@@ -33,3 +33,13 @@ justify-content: center; 주축 정렬  =>
 align-items: center; 교차축 정렬    =>  둘이 같이 쓰면 정중앙 정렬
 flex: n 1 0%; block 분할 css-22참고
 transition: 1s; 는 요소에 직접 줘야함
+
+1. 여행 관련 앱
+ - 경로 지역 날씨 랜드마크 맛집 숙박일
+
+2. 코디 앱
+ - 색깔별 날씨 내옷코디
+
+3. 전시/축제 일정 앱
+ - 지역 테마 맛집 랜드마크 길찾기 시기
+https://korean.visitkorea.or.kr/kfes/list/wntyFstvlList.do
