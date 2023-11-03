@@ -78,7 +78,7 @@ function ProductDetail(props) {
     let latestViewed = JSON.parse(localStorage.getItem('latestViewed')) || []; // 처음에 null이니까 기본값으로 빈 배열 넣어줌
     // id값을 넣기 전에 기존 배열에 존재하는지 검사하거나 => 코드 길어짐
     // 아니면 일단 넣고 Set 자료형을 이용하여 중복 제거한다(간편함)
-    latestViewed.push(id);
+    latestViewed.push(product.id);
     latestViewed = new Set(latestViewed); // 배열을 Set 객체로 만듦(중복 요소가 제거됨)
     latestViewed = [...latestViewed]; // Set 객체를 다시 배열로 반환
     localStorage.setItem('latestViewed', JSON.stringify(latestViewed)); // JSON 문자열로 저장
@@ -99,7 +99,7 @@ function ProductDetail(props) {
     return null; // 아무것도 렌더링하지 않음
   } 
   
-  const { id, title, content, price, imagePath } = product; // if 로 product 확인하고 아래에 써야 함
+  // const { id, title, content, price, imagePath } = product; // if 로 product 확인하고 아래에 써야 함
 
   return (
     <Container className='pt-3'>
@@ -112,12 +112,12 @@ function ProductDetail(props) {
       <Row>
         {/* Quiz: 데이터 바인딩 작업 */}
         <Col md={6}>
-          <img src={imagePath} width="80%" />
+          <img src={product.imagePath} width="80%" />
         </Col>
         <Col md={6}>
-          <h4 className='pt-5'>{title}</h4>
-          <p>{content}</p>
-          <p>{formatter.format(price)}</p>
+          <h4 className='pt-5'>{product.title}</h4>
+          <p>{product.content}</p>
+          <p>{formatter.format(product.price)}</p>
 
           <Col md={4} className='m-auto mb-3'>
             <Form.Control type="text" value={orderCount} onChange={handleChangeOrderCount}/>
