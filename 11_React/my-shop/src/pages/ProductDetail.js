@@ -104,8 +104,10 @@ function ProductDetail(props) {
           </Col>
 
           <Button variant='primary'>주문하기</Button>
-          <Button variant='warning' onClick={() => 
-            dispatch(addItemToCart(id, title, price, orderCount))}>장바구니</Button>
+          <Button variant='warning' onClick={() => {
+            // dispatch(addItemToCart({ id, title, price, count: orderCount }))
+            dispatch(addItemToCart({ ...product, count: orderCount }));
+            }}>장바구니</Button>
         </Col>
       </Row>
 
