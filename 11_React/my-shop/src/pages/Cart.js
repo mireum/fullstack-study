@@ -55,6 +55,17 @@ function Cart(props) {
               </tr>
             );
           })}
+          <tr>
+            <th>합계</th>
+            <td></td>
+            <td></td>
+            <th>
+              {formatter.format(cartList.reduce((prev, cart) => {
+                return prev + (cart.price * cart.count);
+              }, 0))}원
+            </th>
+            <td></td>
+          </tr>
         </tbody>
       </Table>
     </>
