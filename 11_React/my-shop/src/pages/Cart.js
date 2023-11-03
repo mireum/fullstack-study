@@ -1,11 +1,14 @@
 import React from 'react';
 import { Table } from "react-bootstrap";
-import { useSelector } from 'react-redux';
-import { selectCartList } from '../features/cart/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { decreaseCount, increaseCount, selectCartList } from '../features/cart/cartSlice';
 
 function Cart(props) {
+  const dispatch = useDispatch();
   const cartList = useSelector(selectCartList);
   // console.log(cartList);
+  const formatter = new Intl.NumberFormat('ko-KR');
+
   
   return (
     <>
@@ -27,14 +30,22 @@ function Cart(props) {
           </tr> */}
 
           {/* Quiz: cartList 반복 렌더링 및 데이터 바인딩 하기 */}
-          {cartList.map((item) => {
-            const { id, title, price, count } = item;
+          {cartList.map((cart, index) => {
+            const { id, title, price, count } = cart;
             return (
-              <tr>
-                <td>{id}</td>
+              <tr key={id}>
+                <td>{index+1}</td>
                 <td>{title}</td>
-                <td>{count}</td>
-                <td>{price}</td>
+                <td>
+                  <button onClick={() => dispatch(decreaseCount(id))}>
+                    -
+                  </button>
+                  {count}
+                  <button onClick={() => dispatch(increaseCount(id))}>
+                    +
+                  </button>
+                </td>
+                <td>{formatter.format(price*count)}원</td>
               </tr>
             );
           })}
