@@ -46,6 +46,8 @@ function Cart(props) {
                   </button>
                 </td>
                 <td>{formatter.format(price*count)}원</td>
+
+                {/* Quiz: 표의 행마다 삭제 버튼 만들고 누르면 상품이 삭제되도록 만들기 */}
               </tr>
             );
           })}

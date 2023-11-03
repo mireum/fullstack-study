@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Button, Col, Container, Form, Nav, Row } from 'react-bootstrap';
+import { Alert, Button, Col, Container, Form, Modal, Nav, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { clearSelectedProduct, getSelectedProduct, selectSelectedProduct } from '../features/product/productSlice';
 import axios from 'axios';
 import styled, { keyframes } from 'styled-components';
@@ -32,7 +32,11 @@ function ProductDetail(props) {
   const [showInfo, setShowInfo] = useState(true); // Info Alert창 상태
   const [orderCount, setOrderCount] = useState(1); // 주문 수량 상태
   const [showTabIndex, setShowTabIndex] = useState(0); // 상세보기 탭 상태
-  const [showTab, setShowTab] = useState('detail');
+  const [showTab, setShowTab] = useState('detail'); // 탭 상태
+  const [showModal, setShowModal] = useState(false); // 모달 상태
+  const handleCloseModal = () => setShowModal(false); // 모달 관련 함수들
+  const handleOpenModal = () => setShowModal(true);
+  const navigate = useNavigate();
 
   // 상품 상세보기가 처음 마운트 됐을 때 서버에 상품 id를 이용하여 데이터를 오청하고
   // 그 결과를 리덕스 스토어에 저장
@@ -107,6 +111,7 @@ function ProductDetail(props) {
           <Button variant='warning' onClick={() => {
             // dispatch(addItemToCart({ id, title, price, count: orderCount }))
             dispatch(addItemToCart({ ...product, count: orderCount }));
+            handleOpenModal();
             }}>장바구니</Button>
         </Col>
       </Row>
@@ -172,6 +177,26 @@ function ProductDetail(props) {
         // 대괄호 표기법으로 써야 변수로 인식함.
       }
       
+
+      {/* 장바구니에 담기 모달 만들기
+        추후 공통 모달로 만드는 것이 좋음 */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>🎈 뽀삐빠 샵 알림</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          장바구니에 상품을 담았습니다.<br />
+          장바구니로 이동하시겠습니까?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            취소
+          </Button>
+          <Button variant="primary" onClick={() => navigate('/cart')}>
+            확인
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
     </Container>
   );
