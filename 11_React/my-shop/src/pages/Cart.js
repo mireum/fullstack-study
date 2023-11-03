@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from 'react-redux';
-import { decreaseCount, increaseCount, selectCartList } from '../features/cart/cartSlice';
+import { decreaseCount, increaseCount, removeItemFromCart, selectCartList } from '../features/cart/cartSlice';
 
 function Cart(props) {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ function Cart(props) {
             <th>상품명</th>
             <th>수량</th>
             <th>가격</th>
+            <th>삭제</th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +49,9 @@ function Cart(props) {
                 <td>{formatter.format(price*count)}원</td>
 
                 {/* Quiz: 표의 행마다 삭제 버튼 만들고 누르면 상품이 삭제되도록 만들기 */}
+                <td>
+                  <button onClick={() => dispatch(removeItemFromCart(id))}>삭제</button>
+                </td>
               </tr>
             );
           })}

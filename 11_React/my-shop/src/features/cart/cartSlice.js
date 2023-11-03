@@ -43,10 +43,19 @@ const cartSlice = createSlice({
         targetItem.count += item.count;
       }
     },
+    removeItemFromCart: (state, { payload: id }) => {
+      // 방법1
+      // const targetIndex = state.cartList.findIndex(cart => cart.id === id);
+      // state.cartList.splice(targetIndex, 1);
+
+      // 방법2: filter() 사용 시
+      const newCartList = state.cartList.filter(cart => cart.id !== id);
+      state.cartList = newCartList;
+    },
   }
 });
 
-export const { increaseCount, decreaseCount, addItemToCart } = cartSlice.actions;
+export const { increaseCount, decreaseCount, addItemToCart, removeItemFromCart } = cartSlice.actions;
 
 export const selectCartList = state => state.cart.cartList; // 함수다
 
