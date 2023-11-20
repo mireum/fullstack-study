@@ -8,3 +8,6 @@ function checkOddOrEven(num) {
 }
 
 export default checkOddOrEven;
+// default export
+// 파일 안에서 단 한 번만 쓸 수 있음
+// import 시 작명 가능

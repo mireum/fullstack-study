@@ -5,3 +5,4 @@
 // 선언하면서 선언 앞에 export를 붙여서 내보낼 수 있음
 export const odd = '홀수입니다.';
 export const even = '짝수입니다.';
+// named export: 이름이 정확하게 정해진 export

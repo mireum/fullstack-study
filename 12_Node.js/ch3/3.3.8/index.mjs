@@ -1,7 +1,5 @@
 import { odd, even } from "./var.mjs";
-import checkOddOrEven from "./func.mjs";
-
-console.log(checkOddOrEven);
+import checkNumber from "./func.mjs";
 
 function checkStringOddOrEven(str) {
   if (str.length % 2) { // 홀수면
