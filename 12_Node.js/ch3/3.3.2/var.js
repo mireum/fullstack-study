@@ -11,3 +11,12 @@ module.exports = {
   odd,
   even: even,
 }
+
+
+// (참고만 할 것)
+// module.exports나 exports.나 동일한 코드지만 혼용하면 안됌
+// exports.odd = odd;
+// exports.even = even;
+// 이렇게 쓰면 module 키워드 생략 가능
+// 근데 module.exports 방식과 같이 쓸 수 없다.
+// module.exports === exports === {} 초기값이 빈 객체
