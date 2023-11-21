@@ -7,10 +7,20 @@ const fs = require('fs').promises;
 
 // 파일 읽기
 // 인자값: 파일 경로
-fs.readFile('./readme.txt', (err, data) => {
-  if (err) {
-    throw err;
-  }
-  console.log(data);  // 바이너리 데이터(2진법)가 출력됨 - 컴퓨터가 다룰 수 있는 데이터(0 또는 1)
-  console.log(data.toString()); // 사람이 읽을 수 있게 바꿈
-});
+fs.readFile('./readme.txt') 
+  .then (data => {
+    console.log(data); 
+    console.log(data.toString()); 
+  })
+  .catch (err => {
+    console.error(err);
+  });
+
+fs.readFile('./readme.txt') = async () => {
+  try {data => {
+    console.log(data);
+  }}
+  catch {err => {
+    console.log(err);
+  }}
+} 
