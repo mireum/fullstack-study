@@ -7,20 +7,22 @@ const fs = require('fs').promises;
 
 // 파일 읽기
 // 인자값: 파일 경로
-fs.readFile('./readme.txt') 
-  .then (data => {
-    console.log(data); 
-    console.log(data.toString()); 
-  })
-  .catch (err => {
-    console.error(err);
-  });
+// fs.readFile('./readme.txt') 
+//   .then (data => {
+//     console.log(data); 
+//     console.log(data.toString()); 
+//   })
+//   .catch (err => {
+//     console.error(err);
+//   });
 
-fs.readFile('./readme.txt') = async () => {
-  try {data => {
+async function readFileAsync() {
+  try {
+    const data = await fs.readFile('./readme.txt');
     console.log(data);
-  }}
-  catch {err => {
-    console.log(err);
-  }}
-} 
+    console.log(data.toString());
+  } catch (err) {
+    console.error(err);
+  }
+}
+readFileAsync();
