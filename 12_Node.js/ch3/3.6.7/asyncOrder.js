@@ -17,12 +17,14 @@ fs.readFile('./readme.txt', (err, data) => {
       fs.readFile('./readme.txt', (err, data) => {
         if (err) throw err;
         console.log('4번', data.toString());
+        console.log('끝');
       });
     });
   });
 });
 
-console.log('끝');
+// 콜백 지옥 발생
 
-
-// 
+// 이렇게 쓸거면 동기식과 다른 점이 무엇?
+// asyncOrder.js를 여러 번 실행하면 동시에 실행됨
+// sync.js는 계속 순서가 쌓임(대기가 발생함)
