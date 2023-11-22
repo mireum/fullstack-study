@@ -28,4 +28,6 @@ randomBytesPromise(64)
   .catch((err) => {
     console.error(err);
   });
+
 // 프로미스로 바꿨으니 async/await 사용도 가능
+const randomBytesPromiseAsync = 
