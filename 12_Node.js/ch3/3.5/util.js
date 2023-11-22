@@ -30,4 +30,13 @@ randomBytesPromise(64)
   });
 
 // 프로미스로 바꿨으니 async/await 사용도 가능
-const randomBytesPromiseAsync = 
+const randomBytesPromiseAsync = async () => {
+  try {
+    const buf = await randomBytesPromise(64);
+    console.log(buf.toString('base64'));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+randomBytesPromiseAsync();
