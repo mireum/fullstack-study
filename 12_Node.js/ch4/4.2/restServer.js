@@ -12,14 +12,27 @@ http.createServer(async (req, res) => {
   try {
     if (req.method === 'GET') {
       if (req.url === '/') {  // GET 요청이고 url이 '/'일 때
-        const data = await fs.readFile('./restFront.html');
+        // const data = await fs.readFile('./restFront.html');
+        // (참고) 서버 파일이 루트 경로에 없는 경우 서버 실행 위치에 따라 상대 경로가 문제될 수 있음, path를 같이 사용하면 좋음
+        const data = await fs.readFile(path.join(__dirname, 'restFront.html'));
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); // 200: OK(성공)
         return res.end(data); // 응답으로 페이지를 내려줌
       }
-
+      // Quiz: GET 요청이고 url이 '/about'일 때
+      else if (req.url === '/about') {
+        const data = await fs.readFile(path.join(__dirname, 'about.html'));
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        return res.end(data);
+      }
+      else if (req.url === '/users') {
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });  // 콘텐츠 타입은 json
+        return res.end(JSON.stringify(users));  // 응답으로 json 포맷으로 바꿔서 내려줌
+      }
+      
       console.log(req.url);
       try {
-        const data = await fs.readFile(`.${req.url}`);  // 상대 경로 사용
+        // const data = await fs.readFile(`.${req.url}`);  // 상대 경로 사용
+        const data = await fs.readFile(path.join(__dirname, req.url));  // 안전한 방식
         return res.end(data); // 응답으로 css랑 js를 보내줌
       } catch (err) {
         console.error(err);
