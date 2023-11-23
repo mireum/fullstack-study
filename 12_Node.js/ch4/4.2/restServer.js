@@ -38,6 +38,47 @@ http.createServer(async (req, res) => {
         console.error(err);
       }
     }
+    else if (req.method === 'POST') {
+      if (req.url === '/user') { // 폼 제출(submit) 시 실행, 사용자를 등록하는 로직
+        let body = '';
+        // 요청의 body를 stream 형식으로 받음
+        req.on('data', (data) => {
+          body += data;
+        });
+        // 요청의 body를 다 받은 후 실행됨
+        return req.on('end', () => {
+          console.log('POST 본문(Body):', body);
+          const { name } = JSON.parse(body); // json 문자열을 객체로 변환
+          const id = Date.now(); // id값 임의 생성
+          users[id] = name;
+          res.writeHead(201, { 'Content-Type': 'text/plain; charset=utf-8' }); // 201: Created(생성됨)
+          res.end('등록 성공'); // Response에서 응답 데이터 확인 가능
+        });
+      }
+    } else if (req.method === 'PUT') {
+      // console.log(req.url); // /user/1700576444873
+      // console.log(req.url.split('/')); // [ '', 'user', '1700576444873' ]
+      if (req.url.startsWith('/user/')) {
+        const key = req.url.split('/')[2]; // url에서 id 추출
+        let body = '';
+        req.on('data', (data) => {
+          body += data;
+        });
+        return req.on('end', () => {
+          console.log('PUT 본문(Body):', body);
+          users[key] = JSON.parse(body).name;
+          res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+          return res.end(JSON.stringify(users));
+        });
+      }
+    } else if (req.method === 'DELETE') {
+      if (req.url.startsWith('/user/')) {
+        const key = req.url.split('/')[2]; // url에서 id 추출
+        delete users[key];
+        res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+        return res.end(JSON.stringify(users));
+      }
+    }
   } catch (err) {
     console.error(err);
     res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' }); // 500: Internal Server Error(서버 에러)
