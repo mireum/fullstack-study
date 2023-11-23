@@ -15,3 +15,5 @@ const server = http.createServer(async (req, res) => {
   .listen(8081, () => {
     console.log('8081번 포트에서 서버 대기 중입니다!');
   });
+
+// localhost === 127.0.0.1
