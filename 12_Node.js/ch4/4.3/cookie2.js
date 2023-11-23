@@ -22,15 +22,38 @@ http.createServer(async (req, res) => {
     const name = url.searchParams.get('name');  // 쿼리스트링에서 name 추출
     const expires = new Date();
     // 쿠키 유효 시간을 현재시간 + 5분으로 설정
-    expires.setMinutes(expires.getMinutes() + 5);
+    expires.setMinutes(expires.getMinutes() + 1); // 테스트: 1분 뒤 쿠키 삭제됨 => 로그인 풀림
 
     console.log(name);  // 한글일 때 encodeURIComponent로 인코딩 안하면 쿠키에 이상한 문자 들어갔다고 에러 발생
     res.writeHead(302, {  // 302: 리다이렉션
       location: '/', // 이 주소로 돌려보내라
       'set-cookie': `name=${encodeURIComponent(name)}; Expires=${expires.toGMTString()}; HttpOnly; Path=/`
+      // 쿠키 옵션
+      // Expires: 만료 기한, 브라우저가 자동으로 서버에 쿠키를 보내주는데 만료된 쿠키는 제거되어서 안 보내짐, 안 적으면 세션 쿠키가 됨
+      // HttpOnly: JS에서 쿠키에 접근하지 못하게 설정, 보안상 설정하는 것이 좋음
+      // Path: /, 즉, 루트 아래에 있는 주소에서 이 쿠키를 다 쓸 수 있음
     });
+    res.end();
+  // name이라는 쿠키가 있는 경우
+  } else if (cookies.name) {
+    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end(`${cookies.name}님 안녕하세요`);
+  // name이라는 쿠키가 없는 경우(처음 접속 시, 로그아웃 상태)
+  } else {
+    try {
+      const data = await fs.readFile(path.join(__dirname, 'cookie2.html'));
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(data);
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end(err.message);
+    }
   }
 })
   .listen(8084, () => {
     console.log('8084번 포트에서 서버 대기 중입니다!');
   });
+
+// 로그인 잘 유지되다가 풀린 경우가 발생하면 쿠키가 만료된 겻임
+// (로그인 구현에 쿠키를 썼을 때만 해당)
+// 실습: github에 로그인하고 쿠키 날려보기
