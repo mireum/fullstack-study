@@ -29,7 +29,7 @@ http.createServer(async (req, res) => {
         return res.end(JSON.stringify(users));  // 응답으로 json 포맷으로 바꿔서 내려줌
       }
 
-      // GET 요청이면서 /도 /about도 /users도 아니면
+      // GET 요청이면서 /도 /about도 /users도 아니면(css, js)
       console.log(req.url);
       try {
         // const data = await fs.readFile(`.${req.url}`);  // 상대 경로 사용
@@ -99,3 +99,6 @@ http.createServer(async (req, res) => {
 // https://developer.mozilla.org/ko/docs/Web/HTTP/Status
 
 // 위 코드는 서버의 동작 흐름(맥락)만 이해할 것!
+// 기본적으로는 Node.js의 http 모듈만으로도 서버 구성이 가능하나 코드가 상당히 복잡하고 지저분
+// 실제로는 웹 프레임워크 사용하여 더 효율적으로 작성
+// 예: Express, koa, fastify 등
