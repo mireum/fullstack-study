@@ -16,6 +16,14 @@ http.createServer(async (req, res) => {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); // 200: OK(성공)
         return res.end(data); // 응답으로 페이지를 내려줌
       }
+
+      console.log(req.url);
+      try {
+        const data = await fs.readFile(`.${req.url}`);  // 상대 경로 사용
+        return res.end(data); // 응답으로 css랑 js를 보내줌
+      } catch (err) {
+        console.error(err);
+      }
     }
   } catch (err) {
     console.error(err);
