@@ -3,6 +3,7 @@ const path = require('path');
 
 const app = express(); // express로 부터 app을 하나 가져옴
 // app.set(키, 값): 서버에 전역 속성 설정
+// 이름을 port라고 정해준것
 app.set('port', process.env.PORT || 3000); // 서버가 실행될 포트 지정(환경변수 없으면 기본값 3000으로)
 
 // 미들웨어
