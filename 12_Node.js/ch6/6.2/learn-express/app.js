@@ -49,9 +49,21 @@ app.get('/', (req, res) => {
     httpOnly: true, // JS에서 쿠키 접근 못하게 
     path: '/',  // 쿠키를 사용할 경로. '/'면 어디서든
     signed: true, // 서명(암호화) 옵션: 쿠키 뒤에 서명이 붙음
+    // secure: true, // HTTPS일 경우에만 쿠키가 전송됨
   });
+  console.log(req.cookies); 
   
-  
+  // 쿠키 지우기
+  // res.clearCookie(키, [옵션]); 옵션이 일치해야 지워짐
+  // res.clearCookie('name');
+  // res.clearCookie('name', {
+  //   httpOnly: true, 
+  //   path: '/',  
+  //   signed: true,
+  // });
+
+
+
   res.sendFile(path.join(__dirname, '/index.html')); 
 });
 
