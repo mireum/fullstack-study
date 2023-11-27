@@ -99,15 +99,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html')); 
 });
 
-// form태그로 받아왔을 때
-// app.post('/user', (req, res) => {
-//   console.log(req.body.username);
-//   res.send('us페이지');
-// });
 
 app.post('/user', (req, res) => {
   console.log(req.body.username);
   res.send('us페이지2');
+  // 동기식일때(form태그 사용)는 redirect로 다시 돌아오게 한다(login)
+  // res.redirect('/');
 });
 
 
