@@ -9,8 +9,16 @@
   <h1>익스프레스</h1>
   <p>배워봅시다</p>
   <div>
-    <form id="form" action="/user" method="post">
-      <label for="username">사용자</label>
+    <!-- form -->
+    <form action="/user" method="post">
+      <label for="username">사용자form</label>
+      <input type="text" name="username">
+      <button>등록</button>
+    </form>
+
+    <!-- ajax -->
+    <form id="form" action="/user">
+      <label for="username">사용자ajax</label>
       <input type="text" id="username" name="username">
       <button type="submit">등록</button>
     </form>
@@ -18,7 +26,7 @@
   
   <!-- 서버에 JS 파일에 대한 GET 요청을 보냄 -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  
+
   <!-- 아래 코드는 ajax로 req.body확인하는 방법(비동기식), 주석하면 form태그로(동기식) 실행됨 -->
   <script>
     document.getElementById('form').addEventListener('submit', async (e) => {
