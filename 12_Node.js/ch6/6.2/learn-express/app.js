@@ -99,10 +99,17 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html')); 
 });
 
-app.post((req, res) => {
-  // res.send('about 페이지입니다.');
-  console.log(req.body.name);
+// form태그로 받아왔을 때
+// app.post('/user', (req, res) => {
+//   console.log(req.body.username);
+//   res.send('us페이지');
+// });
+
+app.post('/user', (req, res) => {
+  console.log(req.body.username);
+  res.send('us페이지2');
 });
+
 
 app.listen(app.get('port'), () => {
   console.log(app.get('port') + '번에서 익스프레스 서버 실행');

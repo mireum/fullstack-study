@@ -9,11 +9,37 @@
   <h1>익스프레스</h1>
   <p>배워봅시다</p>
   <div>
-    <form id="form">
-      <label for="nsername">사용자</label>
+    <!-- 1. form태그 사용했을 때 -->
+    <!-- <form id="form" action="/user" method="post">
+      <label for="username">사용자form태그 사용</label>
+      <input type="text" id="username" name="username">
+      <button type="submit">등록</button>
+    </form> -->
+
+    <!-- 2. ajax 사용했을 때 -->
+    <form id="form" action="/user" method="post">
+      <label for="username">사용자axios사용</label>
       <input type="text" id="username" name="username">
       <button type="submit">등록</button>
     </form>
   </div>
+  
+  <!-- 서버에 JS 파일에 대한 GET 요청을 보냄 -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    document.getElementById('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = e.target.username.value;
+      if (!name) {
+        return alert('이름을 입력하세요');
+      }
+      try {
+        await axios.post('/user', { name });  
+      } catch (err) {
+        console.error(err);
+      }
+      e.target.username.value = ''; // 한 번 제출하면 빈 값으로
+    });
+  </script>
 </body>
 </html>
