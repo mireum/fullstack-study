@@ -1,0 +1,13 @@
+<!-- 1. form 태그로 보내는 경우(동기식) -->
+<form id="form" action="/upload" method="post" enctype="multipart/form-data">
+  <!-- 파일 하나 -->
+  <!-- <input type="file" name="image"> -->
+  <!-- 여러 파일 -->
+  <!-- <input type="file" name="image" multiple> -->
+  <!-- 여러 파일(input 태그를 여러 개 사용해서 name이 다른 경우) -->
+  <input type="file" name="image1">
+  <input type="file" name="image2">
+
+  <input type="text" name="title">
+  <button type="submit">업로드</button>
+</form>
