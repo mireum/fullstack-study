@@ -1,11 +1,3 @@
-// Quiz1: 프로젝트 세팅해보기
-// dotenv 설정
-// app 관련 설정들(전역속성) 설정
-// 공통 미들웨어 작성(morgan, static, body-parser, cookie-parser, express-session)
-// 기본 '/' 라우터 작성
-// 404, 에러 처리 미들웨어
-// 서버 연결
-
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
@@ -16,6 +8,10 @@ const multer = require('multer');
 
 // dotenv
 dotenv.config();
+
+// 라우터 가져오기
+const indexRouter = require('./route/index'); // indexRouter 가져오기(/index는 생략가능)
+const userRouter = require('./route/user'); // userRouter 가져오기
 
 // 포트 설정
 const app = express();
@@ -45,11 +41,25 @@ app.use(session({
   name: 'session-cookie',
 }));
 
-// '/' 라우터
-app.get('/', (req, res) => {
 
-  res.sendFile(path.join(__dirname, '/index.html'));
-});
+// 라우터 분리하기
+// 개발을 하다보면 app.get(), app.post() 등이 계속 늘어나는데
+// 이걸 app.js 같은 하나의 파일에 계속 쓰다보면 코드가 길어지고 복잡해짐(=코드 수정 및 유지보수 어려움)
+// 라우터(API)들을 다른 파일로 추출하는 것이 좋음
+// 1) route 폴더 생성
+// 2) '/', '/user'로 들어오는 요청을 모아놓을 파일 생성
+// 3) router 설정 -> 라우터(API) 작성(이 때 app을 전부 router로 변경)
+// 4) router 내보내기(module.exports) -> app.js에서 가져오기(require)
+
+
+// GET '/' 라우터
+// app.get('/', (req, res) => {
+//   res.send('Hello Express');
+// });
+
+// 분리한 라우터들을 미들웨어로 등록
+app.use('/', indexRouter);  // '/'로 요청이 들어오면 indexRouter로
+app.use('/user', userRouter);  // '/user'로 요청이 들어오면 userRouter로
 
 // 404 미들웨어
 app.use((req, res, next) => {
