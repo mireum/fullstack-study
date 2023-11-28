@@ -25,16 +25,17 @@
     // console.log(e.target.image1);
     const formData = new FormData();
     // 1)
-    // formData.append('image', e.target.image.files[0]);
+    // formData.append('image', e.target.image.files[0]); // 서버에서 받을 때 req.file
     // 2)
-    // for (let i = 0; i < e.target.image.files.length; i++) {
-    //   formData.append('image', e.target.image.files[i]);
+    // const fileList = e.target.image.files;
+    // for (const file of fileList) {
+    //   formData.append('image', file);
     // }
     // 3)
     // formData.append('image1', e.target.image1.files[0]);
     // formData.append('image2', e.target.image2.files[0]);
-    // 4)
-    
+    formData.append('title', e.target.title.value); // 서버에서 받을 때 req.body.title
+
 
     try {
       await axios.post('/upload', formData); 
