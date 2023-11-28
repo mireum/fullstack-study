@@ -149,11 +149,11 @@ app.get('/upload', (req, res) => {
 // });
 
 // 4) 멀티파트로 보내는데 파일을 업로드하지 않을 때(잘 안 씀)
-app.post('/upload', upload.none(), (req, res) => { 
-  console.log(req.files); // 파일이 없으니까 undefined
-  console.log(req.body);  
-  res.send('ok');
-});
+// app.post('/upload', upload.none(), (req, res) => { 
+//   console.log(req.files); // 파일이 없으니까 undefined
+//   console.log(req.body);  
+//   res.send('ok');
+// });
 
 
 
