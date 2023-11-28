@@ -44,7 +44,7 @@ router.post('/abc', (req, res) => {
 
 // router.route로 묶음
 // 주소를 먼저 써서 그룹화를 하고 그 다음에 메서드로 분기
-router.route('/abc')
+router.route('/abc')  // / 꼭 있어야 함
   .get((req, res) => {
     res.send('GET /abc');
   })
