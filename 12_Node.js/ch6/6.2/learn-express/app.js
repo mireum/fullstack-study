@@ -91,6 +91,28 @@ app.use((req, res, next) => {
 });
 
 
+// multer 설정하기
+// 서버 시작할 때 uploads 폴더 만들기
+try {
+  fs.readdirSync('uploads');
+} catch (err) {
+  console.error('uploads 폴더가 없어 uploads 폴더를 생성합니다.');
+  fs.mkdirSync('uploads');
+}
+
+// multer 자체가 미들웨어는 아니고 multer 함수를 호출하면 나오는 객체 안에 4가지 미들웨어가 들어있음
+const upload = multer({
+  storage: multer.diskStorage({ // 하드디스크에 저장(실제 서버 운영 시 디스크 대신에 클라우드 스토리지 서비스(AWS)에 저장하는게 좋음)
+    destination(req, file, done) {  // 어느 경로에 저장할지
+      done(null, 'uploads/'); // 주의! uploads 폴더가 없으면 업로드 시 에러남
+    },
+    filename(req, file, done) { // 어떤 이름으로 저장할지
+      const ext = path.extname(file.originalname);  // 확장자 추출
+      done(null, path.basename(file.originalname, ext) + Date.now() + ext); // 파일명 + 날짜/시간 + 확장자
+    }
+  }),
+});
+
 app.get('/', (req, res) => {
   // 쿠키 사용하기
   // 이전 방식: 임의로 만든 parseCookies() 함수를 사용해서 객체로 변환
