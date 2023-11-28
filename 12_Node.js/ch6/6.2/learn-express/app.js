@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const multer = require('multer');
+const fs = require('fs');
 
 // dotenv(닷엔브): 환경변수(시스템에 때른 설정값이나 비밀키 등) 관리
 // 별도의 파일로 관리하는 이유는 보안과 설정의 편의성 때문
@@ -77,6 +79,18 @@ app.use(session({
 }));
 
 
+// 미들웨어간 데이터 공유 및 전달하기
+// 1) app.set은 서버 내내 유지
+// 2) req.session은 나에 한해서(=같은 세션 안에서) 계속 유지하고 싶은 데이터 => 로그인 유저 정보
+// 3) req, res는 요청 하나 동안만 유지(1회성)
+// use 안에 콜백함수 넣으면 미들웨어
+app.use((req, res, next) => {
+  req.data = '전달 데이터';
+  res.locals.data = '데이터 넣기';  // 일반적, 관례적으로 이렇게 사용
+  next();
+});
+
+
 app.get('/', (req, res) => {
   // 쿠키 사용하기
   // 이전 방식: 임의로 만든 parseCookies() 함수를 사용해서 객체로 변환
@@ -117,6 +131,11 @@ app.get('/', (req, res) => {
   console.log(req.session.id);
   console.log(req.sessionID);
   console.log(req.session);
+
+
+  // 위에서 추가한 data 받기
+  console.log(req.data);
+  console.log(res.locals.data);
 
   res.sendFile(path.join(__dirname, '/index.html')); 
 });
