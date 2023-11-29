@@ -15,9 +15,4 @@ router.get('/sub/:case', (req, res) => {
   }
 });
 
-// app.get('/board/sub/notice', (req, res) => {
-//   res.send('공지사항 게시판');
-// });
-// app.get('/board/sub/qna', (req, res) => {
-//   res.send('문의 게시판');
-// });
+module.exports = router;

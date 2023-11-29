@@ -13,7 +13,7 @@ dotenv.config();
 const indexRouter = require('./route/index'); // indexRouter 가져오기(/index는 생략가능)
 const userRouter = require('./route/user'); // userRouter 가져오기
 const shopRouter = require('./route/shop'); // shopRouter 가져오기
-// const boardRouter = require('./route/board'); // boardRouter 가져오기
+const boardRouter = require('./route/board'); // boardRouter 가져오기
 
 // 포트 설정
 const app = express();
@@ -78,7 +78,7 @@ app.use('/shop', shopRouter);
 // app.get('/board/sub/qna', (req, res) => {
 //   res.send('문의 게시판');
 // });
-
+app.use('/board/sub', boardRouter);
 
 // 404 미들웨어
 app.use((req, res, next) => {

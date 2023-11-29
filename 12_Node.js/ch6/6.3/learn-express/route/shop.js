@@ -14,3 +14,5 @@ router.get('/:category', (req, res) => {
     res.send('404 NOT FOUND');
   }
 });
+
+module.exports = router;
