@@ -5,14 +5,8 @@ router.get('/', (req, res) => {
   res.send('Hello, Board');
 });
 
-router.get('/sub/:case', (req, res) => {
-  if (req.params.case === notice) {
-    res.send('공지사항 게시판');
-  } else if (req.params.case === qna) {
-    res.send('문의 게시판');
-  } else {
-    res.send('404 NOT FOUND');
-  }
+router.get('/sub/:category', (req, res) => {
+  res.send(`${req.params.category} 게시판`);
 });
 
 module.exports = router;

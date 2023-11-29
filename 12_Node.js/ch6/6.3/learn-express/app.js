@@ -78,7 +78,7 @@ app.use('/shop', shopRouter);
 // app.get('/board/sub/qna', (req, res) => {
 //   res.send('문의 게시판');
 // });
-app.use('/board/sub', boardRouter);
+app.use('/board', boardRouter);
 
 // 404 미들웨어
 app.use((req, res, next) => {

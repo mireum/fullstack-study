@@ -6,13 +6,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:category', (req, res) => {
-  if (req.params.category === 'shirts') {
-    res.send('셔츠 판매 페이지');
-  } else if (req.params.category === 'pants') {
-    res.send('바지 판매 페이지');
-  } else {
-    res.send('404 NOT FOUND');
-  }
+  res.send(`${req.params.category} 판매 페이지`);
 });
 
 module.exports = router;
