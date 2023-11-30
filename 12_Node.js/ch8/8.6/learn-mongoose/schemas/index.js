@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // 몽구스를 통해서 몽고디비에 연결
 const connect = () => {
   if (process.env.NODE_ENV !== 'production') {  // 운영(배포) 버전이 아닐 때(즉, 개발 버전일 때)
-    mongoose.set('debug', true);  // 디버그 모드를 true: 터미널에 쿼리가 기록됨
+    mongoose.set('debug', true);  // 디버그 모드를 true: 터미널에 쿼리가 기록됨. mongoose: ~
   }
 
   mongoose.connect('mongodb+srv://admin:qwer`123@cluster0.hqitiuj.mongodb.net/', {
