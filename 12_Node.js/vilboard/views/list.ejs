@@ -6,7 +6,12 @@
   <title>Document</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
-<body>
+<body class="grey-bg">
+  <!-- 상단바 넣기 -->
+  <!-- ejs 문법 중 include() 쓰면 다른 ejs 파일에 있는 HTML을 넣을 수 있다 -->
+  <!-- 재사용이 많은 UI들은 모듈화 -->
+  <%- include('nav') %>
+
   <!-- 하드 코딩 -->
   <!-- <div class="white-bg">
     <div class="list-box">
