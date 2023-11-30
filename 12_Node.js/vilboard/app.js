@@ -18,10 +18,13 @@ dotenv.config();
 
 // 라우터 가져오기
 const indexRouter = require('./routes/index');
+// DB 연결 함수 가져오기
+const { connect } = require('./database/index');
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');  // view engine의 확장자 지정
+connect();  // 몽고디비에 연결
 
 app.use(morgan('dev'));
 app.use('/', express.static(path.join(__dirname, 'public'))); // '/' 생략 가능
