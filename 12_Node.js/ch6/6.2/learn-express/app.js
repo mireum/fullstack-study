@@ -61,6 +61,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET)); // 넣어준다고 암호화�
 app.use(express.json());  // 클라이언트에서 json 데이터를 보냈을 때 파싱해서 req.body에 넣어줌
 app.use(express.urlencoded({ extended: true }));
 // 클라이언트에서 FormData를 보냈을 때(form을 submit할 때) 파싱해서 req.body에 넣어줌
+// req.body는 post에서 사용 가능
 // extended: 퀴리스트링을 어떻게 처리할지(true면 qs 패키지를, false면 querystring 내장 모듈을 사용)
 // true를 추천, qs > querystring 보다 편의 및 강력한 기능 지원
 // 다만 FormData로 파일을 보내는 경우 urlencoded()로 처리 못함 => 이 떄는 multer 사용
