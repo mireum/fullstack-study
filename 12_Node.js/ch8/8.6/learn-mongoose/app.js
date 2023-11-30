@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const connect = require('./schemas/index');
 const indexRouter = require('./routes');
 const usersRouter = require('./routes/users');
+const commentsRouter = require('./routes/comments');
 
 const app = express();
 app.set('port', process.env.PORT || 3002);
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/comments', commentsRouter);
 
 
 app.use((req, res, next) => {

@@ -20,5 +20,17 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.patch('/:id', async (req, res, next) => {
+  try {
+    await Comment.updateOne({ // 조건, 수정대상
+      _id: req.params.id
+    }, {  // 어떻게 수정할지, 수정 내용
+      // $set: { comment: req.body.comment }, // 몽고디비(네이티브)에선 $set필요(안 쓰면 데이터 통째로 바꿈)
+      comment: req.body.comment // 몽구스에선 $set을 안 붙여도 comment 필드만 바뀜
+    })
+  } catch (err) {
+    next(reportError);
+  }
+});
 
 module.exports = router;
