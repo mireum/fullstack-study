@@ -30,7 +30,7 @@ router.get('/insert', async (req, res) => {
 // time.ejs로 웹페이지 만들어서 그 안에 서버의 시간을 넣어 보내주면 됨
 router.get('/time', (req, res) => {
   const now = new Date();
-  res.render('time', { now });
+  res.render('time', { now });  // { now: now }
 });
 
 module.exports = router;
