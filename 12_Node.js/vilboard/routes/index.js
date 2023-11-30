@@ -4,8 +4,7 @@ const router = express.Router();
 
 // GET / 라우터
 router.get('/', (req, res) => {
-  res.render();
+  res.render('main.ejs');
 });
-
 
 module.exports = router;

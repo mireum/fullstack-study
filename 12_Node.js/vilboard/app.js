@@ -16,6 +16,9 @@ const session = require('express-session');
 
 dotenv.config();
 
+// 라우터 가져오기
+const indexRouter = require('./routes/index');
+
 const app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');  // view engine의 확장자 지정
@@ -35,6 +38,9 @@ app.use(session({
   },
   name: 'session-cookie',
 }));
+
+// 라우터를 미들웨어로 등록
+app.use('/', indexRouter);
 
 app.use((req, res, next) => {
   const error = new Error( `${req.method} ${req.url} 라우터가 없습니다.`);
