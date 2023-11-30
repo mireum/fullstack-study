@@ -22,7 +22,7 @@ router.post('/', async (req, res, next) => {
 
 router.patch('/:id', async (req, res, next) => {
   try {
-    await Comment.updateOne({ // 조건, 수정대상
+    const result = await Comment.updateOne({ // 조건, 수정대상
       _id: req.params.id
     }, {  // 어떻게 수정할지, 수정 내용
       // $set: { comment: req.body.comment }, // 몽고디비(네이티브)에선 $set필요(안 쓰면 데이터 통째로 바꿈)
@@ -36,12 +36,11 @@ router.patch('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    await Comment.deleteOne({
-      _id: req.params.id
-    })
+    const result = await Comment.deleteOne({ _id: req.params.id });  // 조건
+    res.json(result)
   } catch (err) {
     next(err);
   }
-})
+});
 
 module.exports = router;
