@@ -29,8 +29,7 @@ router.get('/insert', async (req, res) => {
 // Quiz: /time으로 접속하면 현재 서버의 날짜/시간을 보여주는 기능 만들기
 // time.ejs로 웹페이지 만들어서 그 안에 서버의 시간을 넣어 보내주면 됨
 router.get('/time', (req, res) => {
-  const now = new Date();
-  res.render('time', { now });  // { now: now }
+  res.render('time', { date: new Date(), datetime: Date.now() });
 });
 
 module.exports = router;

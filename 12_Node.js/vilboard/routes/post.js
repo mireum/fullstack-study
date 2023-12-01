@@ -36,19 +36,34 @@ router.get('/write', (req, res) => {
 });
 
 // POST /post/write 라우터
-router.post('/write', (req, res) => {
+router.post('/write', (req, res, next) => {
   console.log(req.body);  
   // 클라이언트가 보낸 데이터 -> 요청 본문에 담김 -> body-parser가 분석해서 req.body에 객체로 저장
 
-  const title = req.body.title;
-  const content = req.body.content;
+  // DB 예외 처리
+  try {
+    const title = req.body.title;
+    const content = req.body.content;
 
-
-  // Quiz: DB에 저장하기
-  db.collection('post').insertOne({
-    title,
-    content,
-  });
+    // 유효성 검사 추가하기
+    // 제목이 비어있으면 저장 안함
+    if (!title) { 
+      res.json({
+        flag: false,
+        message: '제목을 입력하세요'
+      });
+    } else {
+      // Quiz: DB에 저장하기
+      db.collection('post').insertOne({ title, content });
+  
+      // 동기식 요청이면 다른 페이지로 이동
+      res.redirect('/post');
+    }
+  } catch (err) {
+    // (참고) 예외처리는 정답이 없음, 회사/팀의 룰 또는 기획 의도에 따라 달라짐
+    err.status = 500;
+    next(err);
+  }
 
 });
 
