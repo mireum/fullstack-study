@@ -187,17 +187,22 @@ router.delete('/:id', async (req, res) => {
     await db.collection('post').deleteOne({ _id: new ObjectId(req.params.id) });
 
     res.json({
-      flag: true,
       message: '삭제 성공'
     });
     // 새로고침은 list.js에서 구현함
   } catch (err) {
     console.error(err);
-    res.json({
-      flag: false,
+    res.status(500).json({
       message: '삭제 실패'
     });
   }
 });
+
+
+// (정리) 서버로 데이터 보내는 방법
+// 1) form 태그
+// 2) Ajax 방식(axios)
+// 3) 라우트 매개변수(URL 파라미터)
+// 4) 쿼리스트링(?key=value, GET요청에 사용)
 
 module.exports = router;
