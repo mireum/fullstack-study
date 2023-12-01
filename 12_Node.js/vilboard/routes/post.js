@@ -1,4 +1,5 @@
 const express = require('express');
+const { ObjectId } = require('mongodb');
 const { client } = require('../database/index');
 const db = client.db('board');  // board 데이터베이스에 연결. 없으면 생성됨
 
@@ -72,7 +73,28 @@ router.post('/write', (req, res, next) => {
     err.status = 500;
     next(err);
   }
-
 });
+
+
+// 글 상세보기 만들기
+// /post/글id 입력하면 해당 글의 상세 페이지를 보여줌
+// 1) /post/글id 요청 보내기
+// 2) { _id: 글id } 조건으로 글을 DB에서 찾아서
+// 3) 해당 글을 ejs 파일에 꽂아서 보내줌
+
+// GET /post/:id 라우터
+router.get('/:id', async (req, res, next) => {
+  res.render('detail');
+
+  // DB에서 글 가져오기
+  // 테스트
+  // const post = await db.collection('post').findOne({ _id: '65683e88a6e5f0745c180e5a' });
+  // console.log(post);  // ObjectId 가 객체이므로 null 찍힘
+
+  const post = await db.collection('post').findOne({ _id: new ObjectId
+    ('65683e88a6e5f0745c180e5a') });
+  console.log(post);
+});
+
 
 module.exports = router;
