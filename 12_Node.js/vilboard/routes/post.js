@@ -190,6 +190,7 @@ router.delete('/:id', async (req, res) => {
       flag: true,
       message: '삭제 성공'
     });
+    // 새로고침은 list.js에서 구현함
   } catch (err) {
     console.error(err);
     res.json({
