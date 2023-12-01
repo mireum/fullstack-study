@@ -45,7 +45,12 @@
   <div class="white-bg">
     <% for (let i = 0; i < posts.length; i++) { %>
       <div class="list-box">
-        <h4><%= posts[i].title %></h4>
+        <h4>
+          <!-- 글 제목 누르면 상세 페이지로 이동하도록 링크 걸기 -->
+          <a href="/post/<%= posts[i]._id %>">
+            <%= posts[i].title %>
+          </a>
+        </h4>
         <p><%= posts[i].content %></p>
       </div>
     <% } %>

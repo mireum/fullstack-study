@@ -84,16 +84,43 @@ router.post('/write', (req, res, next) => {
 
 // GET /post/:id 라우터
 router.get('/:id', async (req, res, next) => {
-  res.render('detail');
+  // res.render('detail');
 
   // DB에서 글 가져오기
   // 테스트
   // const post = await db.collection('post').findOne({ _id: '65683e88a6e5f0745c180e5a' });
-  // console.log(post);  // ObjectId 가 객체이므로 null 찍힘
+  // console.log(post);  // ObjectId 가 객체이므로 null 찍힘, _id에 문자열 쓰는 건 몽구스에서만 가능
 
-  const post = await db.collection('post').findOne({ _id: new ObjectId
-    ('65683e88a6e5f0745c180e5a') });
-  console.log(post);
+  // const post = await db.collection('post').findOne({ _id: new ObjectId
+  //   ('65683e88a6e5f0745c180e5a') });  // ObjectId 객체로 만듦
+  // console.log(post);
+
+  // 예외 처리 하기
+  // 1) url 잘못 입력 시
+  // 2) 데이터를 못 찾을 시(잘못된 id) => null 반환
+  try {
+    // 실제: 라우트 매개변수에 입력한 값
+    const post = await db.collection('post').findOne({ _id: new ObjectId(req.params.id) });
+    console.log(post);
+
+    // 2)번에 대한 예외 처리
+    if (!post) {
+      const error = new Error('데이터 없음');
+      error.status = 404;
+      next(error);
+    }
+
+    // Quiz: 데이터 꽂아서 보내고 바인딩하기
+    res.render('detail', { post });
+
+  } catch (err) { // 1)번에 대한 예외 처리
+    err.message = '잘못된 URL 입니다.';
+    err.status = 400; // 응답코드 400번대는 클라이언트 에러
+    // 400: 유저의 잘못된 문법으로 인하여 서버가 요청을 이해할 수 없을 때
+    next(err);
+  }
+
+
 });
 
 
