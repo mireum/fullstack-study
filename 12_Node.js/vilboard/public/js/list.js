@@ -15,13 +15,12 @@ document.querySelectorAll('.delete').forEach((deleteBtn, index) => {
         // location.href = '/post';
         
         // 그럼 리액트에서는? state를 변경하면 됨
-      } else {
-        alert(result.response.data.message);
-      }
-
-      
+      } 
     } catch (err) {
       console.error(err);
+      // axios는 서버에서 에러 코드로 응답 시 에러 발생
+      // fetch는 아님
+      alert(err.response.data.message);
     }
   });
 });
