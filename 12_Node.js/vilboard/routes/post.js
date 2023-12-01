@@ -35,4 +35,21 @@ router.get('/write', (req, res) => {
   res.render('write');
 });
 
+// POST /post/write 라우터
+router.post('/write', (req, res) => {
+  console.log(req.body);  
+  // 클라이언트가 보낸 데이터 -> 요청 본문에 담김 -> body-parser가 분석해서 req.body에 객체로 저장
+
+  const title = req.body.title;
+  const content = req.body.content;
+
+
+  // Quiz: DB에 저장하기
+  db.collection('post').insertOne({
+    title,
+    content,
+  });
+
+});
+
 module.exports = router;
