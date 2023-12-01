@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="grey-bg">
+  <%- include('nav') %>
+
+  <form id="edit-form" class="form-box">
+    <h4>수정하기</h4>
+    <label for="title">제목</label>
+    <input type="text" id="title" name="title">
+    <label for="content">내용</label>
+    <input type="text" id="content" name="content">
+    <button type="submit">수정</button>
+  </form>
+
+
+  <!-- Quiz: write.js 만들어서 글 작성 기능을 Ajax 요청으로 바꿔보기 -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- static 쓴 app.use에 걸려서 js에 write.js 파일이 있으면 요청됨 -->
+  <script src="/js/edit.js"></script>
+</body>
+
+</html>

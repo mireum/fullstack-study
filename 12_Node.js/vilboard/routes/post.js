@@ -119,9 +119,35 @@ router.get('/:id', async (req, res, next) => {
     // 400: 유저의 잘못된 문법으로 인하여 서버가 요청을 이해할 수 없을 때
     next(err);
   }
-
-
 });
+
+
+// 글 수정 기능 만들기
+// 1) 수정 버튼 누르면 수정 페이지로
+// 2) 수정 페이지에는 기존 글이 채워져있음
+// 3) 전송 누르면 입력한 내용으로 DB 글 수정
+// a, form 태그 사용 시 단점: 동기식이라 새로고침 발생 => 비동기식 Ajax 방식 사용해보기
+
+// GET /post/edit/:id 라우터 
+router.get('/edit/:id', async (req, res, next) => {
+  // DB에서 글 가져오기
+  try {
+    const post = await db.collection('post').findOne({ _id: new ObjectId(req.params.id)});
+
+    if (!post) {
+      const error = new Error('데이터 없음');
+      error.status = 404;
+      next(error)
+    }
+
+    res.render('edit', { post });
+  } catch (err) {
+    err.message = '잘못된 URL 입니다.';
+    err.status = 400;
+    next(err);
+  }
+});
+
 
 
 module.exports = router;

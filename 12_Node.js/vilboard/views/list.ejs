@@ -50,6 +50,9 @@
           <a href="/post/<%= posts[i]._id %>">
             <%= posts[i].title %>
           </a>
+
+          <!-- 글 수정 버튼 -->
+          <a href="/post/edit/<%= posts[i]._id %>">🛠</a>
         </h4>
         <p><%= posts[i].content %></p>
       </div>
