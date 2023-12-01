@@ -148,6 +148,30 @@ router.get('/edit/:id', async (req, res, next) => {
   }
 });
 
+// PATCH /post/:id 라우터
+router.patch('/:id', async (req, res, next) => {
+  try {
+    const title = req.body.title;
+    const content = req.body.content;
 
+    // 어떤 document를 찾아서 어떤 내용으로 수정할지 인자값 2개 전달
+    const patch = await db.collection('post').updateOne({ 
+      _id: new ObjectId(req.params.id)
+    }, {
+      $set: { title, content }
+    });
+
+    res.json({
+      flag: true,
+      message: '수정 성공'
+    });
+  } catch (err) {
+    console.error(err);
+    res.json({
+      flag: false,
+      message: '수정 실패'
+    });
+  }
+});
 
 module.exports = router;

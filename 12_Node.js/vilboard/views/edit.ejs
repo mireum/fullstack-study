@@ -9,12 +9,18 @@
 <body class="grey-bg">
   <%- include('nav') %>
 
+  <!-- PUT, PATCH, DELETE 같은 요청을 쓰고 싶으면 method-overwriting -->
+  <!-- 하지만 비동기인 Ajax 쓰는게 맞다 -->
+  <!-- Ajax 방식을 쓴다면 e.target.name으로 값에 접근 가능 -->
   <form id="edit-form" class="form-box">
     <h4>수정하기</h4>
+    <!-- id값 보내는 꼼수(개발 시 text, 운영(배포) 시 hidden으로 바꿈) -->
+    <input type="hidden" name="id" value="<%= post._id %>">
+    <!-- 데이터 바인딩 -->
     <label for="title">제목</label>
-    <input type="text" id="title" name="title">
+    <input type="text" id="title" name="title" value="<%= post.title %>">
     <label for="content">내용</label>
-    <input type="text" id="content" name="content">
+    <input type="text" id="content" name="content" value="<%= post.content %>">
     <button type="submit">수정</button>
   </form>
 
