@@ -57,7 +57,15 @@ router.post('/write', (req, res, next) => {
       db.collection('post').insertOne({ title, content });
   
       // 동기식 요청이면 다른 페이지로 이동
-      res.redirect('/post');
+      // res.redirect('/post');
+
+      // 비동기식(Ajax) 요청이면 성공 데이터와 함께 응답
+      // 응답으로 redirect와 render는 사용 안 하는게 좋음
+      // 리액트는 새로고침이 필요없으므로
+      res.json({
+        flag: true,
+        message: '등록 성공'
+      });
     }
   } catch (err) {
     // (참고) 예외처리는 정답이 없음, 회사/팀의 룰 또는 기획 의도에 따라 달라짐
