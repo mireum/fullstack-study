@@ -20,4 +20,19 @@ router.get('/', async (req, res) => {
   res.render('list', { posts });
 });
 
+// 글 작성 기능 만들기
+// 사용자가 작성한 글을 DB에 저장해주기
+// 1) 글 작성 페이지에서 작성한 내용을 서버로 전송
+// 2) 서버는 전달받은 내용을 검사(유효성 검사)
+// 프론트와 더불어 이중 체크 해주면 좋음
+// => 프론트엔드 코드 및 데이터는 위조가 가능하기 때문
+// => 또는 POSTMAN 같은 툴을 써서 요청을 보내면 프론트의 유형성 검사를 안 거침
+// 3) 이상 없으면 DB에 저장
+
+
+// GET /post/write 라우터
+router.get('/write', (req, res) => {
+  res.render('write');
+});
+
 module.exports = router;
