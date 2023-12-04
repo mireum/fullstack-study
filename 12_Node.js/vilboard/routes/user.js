@@ -1,5 +1,5 @@
 const express = require('express');
-
+const bcrypt = require('bcrypt');
 const { client } = require('../database/index');
 const db = client.db('board');  // board 데이터베이스에 연결. 없으면 생성됨
 
@@ -25,8 +25,59 @@ const router = express.Router();
 
 
 // GET /user/register 라우터
-router.get('/user/register', (req, res) => {
+router.get('/register', (req, res) => {
   res.render('register');
+});
+
+
+// Quiz: 회원가입 기능 만들기
+// 1) 회원 가입 페이지 만들기
+// 2) 서버는 전송받은 아이디, 비번을 user 컬렉션에 저장
+//  /public/js/register.js 작성
+// POST /user/register 라우터 작성
+
+
+
+router.post('/register', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // 비번을 그냥 넣을 때
+    // await db.collection('user').insertOne({
+    //   username,
+    //   password
+    // });
+    
+    // 회원 가입 예외 처리 추가
+    // 기존에 같은 아이디로 가입한 사용자가 있으면 에러 처리
+    // username이 이미 DB에 있는지 조회
+    const existUser = await db.collection('user').findOne({ username });
+    if (existUser) {
+      throw new Error('존재하는 사용자');
+    }
+
+    // 비번을 해싱해서 저장해보기
+    // npm install bcrypt 설치 후 가져오기
+    // 두번째 인자값: 해싱을 얼마나 복잡하게 할지
+    // 숫자가 커질수록 비밀번호를 알아내기가 어려워지지만 암호화 시간도 오래 걸림
+    const hash = await bcrypt.hash(password, 12);  // 최소 10 이상 추천, 31까지 사용 가능
+
+    await db.collection('user').insertOne({
+      username,
+      hash
+    });
+
+    res.json({
+      flag: true,
+      message: '회원 가입 성공'
+    });
+  } catch (err) {
+    console.error(err);
+    res.json({
+      flag: false,
+      message: err.message
+    });
+  }
 });
 
 
