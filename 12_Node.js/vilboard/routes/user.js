@@ -65,7 +65,7 @@ router.post('/register', async (req, res) => {
 
     await db.collection('user').insertOne({
       username,
-      hash
+      password: hash
     });
 
     res.json({

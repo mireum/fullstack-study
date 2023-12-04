@@ -51,7 +51,16 @@ app.use(session({
 // passport 미들웨어 설정
 app.use(passport.initialize()); // 요청(req) 객체에 passport 설정이 추가됨(req.isAuthenticated, req.login, req.logout 등)
 app.use(passport.session());  // req.session 객체에 passport 정보를 저장
-// req.session 객체는 express-session에서 생성하는 것이므노 passport 미들웨어는 express-session 미들웨어보다 뒤에 연결해야 함
+// req.session 객체는 express-session에서 생성하는 것이므로 passport 미들웨어는 express-session 미들웨어보다 뒤에 연결해야 함
+
+// res.locals.user 속성에 req.user 정보 넣기를 미들웨어로 등록
+// => 템플릿 엔진에서 user 객체를 통해 로그인한 사용자 정보에 접근할 수 있음
+// views에서 쓸 수 있게 미들웨어로 등록
+app.use((req, res, next) => {
+  res.locals.user = req.user; // deserializeUser에서 req.user에 저장했음
+  next();
+});
+
 
 // 라우터를 미들웨어로 등록
 app.use('/', indexRouter);
