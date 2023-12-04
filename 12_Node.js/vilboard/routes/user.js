@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 const { client } = require('../database/index');
 const db = client.db('board');  // board 데이터베이스에 연결. 없으면 생성됨
 
@@ -78,6 +79,33 @@ router.post('/register', async (req, res) => {
       message: err.message
     });
   }
+});
+
+
+// 로그인 로그아웃 라우터 작성
+// GET /user/login
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+
+// POST /user/login
+router.post('/login', (req, res, next) => {
+  // 전송 받은 아이디, 비번이 DB에 있는지 확인하고 있으면 세션 만들기
+  // 이 과정을 직접 만들기보다 passport의 미들웨어를 이용하여 로컬 로그인 전략(localStrategy.js)을 수행
+  passport.authenticate('local', (authError, user, info) => {  // 전략이 성공하거나 실패하면 실행될 콜백 함수
+    // user: 성공 시 로그인한 사용자 정보
+    // info: 실패 시 이유
+    if (authError) {
+      console.error(authError); // 에러 발생 시 에러가 넘어옴
+      return res.status(500).json(authError);
+    }
+    if (!user) return res.status(401).json(info.message);
+
+    req.login(user, (loginError) => {
+      if (loginError) return next(loginError);
+      res.redirect('/');  // 로그인 완료 시 실행할 코드
+    });
+  })(req, res, next);
 });
 
 
