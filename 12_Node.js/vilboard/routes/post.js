@@ -222,7 +222,7 @@ router.get('/', async (req, res) => {
   // 페이지네이션 구현(1)
   // 페이지 번호는 쿼리 스트링 또는 URL 파라미터 사용
   // 1 -> 0, 2 -> 5, 3 -> 10 
-  const posts = await db.collection('post').find({}).skip((req.query.page - 1) * 5).limit(5).toArray();
+  // const posts = await db.collection('post').find({}).skip((req.query.page - 1) * 5).limit(5).toArray();
 
   // 페이지 계산
   // 콘텐츠 1~5 -> 페이지 수 1, 6~10 -> 2
@@ -231,6 +231,19 @@ router.get('/', async (req, res) => {
   const numOfPage = Math.ceil(totalCount / postsPerPage); // 페이지 수
   const currentPage = req.query.page || 1;  // 현재 페이지
 
+  // 페이지네이션 구현(2)
+  // 데이터의 양이 너무 많아서 skip(1000000)을 많이 하게 되면 성능에 안 좋음
+  // => 너무 많이 skip하지 못하게 막거나 다른 페이지네이션 방법 구현
+  // 장점: 매우 빠르다(_id 기준으로 찾는건 DB가 가장 빠르게 하는 작업)
+  // 단점: 바로 다음 게시물만 가져올 수 있어서 1페이지 보다가 3페이지로 이동 불가
+  let posts;
+  if (req.query.nextId) {
+    posts = await db.collection('post')
+      .find({ _id: { $gt: new ObjectId(req.query.nextId) } }) // ObjectId는 대소 비교 가능
+      .limit(5).toArray();
+  } else {
+    posts = await db.collection('post').find().limit(5).toArray();  // 처음 5개
+  }
 
   res.render('list', { posts, numOfPage, currentPage });
 });
