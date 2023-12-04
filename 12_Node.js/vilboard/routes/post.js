@@ -228,10 +228,11 @@ router.get('/', async (req, res) => {
   // 콘텐츠 1~5 -> 페이지 수 1, 6~10 -> 2
   const totalCount = await db.collection('post').countDocuments({});  // 전체 document 개수
   const postsPerPage = 5; // 페이지 당 콘텐츠 개수
-  const numOfPage = ; // 페이지 수
+  const numOfPage = Math.ceil(totalCount / postsPerPage); // 페이지 수
+  const currentPage = req.query.page || 1;  // 현재 페이지
 
 
-  res.render('list', { posts });
+  res.render('list', { posts, numOfPage, currentPage });
 });
 
 
