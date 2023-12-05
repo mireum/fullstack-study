@@ -116,3 +116,35 @@ input, div {
 .next-bg > a:hover {
   background: lightgray;
 }
+
+/* 프로필 */
+.profile {
+  width: 100px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+}
+
+p span {
+  font-weight: bold;
+}
+
+.content {
+  text-align: center;
+
+}
+
+.box {
+  width: 400px;
+  background-color: royalblue;
+  border-radius: 10px;
+  text-align: center;
+  margin: 0 auto;
+  color: white;
+  padding: 20px 0;
+  box-shadow: 5px 5px black;
+}

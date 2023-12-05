@@ -138,8 +138,9 @@ router.get('/logout', (req, res, next) => {
 router.get('/profile', (req, res, next) => {
   if (req.user) {
     res.render('profile');
+    // res.render('profile', { user: req.user }); // 이렇게 넘기는 것도 가능하지만 전역변수로 만들어서 ejs에서 직접 갖다 쓸 수 있음
   } else {
-    res.send('<h2>먼저 로그인 해주세요</h2>');
+    res.redirect('/user/login');
   }
 });
 

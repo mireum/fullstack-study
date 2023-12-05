@@ -4,8 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="/css/main.css">
+
 </head>
 <body>
+  <%- include('nav') %>
   
+  <img class="profile"  src="https://avatars.githubusercontent.com/u/143495267?v=4" alt="프사">
+
+  <h3 class="title"><%= user.username %></h3>
+
+  <p class="content">
+    <span>Full Stack</span> 
+    Developer</p>
+
+  <div class="box">
+    안녕하세요 <%= user.username %>입니다.<br>
+    현재 웹 개발자 수업을 수강 중 입니다.
+  </div>
 </body>
 </html>
