@@ -17,14 +17,15 @@ module.exports = () => {
     passReqToCallback: false,
   }, async (username, password, done) => {  // passport.authenticate('local')() 사용 시 호출되는 콜백 함수
     try {
-      // 사용자가 입력한 아이디(username), 비번(password)을 검사하는 코드를 적는 곳
+      // 사용자가 입력한 아이디(username), 비번(password)을 매개변수로 가져와서 검사하는 코드를 적는 곳
       const existUser = await db.collection('user').findOne({ username });
       if (!existUser) { // 일치하는 아이디가 없으면
-        // done이라는 매개변수로 들어오는 함수가 passport.authenticate('local') 뒤의 함수
+        // done이라는 매개변수로 들어오는 함수가 passport.authenticate('local') 뒤의 함수!!
         return done(null, false, { message: '가입되지 않은 회원입니다' });  // 회원 인증 실패 시 두번째 인자값에 false
       }
 
       // 해싱할 비번과(사용자가 입력한 비번)과 해싱된 비번(DB에 저장된 비번)을 비교
+      // compare가 자동으로 password를 해싱해서 둘이 비교해준다
       const result = await bcrypt.compare(password, existUser.password);
       if (!result) {  // 비번이 틀리면
         return done(null, false, { message: '비밀번호가 일치하지 않습니다.' });

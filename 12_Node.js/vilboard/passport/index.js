@@ -8,6 +8,7 @@ const db = client.db('board');  // board 데이터베이스에 연결. 없으면
 module.exports = () => {
   // req.login()으로 로그인 시 자동으로 실행되며, 세션 객체(req.session)에 어떤 데이터를 저장할지 정함
   // 즉, 세션 만들기가 자동 실행되고 쿠키도 알아서 보내줌
+  // user는 user.js에서 res.login()에서 줌
   passport.serializeUser((user, done) => {
     console.log(user);  // 로그인 중인 사용자 정보
 
@@ -17,6 +18,7 @@ module.exports = () => {
     // 세션의 용량이 커지고 데이터 일관성에 문제가 발생하므로 아이디만 저장
     done(null, user._id); // _id만 저장
     // done(null, { id: user._id, username: user.username }); // 이런 식으로 저장 가능, 참고
+    // 이게 끝나면 다시 res.login()의 콜백함수로 돌아감
   });
 
   // 각 요청마다 실행되며, passport.session 미들웨어가 이 메서드를 호출
