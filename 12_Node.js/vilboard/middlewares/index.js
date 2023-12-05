@@ -13,3 +13,40 @@ const isLoggedIn = (req, res, next) => {
     res.status(401).send('로그인 필요');  // 401(비인증) 또는 403(미승인) 사용
   }
 };
+
+
+// 로그인 하지 않은 사람에게만 보여야 하면 isNotLoggedIn 미들웨어 사용
+// 예: 회원 가입, 로그인 등
+const isNotLoggedIn = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    next();
+  } else {
+    const message = encodeURIComponent('로그인한 상태입니다.');
+    res.redirect(`/?error=${message}`);
+  }
+};
+
+// Quiz: 회원 가입 및 로그인 시 사용자가 아이디, 비번을 전송하고 있는데
+// 아이디와 비번이 비어있으면 '내용을 입력하세요' 라고 응답해주는 미들웨어 만들어보기
+const emptyInput = (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username) {
+    // res.send('아이디를 입력하세요');
+    res.json({
+      flag: false,
+      message: '아이디를 입력하세요'
+    });
+  } else if (!password) {
+    // res.send('비밀번호를 입력하세요');
+    res.json({
+      flag: false,
+      message: '비밀번호를 입력하세요'
+    });
+  }
+};
+
+module.exports = {
+  isLoggedIn,
+  isNotLoggedIn,
+  emptyInput
+};

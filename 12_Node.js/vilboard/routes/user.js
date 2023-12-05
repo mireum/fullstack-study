@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const { client } = require('../database/index');
+const { isNotLoggedIn, isLoggedIn, emptyInput } = require('../middlewares');
 const db = client.db('board');  // board 데이터베이스에 연결. 없으면 생성됨
 
 const router = express.Router();
@@ -26,7 +27,7 @@ const router = express.Router();
 
 
 // GET /user/register 라우터
-router.get('/register', (req, res) => {
+router.get('/register', isNotLoggedIn, (req, res) => {
   res.render('register');
 });
 
@@ -38,7 +39,7 @@ router.get('/register', (req, res) => {
 // POST /user/register 라우터 작성
 
 
-router.post('/register', async (req, res) => {
+router.post('/register', emptyInput, isNotLoggedIn, async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -83,12 +84,12 @@ router.post('/register', async (req, res) => {
 
 // 로그인 로그아웃 라우터 작성
 // GET /user/login
-router.get('/login', (req, res) => {
+router.get('/login', isNotLoggedIn, (req, res) => {
   res.render('login');
 });
 
 // POST /user/login
-router.post('/login', (req, res, next) => {
+router.post('/login', emptyInput, isNotLoggedIn, (req, res, next) => {
   // 전송 받은 아이디, 비번이 DB에 있는지 확인하고 있으면 세션 만들기
   // 이 과정을 직접 만들기보다 passport의 미들웨어를 이용하여 로컬 로그인 전략(localStrategy.js)을 수행
   passport.authenticate('local', (authError, user, info) => {  // 전략이 성공하거나 실패하면 실행될 콜백 함수(이게 done)
@@ -113,7 +114,7 @@ router.post('/login', (req, res, next) => {
 
 // GET /user/logout
 // 우발적, 악의적 로그아웃을 방지하려면 GET 요청 대신 POST 또는 DELETE 요청 사용하면 좋음
-router.get('/logout', (req, res, next) => {
+router.get('/logout', isLoggedIn, (req, res, next) => {
   // logout: req.user 객체와 req.session 객체를 제거
   req.logout((logoutError) => {  // 두 객체 제거 후 콜백 함수가 실행됨
     if (logoutError) return next(logoutError);
@@ -135,13 +136,16 @@ router.get('/logout', (req, res, next) => {
 // 프로필 페이지 레이아웃은 자유롭게 만드는데 현재 로그인된 사용자의 아이디는 표기할 것
 // GET /user/profile
 
-router.get('/profile', (req, res, next) => {
-  if (req.user) {
-    res.render('profile');
-    // res.render('profile', { user: req.user }); // 이렇게 넘기는 것도 가능하지만 전역변수로 만들어서 ejs에서 직접 갖다 쓸 수 있음
-  } else {
-    res.redirect('/user/login');
-  }
+router.get('/profile', isLoggedIn, (req, res, next) => {
+  res.render('profile');
+
+  // 미들웨어로 검사하면 됨
+  // if (req.user) {
+  //   res.render('profile');
+  //   // res.render('profile', { user: req.user }); // 이렇게 넘기는 것도 가능하지만 전역변수로 만들어서 ejs에서 직접 갖다 쓸 수 있음
+  // } else {
+  //   res.redirect('/user/login');
+  // }
 });
 
 module.exports = router;

@@ -3,11 +3,12 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
   const username = e.target.username.value;
   const password = e.target.password.value;
 
-  if (!username) {
-    return alert('제목을 입력하세요');
-  } else if (!password) {
-    return alert('비밀번호를 입력하세요');
-  }
+  // 미들웨어 장착시킬 것이므로 주석
+  // if (!username) {
+  //   return alert('제목을 입력하세요');
+  // } else if (!password) {
+  //   return alert('비밀번호를 입력하세요');
+  // }
   try {
     const result = await axios.post(`/user/register`, { username, password });
     console.log(result); 
@@ -15,7 +16,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     if (!result.data.flag) {
       return alert(result.data.message);
     }
-    // location.href = '/';
+    location.href = '/';
   } catch (err) {
     console.error(err);
   }

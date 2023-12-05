@@ -8,6 +8,8 @@ const router = express.Router();
 // GET / 라우터
 router.get('/', (req, res) => {
   res.render('main.ejs');
+
+  // if (req.query.error) alert(error);
 });
 
 // GET /insert 라우터

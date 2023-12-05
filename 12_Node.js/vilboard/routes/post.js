@@ -1,5 +1,6 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
+const { isLoggedIn } = require('../middlewares')
 const { client } = require('../database/index');
 const db = client.db('board');  // board 데이터베이스에 연결. 없으면 생성됨
 
@@ -32,7 +33,7 @@ const router = express.Router();
 
 
 // GET /post/write 라우터
-router.get('/write', (req, res) => {
+router.get('/write', isLoggedIn, (req, res) => {
   res.render('write');
 
   // Quiz
