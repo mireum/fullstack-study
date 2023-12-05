@@ -39,7 +39,7 @@ router.get('/register', isNotLoggedIn, (req, res) => {
 // POST /user/register 라우터 작성
 
 
-router.post('/register', emptyInput, isNotLoggedIn, async (req, res) => {
+router.post('/register', isNotLoggedIn, emptyInput, async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -89,7 +89,7 @@ router.get('/login', isNotLoggedIn, (req, res) => {
 });
 
 // POST /user/login
-router.post('/login', emptyInput, isNotLoggedIn, (req, res, next) => {
+router.post('/login', isNotLoggedIn, emptyInput, (req, res, next) => {
   // 전송 받은 아이디, 비번이 DB에 있는지 확인하고 있으면 세션 만들기
   // 이 과정을 직접 만들기보다 passport의 미들웨어를 이용하여 로컬 로그인 전략(localStrategy.js)을 수행
   passport.authenticate('local', (authError, user, info) => {  // 전략이 성공하거나 실패하면 실행될 콜백 함수(이게 done)

@@ -16,7 +16,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     if (!result.data.flag) {
       return alert(result.data.message);
     }
-    location.href = '/';
+    // location.href = '/';
   } catch (err) {
     console.error(err);
   }

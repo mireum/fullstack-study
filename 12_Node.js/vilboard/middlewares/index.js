@@ -31,17 +31,17 @@ const isNotLoggedIn = (req, res, next) => {
 const emptyInput = (req, res, next) => {
   const { username, password } = req.body;
   if (!username) {
-    // res.send('아이디를 입력하세요');
     res.json({
       flag: false,
       message: '아이디를 입력하세요'
     });
   } else if (!password) {
-    // res.send('비밀번호를 입력하세요');
     res.json({
       flag: false,
       message: '비밀번호를 입력하세요'
-    });
+    })
+  } else {
+    next();
   }
 };
 
