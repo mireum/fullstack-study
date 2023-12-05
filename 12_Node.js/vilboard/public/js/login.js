@@ -14,6 +14,5 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
   } catch (err) {
     console.error(err);
   }
-  e.target.username.value='';
-  e.target.password.value='';
+
 });

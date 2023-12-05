@@ -4,18 +4,14 @@ document.getElementById('write-form').addEventListener('submit', async (e) => {
   
   const title = e.target.title.value;
   const content = e.target.content.value;
-  const img = e.target.img.files[0];
-  const formData = new FormData();
+  const img = e.target.img.files[0];  // upload.single('img')이므로 img로 작명!!
+
+  const formData = new FormData();  //FormData는 multipart/form-data 타입
 
   formData.append('title', title);
   formData.append('content', content);
   formData.append('img', img);
 
-
-  // 백에서 검사함
-  // if (!title) {
-  //   return alert('제목을 입력하세요');
-  // }
   try {
     const result = await axios.post('/post/write',  formData );
     console.log(result.data); // 브라우저 콘솔
