@@ -1,10 +1,43 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const { S3Client } = require('@aws-sdk/client-s3');
+
 const { isLoggedIn } = require('../middlewares')
 const { client } = require('../database/index');
 const db = client.db('board');  // board 데이터베이스에 연결. 없으면 생성됨
 
 const router = express.Router();
+
+// multer, S3, aws-sdk 설정
+// 발급받은 액세스 키랑 비밀키 기입(털리면 안되니까 .env에 저장)
+// region: S3 리젼(데이터 센터) 설정하는 부분인데 서울이면 'ap-northeast-2 기입
+const s3 = new S3Client({
+  credentials:{
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY
+  },
+  region: 'ap-northeast-2'
+});
+
+// s3 클라이언트
+// 버킷 이름 설정
+// 저장할 파일명도 바꿀 수 있음
+// 파일명을 안 겹치게 하려면 랜덤 문자(uuid)를 넣던가 현재 시간(timestamp)을 섞거나
+// 이렇게 하는 이유? 파일 이름이 중복되면 덮어씌우기 때문에 
+const upload = multer({
+  storage: multerS3({
+    s3,
+    bucket: 'buckets3awaws',  // 만든 버킷 이름
+    key(req, file, cb) {  // 원본 파일명을 쓰고 싶으면 file 안에 들어있음
+      cb(null, `original/${Date.now()}_${file.originalname}`); // 업로드 시 파일명
+    }
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 } // 파일 사이즈(바이트 단위): 5MB로 제한(그 이상 업로드 시 400번대 에러 발생)
+});
+// 여기까지 세팅하면 upload.single('input의 name속성') 미들웨어 사용으로 S3에 업로드 가능
+
 
 // 글 목록 기능 만들기
 // GET /post 라우터
@@ -49,7 +82,12 @@ router.get('/write', isLoggedIn, (req, res) => {
 });
 
 // POST /post/write 라우터
-router.post('/write', (req, res, next) => {
+// 이미지 파일 업로드를 위한 미들웨어 장착
+// name='img'인 파일이 서버로 전송되면 S3에 자동으로 업로드 해줌
+// 업로드 완료 시 이미지의 URL도 생성해줌(req.file에 들어있음)
+router.post('/write', isLoggedIn, upload.single('img'), async (req, res, next) => {
+  console.log(req.file);  // 업로드 후 S3 객체 정보
+  
   console.log(req.body);  
   // 클라이언트가 보낸 데이터 -> 요청 본문에 담김 -> body-parser가 분석해서 req.body에 객체로 저장
 
