@@ -38,7 +38,6 @@ router.get('/register', (req, res) => {
 // POST /user/register 라우터 작성
 
 
-
 router.post('/register', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -111,5 +110,32 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
+
+// GET /user/logout
+router.get('/logout', (req, res, next) => {
+  // logout: req.user 객체와 req.session 객체를 제거
+  req.logout((logoutError) => {  // 두 객체 제거 후 콜백 함수가 실행됨
+    if (logoutError) return next(logoutError);
+    res.redirect('/');  // 로그아웃 완료 시 실행할 코드
+  });
+});
+
+// (정리) 로그인 기능 요약 정리
+// 1. 로그인 성공하면 세션 만들고 세션 ID가 담긴 쿠키(세션 쿠키)를 사용자 브라우저에 저장
+// => req.login() -> passport.serializeUser() 쓰면 자동 처리
+// 2. 로그인 한 사용자가 서버에 요청을 보낼 때마다 쿠키가 같이 제출되는데 확인
+// => passport.deserializeUser() 쓰면 자동 처리
+// 3. 모든 라우터(API)에서 req.user 라고 쓰면 현재 로그인된 사용자 정보를 사용 가능
+
+
+// Quiz
+// 내 정보 페이지 만들기
+// 프로필 페이지는 로그인한 사람만 방문 가능
+// 프로필 페이지 레이아웃은 자유롭게 만드는데 현재 로그인된 사용자의 아이디는 표기할 것
+// GET /user/profile
+
+router.get('/profile', (req, res, next) => {
+  res.render('profile');
+});
 
 module.exports = router;

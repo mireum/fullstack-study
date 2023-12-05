@@ -58,7 +58,7 @@ app.use(passport.session());  // req.session 객체에 passport 정보를 저장
 // => 템플릿 엔진에서 user 객체를 통해 로그인한 사용자 정보에 접근할 수 있음
 // views에서 쓸 수 있게 미들웨어로 등록
 app.use((req, res, next) => {
-  res.locals.user = req.user; // deserializeUser에서 req.user에 저장했음
+  res.locals.user = req.user; // deserializeUser에서 req.user에 저장했음, 전역변수로 만듦
   next();
 });
 

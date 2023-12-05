@@ -21,7 +21,11 @@
     <input type="text" id="title" name="title">
     <label for="content">내용</label>
     <input type="text" id="content" name="content">
-    <button type="submit">등록</button>
+    <% if (user) { %>
+      <button type="submit">등록</button>
+    <% } else { %>
+      <p>>먼저 로그인 해주세요<</p>
+     <% } %> 
   </form>
 
 
