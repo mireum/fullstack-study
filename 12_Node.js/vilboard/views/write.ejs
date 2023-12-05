@@ -21,6 +21,13 @@
     <input type="text" id="title" name="title">
     <label for="content">내용</label>
     <input type="text" id="content" name="content">
+
+    <!-- accept 속성이 이미지 파일을 강제하는 것은 아님,
+      이미지 파일이 맞는지는 
+    -->
+    <label for="img">이미지</label>
+    <input type="file" id="img" name="img" accept="image/*">
+
     <% if (user) { %>
       <button type="submit">등록</button>
     <% } else { %>

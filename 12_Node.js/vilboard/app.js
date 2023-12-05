@@ -93,3 +93,11 @@ app.listen(app.get('port'), () => {
 // 클라우드 서비스: AWS, GCP, MS Azure, 네이버 클라우드 등
 // 참고로 AWS는 첫 가입 시 카드 등록까지 마치면 1년 동안 프리 티어(사용량이 무제한은 아님, 요금 부과될 수 있음)
 
+// 1) 글 작성 페이지에 file input 하나 만듦
+// 2) 서버는 전송된 이미지를 S3에 업로드
+// npm install multer multer-s3 @aws-sdk/client-s3
+// multer: 전송된 파일을 다룰 수 있음, mmultipart/form-data를 파싱 해줌
+// multer-s3: 파일을 S3에 업로드할 수 있도록 도와줌
+// @aws-sdk/client-s3: Node.js 환경에서 AWS S3를 쓸 때 필요
+// 3) 업로드 완료 시 URL이 하나 생성되는데 DB에 글과 함께 저장
+// 4) 나중에 이미지 필요할 때 DB에 저장한 URL 꺼내쓰기
