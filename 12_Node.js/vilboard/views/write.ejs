@@ -13,7 +13,7 @@
     1) action=/URL
     2) method=GET, POST만 가능
   -->
-  <form id="write-form" class="form-box" action="/post/write" method="post" enctype="multipart/form-data">
+  <form id="write-form" class="form-box" action="/post/write" method="post">
     <h4>글쓰기</h4>
     <!-- input의 데이터를 보내는 방법:
       name 속성 필수로 작성(작명한 이름으로 서버에 데이터 전달) req.body.~ -->
@@ -29,18 +29,14 @@
     <label for="img">이미지</label>
     <input type="file" id="img" name="img" accept="image/*">
 
-    <% if (user) { %>
-      <button type="submit">등록</button>
-    <% } else { %>
-      <p>>먼저 로그인 해주세요<</p>
-     <% } %> 
+    <button type="submit">등록</button>
   </form>
 
 
   <!-- Quiz: write.js 만들어서 글 작성 기능을 Ajax 요청으로 바꿔보기 -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <!-- static 쓴 app.use에 걸려서 js에 write.js 파일이 있으면 요청됨 -->
-  <!-- <script src="/js/write.js"></script> -->
+  <script src="/js/write.js"></script>
 </body>
 
 </html>

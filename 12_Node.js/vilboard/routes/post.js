@@ -86,8 +86,9 @@ router.get('/write', isLoggedIn, (req, res) => {
 // name='img'인 파일이 서버로 전송되면 S3에 자동으로 업로드 해줌
 // 업로드 완료 시 이미지의 URL도 생성해줌(req.file에 들어있음)
 router.post('/write', isLoggedIn, upload.single('img'), async (req, res, next) => {
-  console.log(req.file);  // 업로드 후 S3 객체 정보
-  
+  // console.log(req.file);  // 업로드 후 S3 객체 정보
+  // console.log(req.file.location); // 이미지의 URL 정보. img태그 src 속성에 넣으면 동작
+ 
   console.log(req.body);  
   // 클라이언트가 보낸 데이터 -> 요청 본문에 담김 -> body-parser가 분석해서 req.body에 객체로 저장
 
@@ -105,7 +106,11 @@ router.post('/write', isLoggedIn, upload.single('img'), async (req, res, next) =
       });
     } else {
       // Quiz: DB에 저장하기
-      db.collection('post').insertOne({ title, content });
+      db.collection('post').insertOne({ 
+        title, 
+        content,
+        imgUrl: req.file.location// 이미지 URL을 글과 함께 저장
+      });
   
       // 동기식 요청이면 다른 페이지로 이동
       // res.redirect('/post');
