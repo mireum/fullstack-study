@@ -112,6 +112,7 @@ router.post('/login', (req, res, next) => {
 
 
 // GET /user/logout
+// 우발적, 악의적 로그아웃을 방지하려면 GET 요청 대신 POST 또는 DELETE 요청 사용하면 좋음
 router.get('/logout', (req, res, next) => {
   // logout: req.user 객체와 req.session 객체를 제거
   req.logout((logoutError) => {  // 두 객체 제거 후 콜백 함수가 실행됨
@@ -135,7 +136,11 @@ router.get('/logout', (req, res, next) => {
 // GET /user/profile
 
 router.get('/profile', (req, res, next) => {
-  res.render('profile');
+  if (req.user) {
+    res.render('profile');
+  } else {
+    res.send('<h2>먼저 로그인 해주세요</h2>');
+  }
 });
 
 module.exports = router;
