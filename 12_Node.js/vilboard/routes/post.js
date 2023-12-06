@@ -319,12 +319,25 @@ router.get('/search', async (req, res) => {
   // const posts = await db.collection('post').find({ title: keyword }).toArray();
 
   // 검색어가 포함된 document를 찾으려면 => 정규표현식(정규식) 사용
-  const posts = await db.collection('post').find({ title: { $regex: keyword } }).toArray();
+  // const posts = await db.collection('post').find({ title: { $regex: keyword } }).toArray();
   // 문제점: document가 매우 많을 경우 find()를 써서 _id가 아닌 다른 기준으로 docuemnt를 찾는건 느려터짐
   // 예: document가 1억개 있으면 1억개 다 뒤져봄
   // 해결책: 데이터베이스에 index를 만들어두면 됨
 
-  // console.log(posts);
+  // index를 사용한 검색
+  // $text: text index를 갖다 쓰겠다는 의미
+  // 
+  const posts = await db.collection('post').find({ $text: { $search: keyword } }).toArray();
+
+  // (참고) find() 성능 평가
+  // explain()
+  // const result1 = await db.collection('post').find({ title: keyword }).explain('executionStats');
+  // const result2 = await db.collection('post').find({ $text: { $search: keyword } }).explain('executionStats');
+  // console.log(result1);
+  // console.log(result2);
+
+
+
   res.render('search', { posts });
 });
 
