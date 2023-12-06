@@ -304,4 +304,11 @@ router.get('/', async (req, res) => {
 });
 
 
+// 검색 기능 만들기
+// 1) 검색 UI(input과 버튼)에서 서버로 검색어 전송
+// 2) 서버는 그 검색어가 포함된 document를 찾음
+// 3) 그 결과를 ejs에 넣어서 보내줌
+
+
+
 module.exports = router;

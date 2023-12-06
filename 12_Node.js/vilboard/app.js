@@ -14,6 +14,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
+const MongoStore = require('connect-mongo');
 
 dotenv.config();
 
@@ -44,8 +45,12 @@ app.use(session({
   cookie: {
     httpOnly: true,
     secure: false,  // 개발단계에선 false. 기본이 false
+    // 만료기한 설정(expires, maxage) 안 하면 기본이 session
   },
-  name: 'session-cookie',
+  store: MongoStore.create({
+    mongoUrl: `mongodb+srv://${process.env.MONGO_ID}:${process.env.MONGO_PASSWORD}@cluster0.hqitiuj.mongodb.net/`,
+    dbName: 'board',
+  })
 }));
 
 // passport 미들웨어 설정
