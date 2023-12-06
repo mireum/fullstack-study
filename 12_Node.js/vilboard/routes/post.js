@@ -361,6 +361,8 @@ router.get('/search', async (req, res) => {
   //   { $project: { title: 1 } },  // 조회할 필드 선택(1: 추가, 0: 제외)
   // ]).toArray();
 
+
+  // 123 버튼으로 페이지네이션pagenation
   const query = {
     $search: {
       index: 'title_index',
@@ -377,14 +379,29 @@ router.get('/search', async (req, res) => {
     { $limit: postsPerPage },
   ]).toArray();
 
-  const result = await db.collection('post').aggregate([
-    query, 
-    { $count: "searchCount" }
-  ]).toArray();
-  console.log(result);
-  const totalCount = result[0].searchCount;
-  const numOfPage = Math.ceil(totalCount / postsPerPage); // 페이지 수
+  // const result = await db.collection('post').aggregate([
+  //   query, 
+  //   { $count: "searchCount" }
+  // ]).toArray();
+  // console.log(result);
+  // const totalCount = result[0].searchCount;
+  // const numOfPage = Math.ceil(totalCount / postsPerPage); // 페이지 수
   
+
+  let posts;
+  if (req.query.nextId) {
+    posts = await db.collection('post')
+      .find({ _id: { $gt: new ObjectId(req.query.nextId) } }) 
+      .limit(5).toArray();
+  } else {
+    posts = await db.collection('post').aggregate([
+      query,
+      { $skip: (currentPage - 1) * postsPerPage },
+      { $limit: postsPerPage },
+    ]).toArray();
+  }
+
+
   res.render('search', { posts, numOfPage, currentPage, keyword });
 });
 
