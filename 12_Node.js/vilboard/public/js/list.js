@@ -36,6 +36,4 @@ document.querySelectorAll('.delete').forEach((deleteBtn, index) => {
 document.querySelector('.search-btn').addEventListener('click', async (e) => {
   const keyword = document.querySelector('.search').value;
   location.href = `/post/search?keyword=${keyword}`;
-  
-
 });
