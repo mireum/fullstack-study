@@ -314,20 +314,20 @@ router.get('/search', async (req, res) => {
   console.log(req.query.keyword);
 
   const { keyword } = req.query;
-  // 서버는 그 검색어와 정확히 일치하는 document를 찾음
+  // 1. 서버는 그 검색어와 정확히 일치하는 document를 찾음
   // 배열 목록을 얻으려면 toArray() 써야 함
   // const posts = await db.collection('post').find({ title: keyword }).toArray();
 
-  // 검색어가 포함된 document를 찾으려면 => 정규표현식(정규식) 사용
+  // 2. 검색어가 포함된 document를 찾으려면 => 정규표현식(정규식) 사용
   // const posts = await db.collection('post').find({ title: { $regex: keyword } }).toArray();
   // 문제점: document가 매우 많을 경우 find()를 써서 _id가 아닌 다른 기준으로 docuemnt를 찾는건 느려터짐
   // 예: document가 1억개 있으면 1억개 다 뒤져봄
   // 해결책: 데이터베이스에 index를 만들어두면 됨
 
-  // index를 사용한 검색
+  // 3. index를 사용한 검색
   // $text: text index를 갖다 쓰겠다는 의미
-  // 
-  const posts = await db.collection('post').find({ $text: { $search: keyword } }).toArray();
+  // $search: 검색을 위한 키워드
+  // const posts = await db.collection('post').find({ $text: { $search: keyword } }).toArray();
 
   // (참고) find() 성능 평가
   // explain()
@@ -336,9 +336,70 @@ router.get('/search', async (req, res) => {
   // console.log(result1);
   // console.log(result2);
 
+  // 4. search index를 사용한 검색
+  // find({ 조건 }) -> aggregate([{ 조건1 }, { 조건2 }])
+  // 장점: 여러 상세한 조건을 배열로 넣을 수 있음 => pipeline이라고 부름
 
+  const totalCount = await db.collection('post').aggregate([
+    {
+      $search: {  // search index 이용해서 full-text search 수행
+        index: 'title_index',  // 사용할 인덱스 이름
+        text: {
+          query: keyword, // 검색어
+          path: 'title'   // 검색할 필드 이름
+        }
+      }
+    },  // 기본적으로 검색어와 관련도 점수가 높은 순으로 정렬됨
+    // aggregate에 쓸 수 있는 연산자(find에서는 메서드가 지원됨)
+    // { $sort: { _id: 1 } },  // 검색 결과 정렬(1: 오름차순, -1: 내림차순)
+    // { $skip: 5 },           // 건너뛰기
+    // { $limit: 5 },          // 결과 수 제한
+    { $project: { title: 1 } }  // 조회할 필드 선택(1: 추가, 0: 제외)
+  ]).toArray();
+  const postsPerPage = 5; // 페이지 당 콘텐츠 개수
+  const numOfPage = Math.ceil(totalCount / postsPerPage); // 페이지 수
+  const currentPage = req.query.page || 1;  // 현재 페이지
 
-  res.render('search', { posts });
+  let posts;
+  if (req.query.nextId) {
+    posts = await db.collection('post').aggregate([
+      {
+        $search: {  
+          index: 'title_index', 
+          text: {
+            query: keyword, 
+            path: 'title'   
+          }
+        }
+      },  
+      { $sort: { _id: 1 } },  
+      { $skip: 5 * numOfPage },      
+      { $limit: 5 },       
+      { $project: { title: 1 } }  
+    ])
+      .limit(5).toArray();
+  } else {
+    posts = await db.collection('post').aggregate().limit(5).toArray();  // 처음 5개
+  }
+
+  // const posts = await db.collection('post').aggregate([
+  //   {
+  //     $search: {  // search index 이용해서 full-text search 수행
+  //       index: 'title_index',  // 사용할 인덱스 이름
+  //       text: {
+  //         query: keyword, // 검색어
+  //         path: 'title'   // 검색할 필드 이름
+  //       }
+  //     }
+  //   },  // 기본적으로 검색어와 관련도 점수가 높은 순으로 정렬됨
+  //   // aggregate에 쓸 수 있는 연산자(find에서는 메서드가 지원됨)
+  //   // { $sort: { _id: 1 } },  // 검색 결과 정렬(1: 오름차순, -1: 내림차순)
+  //   // { $skip: 5 },           // 건너뛰기
+  //   { $limit: 5 },          // 결과 수 제한
+  //   { $project: { title: 1 } }  // 조회할 필드 선택(1: 추가, 0: 제외)
+  // ]).toArray();
+
+  res.render('search', { posts, numOfPage, currentPage  });
 });
 
 
