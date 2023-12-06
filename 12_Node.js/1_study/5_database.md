@@ -71,7 +71,12 @@ Allow access from anywhere를 누르거나 0.0.0.0/0 을 추가하기
 8. (참고)
 - MongoDB Document
 https://www.mongodb.com/docs/
-- MongoDB 연산자
+- MongoDB와 몽구스 시작하기
+https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/
+- Mongoose 사용하기
+https://velog.io/@ckstn0777/Mongoose-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+
+9. MongoDB 연산자
 https://www.mongodb.com/docs/v7.0/reference/operator/
 
 - 업데이트 연산자
@@ -84,15 +89,35 @@ $min(기존값보다 적을 때만 변경)
 $rename(key값 이름 변경) 등
 
 - 동시에 여러 document 수정은 updateMany()
-like 항목이 10 이상인 document 전부 수정? 
+like 항목이 10 초과인 document 전부 수정? 
 비교 연산자: &gt(초과), $gte(이상), &lt(미만), $lte(이하), $ne(not equal)
-await db.collection('post').updateMany({ like: { $gte: 10 } }, { 
+await db.collection('post').updateMany({ like: { $gt: 10 } }, { 
   $set: {
     수정할 내용
   } 
 });
 
-- MongoDB와 몽구스 시작하기
-https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/
-- Mongoose 사용하기
-https://velog.io/@ckstn0777/Mongoose-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+10. DB가 데이터를 찾는 방법
+title이 '제발'이랑 일치하는 document를 가져오라고 find()를 쓰면
+컬렉션의 모든 document를 하나하나 전부 다 검사함
+document에 뭐가 적혀있는지 모르기 때문에 당연히 모든 document를 까볼 수 밖에 없음
+그럼 document가 많아질 수록 점점 느리게 동작함
+
+근데 다행히 이걸 해결할 수 있는 방법도 있는데 
+index라는걸 미리 만들어두면 document가 1억개 있어도 원하는 것만 빠르게 찾아올 수 있음
+
+11. index 동작원리
+예시: 소주 뚜껑 업 & 다운 게임
+1부터 100까지 뚜껑 안쪽에 적힌 숫자를 맞춰야 할 때
+어떻게 질문해야하죠?
+
+절반씩 잘라가며 질문 => 이렇게 찾는 걸 전문용어로 binery search라고 부름
+
+그래서 거의 모든 DB들은 기본적으로 binery search 또는
+그거랑 비슷한 알고리즘으로 데이터를 빠르게 찾아주는데
+이런 검색 알고리즘을 쓰려면 전제 조건이 있음
+데이터가 미리 정렬이 되어있어야 함
+그래야 50? 이라고 물어보고 필요 없는 절반의 데이터를 치울 수 있음
+
+컬렉션에 있던 document 들을 복사해서 미리 정렬해서 두면 되는데
+이런 정렬된 컬렉션 복사본을 index라고 부름

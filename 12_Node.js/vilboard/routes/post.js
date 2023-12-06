@@ -137,8 +137,8 @@ router.post('/write', isLoggedIn, upload.single('img'), async (req, res, next) =
 // 2) { _id: 글id } 조건으로 글을 DB에서 찾아서
 // 3) 해당 글을 ejs 파일에 꽂아서 보내줌
 
-// GET /post/:id 라우터
-router.get('/:id', async (req, res, next) => {
+// GET /post/detail/:id 라우터
+router.get('/detail/:id', async (req, res, next) => {
   // res.render('detail');
 
   // DB에서 글 가져오기
@@ -309,6 +309,24 @@ router.get('/', async (req, res) => {
 // 2) 서버는 그 검색어가 포함된 document를 찾음
 // 3) 그 결과를 ejs에 넣어서 보내줌
 
+// GET /post/search 라우터
+router.get('/search', async (req, res) => {
+  console.log(req.query.keyword);
+
+  const { keyword } = req.query;
+  // 서버는 그 검색어와 정확히 일치하는 document를 찾음
+  // 배열 목록을 얻으려면 toArray() 써야 함
+  // const posts = await db.collection('post').find({ title: keyword }).toArray();
+
+  // 검색어가 포함된 document를 찾으려면 => 정규표현식(정규식) 사용
+  const posts = await db.collection('post').find({ title: { $regex: keyword } }).toArray();
+  // 문제점: document가 매우 많을 경우 find()를 써서 _id가 아닌 다른 기준으로 docuemnt를 찾는건 느려터짐
+  // 예: document가 1억개 있으면 1억개 다 뒤져봄
+  // 해결책: 데이터베이스에 index를 만들어두면 됨
+
+  // console.log(posts);
+  res.render('search', { posts });
+});
 
 
 module.exports = router;
