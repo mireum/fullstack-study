@@ -260,14 +260,16 @@ router.delete('/:id', async (req, res) => {
       _id: new ObjectId(req.params.id),
       user: new ObjectId(req.user._id)  // 본인이 쓴 글만 삭제되도록 조건 추가
     });
-    if (result.deletedCount == 0) {
+    const user = await db.collection('user').findOne({ _id: new ObjectId(req.user._id) });
+
+    if (result.deletedCount === 0) {
       alert('삭제 실패');
     };
-    res.json({
-      flag: true,
-      message: '삭제 성공'
-    });
-    // res.render('list', { _id });
+    // res.json({
+    //   flag: true,
+    //   message: '삭제 성공'
+    // });
+    res.render('list', { user });
     // 새로고침은 list.js에서 구현함
   } catch (err) {
     console.error(err);

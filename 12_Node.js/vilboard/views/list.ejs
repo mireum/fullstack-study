@@ -62,7 +62,7 @@
 
           <!-- 글 삭제 버튼 -->
           <!-- data- : 사용자 정의 속성, HTML에 데이터 저장 시 주로 사용 -->
-          <% if (posts[i].user == user._id) { %>
+          <% if (posts[i].username == user.username) { %>
             <span class="delete cursor-pointer" data-id="<%= posts[i]._id %>">🧨</span>
           <% } %>
         </h4>
