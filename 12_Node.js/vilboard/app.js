@@ -15,6 +15,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const MongoStore = require('connect-mongo');
+const cors = require('cors');
 
 dotenv.config();
 
@@ -32,6 +33,14 @@ passportConfig(); // passport/index.js에서 내보낸 함수 = passport 설정 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');  // view engine의 확장자 지정
 connect();  // 몽고디비에 연결
+
+// cors 설정
+// 응답에 'Access-Control-Allow-Origin 헤더가 자동으로 추가됨
+app.use(cors({
+  credentials: true // true여야 다른 도메인 간에 쿠키가 공유됨
+}));
+// (참고) axios에서도 도메인이 다른데, 쿠키를 공유해야 하는 경우
+// withCredentials: true 옵션을 줘서 요청을 보내야 함
 
 app.use(morgan('dev'));
 app.use('/', express.static(path.join(__dirname, 'public'))); // '/' 생략 가능

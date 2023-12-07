@@ -22,7 +22,11 @@ function ApiRequest(props) {
   // 2. async/awiat 방식
   const handleReqerstByIdAsync = async (id) => {
     try {
-      const response = await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`);
+      // const response = await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`);
+      // cors 테스트
+      const response = await axios.get(`http://localhost:8088/cors`, {
+        withCredentials: true // 쿠키 공유하기 위한 속성
+      });
       setData(response.data);
     } catch(error) {
       console.error(error);
