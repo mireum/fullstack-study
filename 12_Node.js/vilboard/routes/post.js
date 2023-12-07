@@ -96,7 +96,18 @@ router.post('/write', isLoggedIn, upload.single('img'), async (req, res, next) =
   try {
     const title = req.body.title;
     const content = req.body.content;
+    const user = req.user._id;
+    const username = req.user.username;
 
+    const postObject = {
+      title,
+      content,
+      user,
+      username
+    };
+    if (req.file && req.file.location) {
+      postObject.imgUrl = req.file.location;
+    };
     // 유효성 검사 추가하기
     // 제목이 비어있으면 저장 안함
     if (!title) { 
@@ -105,12 +116,29 @@ router.post('/write', isLoggedIn, upload.single('img'), async (req, res, next) =
         message: '제목을 입력하세요'
       });
     } else {
+      db.collection('post').insertOne(postObject);
+
       // Quiz: DB에 저장하기
-      db.collection('post').insertOne({ 
-        title, 
-        content,
-        imgUrl: req.file.location// 이미지 URL을 글과 함께 저장
-      });
+      // db.collection('post').insertOne({ 
+      //   title, 
+      //   content,
+      //   imgUrl: req.file.location, // 이미지 URL을 글과 함께 저장
+      //   // 글 등록 시 작성자 정보 넣기
+      //   user: req.user._id,
+      //   username: req.user.username,
+      //   // username(수정 가능한 정보라고 가정) 넣었을 때 문제점:
+      //   // 해당 유저가 글을 여러 개 작성했는데 username이 바뀌면? 전부 찾아서 수정해야 함
+      //   // 관계형DB: 사용자의 _id만 적어두고 JOIN을 써서 사용자의 정보를 가져와 합침
+      //   // 비관계형DB: 그냥 사용자 정보를 그대로 넣는게 관습임, 장점은 다른 컬렉션을 찾아볼 필요 없음
+      //   // 단점은 바뀐 정보 전부 찾아서 업데이트 하거나 업데이트 안됐으면 정보가 부정확할 수 있음
+
+      //   // (비관계형DB 일 때) 개발자 선택 사항임
+      //   // 1. DB 입출력 속도 up, 데이터 정확도 down => 바뀔 수 있는 정보도 같이 저장
+      //   // 2. DB 입출력 속도 down, 데이터 정확도 up => _id값만 저장(추천)
+      //   // 2번을 선택하면 그 안에서도 선택지가 다양함
+      //   // 1) findOne을 2번 쓰던가(글도 가져오고, 사용자도 가져오고)
+      //   // 2) 몽구스의 populate, 몽고디비의 aggregate 연산자 중 $lookup
+      // });
   
       // 동기식 요청이면 다른 페이지로 이동
       // res.redirect('/post');
@@ -379,27 +407,29 @@ router.get('/search', async (req, res) => {
     { $limit: postsPerPage },
   ]).toArray();
 
-  // const result = await db.collection('post').aggregate([
-  //   query, 
-  //   { $count: "searchCount" }
-  // ]).toArray();
-  // console.log(result);
-  // const totalCount = result[0].searchCount;
-  // const numOfPage = Math.ceil(totalCount / postsPerPage); // 페이지 수
+  const result = await db.collection('post').aggregate([
+    query, 
+    { $count: "searchCount" }
+  ]).toArray();
+  console.log(result);
+  const totalCount = result[0].searchCount;
+  const numOfPage = Math.ceil(totalCount / postsPerPage); // 페이지 수
   
 
-  let posts;
-  if (req.query.nextId) {
-    posts = await db.collection('post')
-      .find({ _id: { $gt: new ObjectId(req.query.nextId) } }) 
-      .limit(5).toArray();
-  } else {
-    posts = await db.collection('post').aggregate([
-      query,
-      { $skip: (currentPage - 1) * postsPerPage },
-      { $limit: postsPerPage },
-    ]).toArray();
-  }
+  // let posts;
+  // if (req.query.nextId) {
+  //   posts = await db.collection('post')
+  //   .aggregate([
+  //     { $match: { _id: { $gt: new ObjectId(req.query.nextId) } } },
+  //     { $limit: 5 },
+  //   ])
+  //   .toArray();
+  // } else {
+  //   posts = await db.collection('post').aggregate([
+  //     query,
+  //     { $limit: postsPerPage },
+  //   ]).toArray();
+  // }
 
 
   res.render('search', { posts, numOfPage, currentPage, keyword });
