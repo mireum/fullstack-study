@@ -173,8 +173,11 @@ router.get('/detail/:id', async (req, res, next) => {
   try {
     // 실제: 라우트 매개변수에 입력한 값
     const post = await db.collection('post').findOne({ _id: new ObjectId(req.params.id) });
-    console.log(post);
+    // console.log(post);
 
+    // 댓글 가져오기
+    const comments = await db.collection('comment').find({ postId: new ObjectId(req.params.id)}).toArray();
+    console.log(comments);
     // 2)번에 대한 예외 처리
     if (!post) {
       const error = new Error('데이터 없음');
@@ -183,7 +186,7 @@ router.get('/detail/:id', async (req, res, next) => {
     }
 
     // Quiz: 데이터 꽂아서 보내고 바인딩하기
-    res.render('detail', { post });
+    res.render('detail', { post, comments });
 
   } catch (err) { // 1)번에 대한 예외 처리
     err.message = '잘못된 URL 입니다.';
@@ -420,7 +423,7 @@ router.get('/search', async (req, res) => {
     query, 
     { $count: "searchCount" }
   ]).toArray();
-  console.log(result);
+  // console.log(result);
   const totalCount = result[0].searchCount;
   const numOfPage = Math.ceil(totalCount / postsPerPage); // 페이지 수
   
@@ -444,5 +447,43 @@ router.get('/search', async (req, res) => {
   res.render('search', { posts, numOfPage, currentPage, keyword });
 });
 
+
+// 댓글 기능 만들기
+// 1) 댓글 작성 UI에서 등록 누르면 서버로 댓글 전송
+// 2) 서버는 받은 댓글을 DB에 저장
+// 3) 글 상세 페이지에서 댓글 가져와 보여주기
+
+// 이때 댓글을 DB 어디에 저장할 것인가?
+// 1. post 컬렉션 document 안에 comments 필드를 만들어서 배열로 저장
+// 근데 이 방식은 댓글이 많아지면 문제가 복잡해지고 비효율적임
+// 1) 배열에서 원하는 항목 수정, 삭제가 어려움
+// 2) 배열의 일부만 가져올 수 없음(예: 댓글의 처음 5개만 가져오기)
+// 3) document 1개 용량 제한 16MB
+
+// 2. comments 컬렉션을 따로 만들기(정규화)(권장)
+// 어떤 글(부모)의 댓글(자식)인지 해당 글의 _id도 함께 저장하기(관계 설정)
+
+// POST /post/comment
+router.post('/comment', async (req, res, next) => {
+  try {
+    const { postId, content } = req.body;
+    console.log(req.user._id);
+    console.log(postId);
+
+    await db.collection('comment').insertOne({
+      content,
+      authorId: req.user._id,
+      author: req.user.username,
+      postId: new ObjectId(postId)
+    });
+
+    res.redirect(`/post/detail/${postId}`);
+
+  } catch (err) {
+    console.error(err);
+    next(err);
+    // 비동기면 json
+  }
+});
 
 module.exports = router;
