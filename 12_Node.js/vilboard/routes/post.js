@@ -278,6 +278,10 @@ router.delete('/:id', async (req, res) => {
       // }))
     };
     
+    // 댓글도 삭제할 것
+    
+
+
     res.json({
       flag: true,
       message: '삭제 성공'
@@ -424,7 +428,7 @@ router.get('/search', async (req, res) => {
     { $count: "searchCount" }
   ]).toArray();
   // console.log(result);
-  const totalCount = result[0].searchCount;
+  const totalCount = result.searchCount;
   const numOfPage = Math.ceil(totalCount / postsPerPage); // 페이지 수
   
 
