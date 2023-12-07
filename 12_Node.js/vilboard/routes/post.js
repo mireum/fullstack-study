@@ -264,7 +264,6 @@ router.delete('/:id', async (req, res) => {
       _id: new ObjectId(req.params.id),
       user: new ObjectId(req.user._id)  // 본인이 쓴 글만 삭제되도록 조건 추가
     });
-    const user = await db.collection('user').findOne({ _id: new ObjectId(req.user._id) });
 
     if (result.deletedCount === 0) {
       // 캐치문으로 넘어가도록 에러 생성
