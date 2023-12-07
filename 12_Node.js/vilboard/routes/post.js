@@ -228,22 +228,26 @@ router.patch('/:id', async (req, res, next) => {
 
     // 어떤 document를 찾아서 어떤 내용으로 수정할지 인자값 2개 전달
     const patch = await db.collection('post').updateOne({ 
-      _id: new ObjectId(req.params.id)
+      _id: new ObjectId(req.params.id),
+      user: new ObjectId(req.user._id)  // 본인이 쓴 글만 수정되도록 조건 추가
     }, {
       $set: { title, content }
     });
+
+    if (patch.modifiedCount === 0) {
+      throw new Error('수정 실패');
+    };
 
     res.json({
       flag: true,
       message: '수정 성공'
     });
   } catch (err) {
-    console.error(err);
-
     // 보통 CSR 방식으로 개발 시 응답으로 json 데이터를 내려줌
+    console.error(err);
     res.json({
       flag: false,
-      message: '수정 실패'
+      message: err.message
     });
   }
 });
@@ -263,19 +267,26 @@ router.delete('/:id', async (req, res) => {
     const user = await db.collection('user').findOne({ _id: new ObjectId(req.user._id) });
 
     if (result.deletedCount === 0) {
-      alert('삭제 실패');
+      // 캐치문으로 넘어가도록 에러 생성
+      throw new Error('삭제 실패');
+      // 또는
+      // return (res.json({
+      //   flag: true,
+      //   message: '삭제 성공'
+      // }))
     };
-    // res.json({
-    //   flag: true,
-    //   message: '삭제 성공'
-    // });
-    res.render('list', { user });
+    
+    res.json({
+      flag: true,
+      message: '삭제 성공'
+    });
+    
     // 새로고침은 list.js에서 구현함
   } catch (err) {
     console.error(err);
     res.status(500).json({
       flag: false,
-      message: '삭제 실패'
+      message: err.message
     });
   }
 });
