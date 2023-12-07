@@ -96,18 +96,7 @@ router.post('/write', isLoggedIn, upload.single('img'), async (req, res, next) =
   try {
     const title = req.body.title;
     const content = req.body.content;
-    const user = req.user._id;
-    const username = req.user.username;
-
-    const postObject = {
-      title,
-      content,
-      user,
-      username
-    };
-    if (req.file && req.file.location) {
-      postObject.imgUrl = req.file.location;
-    };
+    
     // 유효성 검사 추가하기
     // 제목이 비어있으면 저장 안함
     if (!title) { 
@@ -116,29 +105,29 @@ router.post('/write', isLoggedIn, upload.single('img'), async (req, res, next) =
         message: '제목을 입력하세요'
       });
     } else {
-      db.collection('post').insertOne(postObject);
-
       // Quiz: DB에 저장하기
-      // db.collection('post').insertOne({ 
-      //   title, 
-      //   content,
-      //   imgUrl: req.file.location, // 이미지 URL을 글과 함께 저장
-      //   // 글 등록 시 작성자 정보 넣기
-      //   user: req.user._id,
-      //   username: req.user.username,
-      //   // username(수정 가능한 정보라고 가정) 넣었을 때 문제점:
-      //   // 해당 유저가 글을 여러 개 작성했는데 username이 바뀌면? 전부 찾아서 수정해야 함
-      //   // 관계형DB: 사용자의 _id만 적어두고 JOIN을 써서 사용자의 정보를 가져와 합침
-      //   // 비관계형DB: 그냥 사용자 정보를 그대로 넣는게 관습임, 장점은 다른 컬렉션을 찾아볼 필요 없음
-      //   // 단점은 바뀐 정보 전부 찾아서 업데이트 하거나 업데이트 안됐으면 정보가 부정확할 수 있음
+      db.collection('post').insertOne({ 
+        title, 
+        content,
+        // 이미지 URL을 글과 함께 저장
+        // imgUrl: req.file ? req.file.location : '',
+        imgUrl: req.file?.location,
+        // 글 등록 시 작성자 정보 넣기
+        user: req.user._id,
+        username: req.user.username,
+        // username(수정 가능한 정보라고 가정) 넣었을 때 문제점:
+        // 해당 유저가 글을 여러 개 작성했는데 username이 바뀌면? 전부 찾아서 수정해야 함
+        // 관계형DB: 사용자의 _id만 적어두고 JOIN을 써서 사용자의 정보를 가져와 합침
+        // 비관계형DB: 그냥 사용자 정보를 그대로 넣는게 관습임, 장점은 다른 컬렉션을 찾아볼 필요 없음
+        // 단점은 바뀐 정보 전부 찾아서 업데이트 하거나 업데이트 안됐으면 정보가 부정확할 수 있음
 
-      //   // (비관계형DB 일 때) 개발자 선택 사항임
-      //   // 1. DB 입출력 속도 up, 데이터 정확도 down => 바뀔 수 있는 정보도 같이 저장
-      //   // 2. DB 입출력 속도 down, 데이터 정확도 up => _id값만 저장(추천)
-      //   // 2번을 선택하면 그 안에서도 선택지가 다양함
-      //   // 1) findOne을 2번 쓰던가(글도 가져오고, 사용자도 가져오고)
-      //   // 2) 몽구스의 populate, 몽고디비의 aggregate 연산자 중 $lookup
-      // });
+        // (비관계형DB 일 때) 개발자 선택 사항임
+        // 1. DB 입출력 속도 up, 데이터 정확도 down => 바뀔 수 있는 정보도 같이 저장
+        // 2. DB 입출력 속도 down, 데이터 정확도 up => _id값만 저장(추천)
+        // 2번을 선택하면 그 안에서도 선택지가 다양함
+        // 1) findOne을 2번 쓰던가(글도 가져오고, 사용자도 가져오고)
+        // 2) 몽구스의 populate, 몽고디비의 aggregate 연산자 중 $lookup
+      });
   
       // 동기식 요청이면 다른 페이지로 이동
       // res.redirect('/post');
@@ -267,15 +256,23 @@ router.patch('/:id', async (req, res, next) => {
 // DELETE /post/:id 라우터
 router.delete('/:id', async (req, res) => {
   try {
-    await db.collection('post').deleteOne({ _id: new ObjectId(req.params.id) });
-
+    const result = await db.collection('post').deleteOne({ 
+      _id: new ObjectId(req.params.id),
+      user: new ObjectId(req.user._id)  // 본인이 쓴 글만 삭제되도록 조건 추가
+    });
+    if (result.deletedCount == 0) {
+      alert('삭제 실패');
+    };
     res.json({
+      flag: true,
       message: '삭제 성공'
     });
+    // res.render('list', { _id });
     // 새로고침은 list.js에서 구현함
   } catch (err) {
     console.error(err);
     res.status(500).json({
+      flag: false,
       message: '삭제 실패'
     });
   }
