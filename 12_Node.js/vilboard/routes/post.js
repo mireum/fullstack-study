@@ -31,7 +31,7 @@ const upload = multer({
     s3,
     bucket: 'buckets3awaws',  // 만든 버킷 이름
     key(req, file, cb) {  // 원본 파일명을 쓰고 싶으면 file 안에 들어있음
-      cb(null, `original/${Date.now()}_${file.originalname}`); // 업로드 시 파일명
+    cb(null, `original/${Date.now()}_${file.originalname}`); // 업로드 시 파일명
     }
   }),
   limits: { fileSize: 5 * 1024 * 1024 } // 파일 사이즈(바이트 단위): 5MB로 제한(그 이상 업로드 시 400번대 에러 발생)
