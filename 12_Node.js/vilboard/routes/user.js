@@ -99,8 +99,10 @@ router.post('/login', isNotLoggedIn, emptyInput, (req, res, next) => {
       console.error(authError); // 에러 발생 시 에러가 넘어옴
       return res.status(500).json(authError);
     }
-    if (!user) return res.status(401).json(info.message);
-
+    if (!user) {
+      console.log(info);
+      return res.status(401).json(info.message);
+    }
     // login(): 사용자 정보를 세션에 저장하는 작업을 시작
     // passport.serializeUser가 호출됨
     // user 객체가 serializeUser로 넘어가게 됨(index.js)
