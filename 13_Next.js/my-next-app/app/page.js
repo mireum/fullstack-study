@@ -16,8 +16,6 @@ export default function Home() {
 
       <h4 className='title'>마이 넥스트 앱</h4>
       <p className='subtitles'>by {developer}</p>
-
-
     </>
   )
 }
