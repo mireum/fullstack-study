@@ -19,6 +19,10 @@ export default function List() {
       {products.map((item, index) => {
         return (
           <div className="fruits" key={index}>
+            {/* 이미지 넣기(1) - img 태그 */}
+            {/* img 태그에 그냥 절대 경로로 적어주면 public 폴더에서 찾음 */}
+            <img src={`/fruits${index}.png`} alt="fruits" className="fruits-img" />
+
             <h4>{item}</h4>
           </div>
         )
