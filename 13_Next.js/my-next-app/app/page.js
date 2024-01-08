@@ -1,95 +1,32 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import Link from 'next/link';
 
 export default function Home() {
+  const developer = 'fkdksk';
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <>
+      {/* 상단바(navbar) 만들기 */}
+      {/* next에서 제공하는 Link -> 새로고침이 일어나지 않는 a 태그다 */}
+      {/* <nav className='navbar'>
+        <Link href="/">홈</Link>
+        <Link href="/list">List</Link>
+      </nav> */}
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <h4 className='title'>마이 넥스트 앱</h4>
+      <p className='subtitles'>by {developer}</p>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   )
 }
+
+// 여러 페이지 만들기(라우팅)
+// 라우팅: URL 별로 페이지를 나눠놓고 사용자가 원하는 경로로 보내는 과정
+// 1) 리액트의 경우: react-router-dom을 사용한 클라이언트 사이드 라우팅
+// 2) 노드 익스프레스의 경우: 라우터 기능을 사용한 서버 사이드 라우팅
+// 3) 넥스트의 경우: 폴더와 파일 하나만 만들면 자동 라우팅
+// app 폴더 안에 list 폴더를 만들면
+// 폴더명과 동일한 URL로 라우터가 자동 생성됨, 파일명은 page.js
+// => /list로 접속 시 page.js 내용을 보여줌
