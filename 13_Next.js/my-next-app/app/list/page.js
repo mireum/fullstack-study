@@ -9,6 +9,7 @@ export default function List() {
   const products = ['Apple', 'Banana', 'Melon'];
 
   // 주문 수량
+  // state는 client 컴포넌트에서만 사용 가능
   // server 컴포넌트에선 사용 불가
   const [orderCount, setOrderCount] = useState([0, 10, 3]);
 
@@ -66,12 +67,20 @@ export default function List() {
             <h4>{item}</h4>
 
             {/* 주문 수량 만들기 */}
+            {/* onClick 이벤트리스너와 이벤트 핸들러 함수를 쓰려면
+              => client 컴포넌트로 변경 */}
             <button type="button" onClick={() => {
               // state 조작
-              
+              let count = [...orderCount];
+              count[index]--;
+              setOrderCount(count);
             }}>-</button>
             <span>{orderCount[index]}</span>
-            <button type="button">+</button>
+            <button type="button" onClick={() => {
+              let count = [...orderCount];
+              count[index]++;
+              setOrderCount(count);
+            }}>+</button>
           </div>
         )
       })}
