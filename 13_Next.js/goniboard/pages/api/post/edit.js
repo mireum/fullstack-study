@@ -6,7 +6,6 @@ export default async function Handler(req, res) {
   const db = await client.db('board');
   
   if (req.method === 'POST') {
-    console.log(req.body);
     const { id, title, content } = req.body;
 
     // 데이터 유효성 검사
