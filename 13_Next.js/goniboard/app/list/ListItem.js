@@ -28,3 +28,7 @@ export default function ListItem({ post }) {
 // => /app/detail 폴더 안에 여러 폴더 만들면 비효율적
 // => React: URL 파라미터, Express: 라우트 파라미터 (둘 다 같음)
 // => Next.js: Dynamic Routes 사용 -> 파일 또는 폴더 이름을 대괄호로 묶어 생성 []
+// 그 외
+// \[변수명1]\[변수명2]\[변수명3]
+// [...변수명]: Catch-all
+// [[...변수명]]:Optional Catch-all
