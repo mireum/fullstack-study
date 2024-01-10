@@ -2,7 +2,7 @@ export default function Write() {
   return (
     <div className="p-20">
       <h4>글쓰기</h4>
-      <form id="write-form" action="" method="">
+      <form id="write-form" action="api/post" method="POST">
         <label htmlFor="title">제목</label>
         <input type="text" id="title" name="title"/>
         <label htmlFor="content">내용</label>
@@ -24,3 +24,12 @@ export default function Write() {
 // (실습)
 // 1) 브라우저로 GET 요청 테스트
 // /api/test
+// 2) query string 테스트
+// /api/test?name=choi&age=1
+// 3) URL 파라미터 테스트
+// /api/test/12345 => Dynamic Routes
+
+// [quiz1]
+// /api/list로 GET 요청하면 DB에 있는 post 컬렉션의 모든 데이터 보내주기
+// [quiz2]
+// /api/post로 POST 요청하면 글 작성 기능 완성하기
