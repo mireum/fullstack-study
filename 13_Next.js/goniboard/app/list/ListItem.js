@@ -16,6 +16,9 @@ export default function ListItem({ post }) {
       {/* 페이지를 이동하는 방법(2) - useRouter */}
       <DetailButton postId={post._id.toString()} />
 
+      {/* 수정 버튼 */}
+      <Link href={`/edit/${post._id}`}>⛏</Link>
+
       <p>{post.content}</p>
     </div>
   );
@@ -32,3 +35,8 @@ export default function ListItem({ post }) {
 // \[변수명1]\[변수명2]\[변수명3]
 // [...변수명]: Catch-all
 // [[...변수명]]:Optional Catch-all
+
+// 글 수정 기능 만들기
+// 1) 수정 버튼 누르면 글 수정 페이지로 이동
+// 2) 글 수정 페이지에 DB에서 가져온 내용을 채워넣기
+// 3) 수정 버튼 누르면 DB에 있는 글 수정
