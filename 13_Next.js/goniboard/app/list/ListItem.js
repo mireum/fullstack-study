@@ -3,8 +3,13 @@
 import Link from "next/link";
 import DetailButton from "./DetailButton";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
 
 export default function ListItem({ post }) {
+
+  const router = useRouter();
+
   return (
     <div className="list-item">
       {/* 페이지를 이동하는 방법(1) - Link 컴포넌트 */}
@@ -23,11 +28,17 @@ export default function ListItem({ post }) {
       <Link href={`/edit/${post._id}`}>🛠</Link>
 
       {/* 삭제 버튼 */}
-      <span className="cursor-pointer" onClick={async () => {
-        // 첫번째 방법, query string http~ 쓰면 안됨
-        await axios.delete(`/api/post?postId=${post._id}`);
-        // 두번째 방법
-        // const result = await axios.post(`http://localhost:3000/api/post/${post._id}`);
+      <span className="cursor-pointer" onClick={async (e) => {
+        // 첫번째 방법, query string. http~ 쓰면 안됨
+        // await axios.delete(`/api/post?postId=${post._id}`);
+
+        // 두번째 방법 URL 파라미터
+        await axios.delete(`/api/post/${post._id}`);
+
+        // e.target.parentElement.remove();  // 요소 제거
+        // location.href = '/list';  // 다시 list로 이동, 새로고침 발생
+        router.refresh(); // soft refresh. 변동이 있는 일부분만 바꿔줌
+
       }}>🔪</span>
 
       <p>{post.content}</p>

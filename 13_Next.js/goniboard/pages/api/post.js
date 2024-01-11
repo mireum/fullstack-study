@@ -36,10 +36,14 @@ export default async function Handler(req, res) {
       })
     }
   }
+  // 삭제 첫번째 방법,  query string
   else if (req.method === 'DELETE') {
     try {
       const result = await db.collection('post').deleteOne({ _id: new ObjectId(req.query.postId) });
       console.log(result);
+      if (result.deletedCount === 0) {
+        throw new Error('삭제 실패');
+      }
 
       res.json({
         flag: true,
