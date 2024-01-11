@@ -1,0 +1,15 @@
+export async function GET(req) { 
+  // 방법1: URL 객체로 만듦
+  console.log(req.url);
+  const { searchParams } = new URL(req.url);
+  // searchParams는 search(쿼리스트링) 문자열을 다루기 쉽게 객체화한 것
+
+  // 방법2: URL Query Parameters
+  
+
+  const id = searchParams.get('id');
+  const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`);
+  const todo = await res.json();  // 파싱
+  
+  return Response.json({ todo });
+}
