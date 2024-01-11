@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import DetailButton from "./DetailButton";
+import axios from "axios";
 
 export default function ListItem({ post }) {
   return (
@@ -22,8 +23,11 @@ export default function ListItem({ post }) {
       <Link href={`/edit/${post._id}`}>🛠</Link>
 
       {/* 삭제 버튼 */}
-      <span className="cursor-pointer" onClick={() => {
-
+      <span className="cursor-pointer" onClick={async () => {
+        // 첫번째 방법, query string http~ 쓰면 안됨
+        await axios.delete(`/api/post?postId=${post._id}`);
+        // 두번째 방법
+        // const result = await axios.post(`http://localhost:3000/api/post/${post._id}`);
       }}>🔪</span>
 
       <p>{post.content}</p>
@@ -61,3 +65,8 @@ export default function ListItem({ post }) {
 //    -> 단점: 검색 노출이 잘 안될 수 있음
 //    - useEffect를 쓰면 HTML 렌더링 이후에 실행되기 때문에 페이지 방문 시 텅 빈 HTML이 먼저 보임
 //    - 검색엔진 봇이 방문 시 수집할 데이터가 없어 수집이 느림
+
+// [Quiz]
+// 글 삭제 기능 완성하기(2가지 방법)
+// 1) /api/post?postId=글id로 DELETE 요청 시
+// 2) /api/post/글id로 DELETE 요청 시
