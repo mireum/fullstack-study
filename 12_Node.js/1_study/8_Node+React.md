@@ -4,7 +4,7 @@
 이점은?
 리액트로 만든 index.html 제공하면서 부가적으로 리액트가 아닌 다른 정적 페이지도 제공 가능
 리액트 서버는 따로 둘 필요가 없고 API 요청 시 CORS가 안 뜰 것이다
-노드로 서버를 구성하였기 때문에 미들웨어  기능을 활용할 수 있음
+노드로 서버를 구성하였기 때문에 미들웨어 기능을 활용할 수 있음
 
 https://dori-coding.tistory.com/entry/React-Node-Express-%EC%84%9C%EB%B2%84%EC%99%80-React-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0
 
