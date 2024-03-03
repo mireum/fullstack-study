@@ -80,3 +80,5 @@ https://inpa.tistory.com/entry/LINUX-%F0%9F%93%9A-Vi-Vim-%EC%97%90%EB%94%94%ED%8
 Elastic Beanstalk 환경 삭제, EC2 인스턴스 삭제, S3 버킷 삭제
 Lightsail Delete 메뉴에서 인스턴스 삭제
 무료로 배포할 수 있는 서비스를 원한다면 Heroku(heroku.com)(이제 아님)나 OpenShift(openshift.com)를 찾아볼 것!
+
+lightsail + nginx 하는중
