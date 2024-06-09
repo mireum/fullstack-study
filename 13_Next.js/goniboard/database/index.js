@@ -16,5 +16,6 @@ if (process.env.NODE_ENV === 'development') {
   connect = client.connect();
 }
 
+
 // connec 변수에 저장해놓고 쓰면 매번 실행 안 되고 좋음
 export { connect };
