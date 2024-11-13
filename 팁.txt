@@ -47,4 +47,4 @@ transition: 1s; 는 요소에 직접 줘야함
  - 지역 테마 맛집 랜드마크 길찾기 시기
 https://korean.visitkorea.or.kr/kfes/list/wntyFstvlList.do
 
-4. vue.js 프로젝트 예정
+4. vue.js 프로젝트 예정 => 완료
