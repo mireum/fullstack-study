@@ -50,3 +50,5 @@ https://korean.visitkorea.or.kr/kfes/list/wntyFstvlList.do
 4. vue.js 프로젝트 예정 => 완료
 
 5. next.js 연습 -> allra-assignment 깃허브 레퍼지토리 
+
+6. 정보처리기사 자격증 따기
